@@ -2,8 +2,17 @@
 import { useSearchParams } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
-import { PRODUCTS } from "../../lib/products"; // <-- relative path
+import { PRODUCTS } from "../../lib/products";
 import { useMemo } from "react";
+
+// Map broad groups -> leaf categories used in PRODUCT.category
+const GROUPS: Record<string, string[]> = {
+  face: ["cleansers", "toners", "serums", "moisturizers", "masks"],
+  body: ["bath-body", "hand-creams", "hair-products"],
+  powders: ["powders"],
+  toothpaste: ["toothpaste"],
+  "spa-packages": ["spa-packages"],
+};
 
 export default function ShopPage() {
   const params = useSearchParams();
@@ -11,17 +20,16 @@ export default function ShopPage() {
 
   const items = useMemo(() => {
     if (!category) return PRODUCTS;
-    return PRODUCTS.filter(p => {
-      // allow broad buckets like "face" or exact leaf categories
-      return p.category === category || p.tags?.includes(category);
-    });
+
+    // match exact leaf category, or match when the product's category is inside a group
+    const leaves = GROUPS[category] || [];
+    return PRODUCTS.filter((p) => p.category === category || leaves.includes(p.category));
   }, [category]);
 
   return (
     <section className="mx-auto max-w-6xl px-4 py-10">
       <h1 className="text-3xl font-semibold">All Products</h1>
 
-      {/* Filter pills (match mega menu keys) */}
       <div className="mt-6 flex flex-wrap items-center gap-2">
         <Pill label="ALL" href="/shop" active={!category} />
         <Pill label="FACE" href="/shop?category=face" active={category === "face"} />
@@ -31,9 +39,8 @@ export default function ShopPage() {
         <Pill label="SPA PACKAGES" href="/shop?category=spa-packages" active={category === "spa-packages"} />
       </div>
 
-      {/* Product grid */}
       <div className="mt-8 grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-        {items.map(p => (
+        {items.map((p) => (
           <div key={p.sku} className="border rounded-lg p-4">
             <Link href={`/products/${p.slug}`}>
               <div className="relative h-44 rounded bg-gray-50 overflow-hidden">
