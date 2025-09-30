@@ -1,27 +1,41 @@
+// app/shop/page.tsx  (SERVER COMPONENT – no "use client")
 import Link from "next/link";
 import Image from "next/image";
 import { PRODUCTS } from "../../lib/products";
 
-type PageProps = {
-  searchParams?: { category?: string };
+// Map broad groups -> leaf categories used in PRODUCT.category
+const GROUPS: Record<string, string[]> = {
+  face: ["cleansers", "toners", "serums", "moisturizers", "masks"],
+  body: ["bath-body", "hand-creams", "hair-products"],
+  powders: ["powders"],
+  toothpaste: ["toothpaste"],
+  "spa-packages": ["spa-packages"],
 };
 
+type PageProps = { searchParams?: { category?: string } };
+
 export default function ShopPage({ searchParams }: PageProps) {
-  const category = searchParams?.category;
-  const items = category ? PRODUCTS.filter(p => p.category === category) : PRODUCTS;
+  const category = searchParams?.category ?? null;
+
+  const items = !category
+    ? PRODUCTS
+    : PRODUCTS.filter((p) => {
+        const leaves = GROUPS[category] || [];
+        return p.category === category || leaves.includes(p.category);
+      });
 
   return (
     <section className="mx-auto max-w-6xl px-4 py-10">
       <h1 className="text-3xl font-semibold">All Products</h1>
 
-      {/* Filter by category */}
+      {/* Filter pills */}
       <div className="mt-6 flex flex-wrap items-center gap-2">
-        <FilterPill label="ALL" href="/shop" active={!category} />
-        <FilterPill label="FACE" href="/shop?category=face" active={category === "face"} />
-        <FilterPill label="BODY" href="/shop?category=body" active={category === "body"} />
-        <FilterPill label="POWDERS" href="/shop?category=powders" active={category === "powders"} />
-        <FilterPill label="TOOTHPASTE" href="/shop?category=toothpaste" active={category === "toothpaste"} />
-        <FilterPill label="SPA PACKAGES" href="/shop?category=spa-packages" active={category === "spa-packages"} />
+        <Pill label="ALL" href="/shop" active={!category} />
+        <Pill label="FACE" href="/shop?category=face" active={category === "face"} />
+        <Pill label="BODY" href="/shop?category=body" active={category === "body"} />
+        <Pill label="POWDERS" href="/shop?category=powders" active={category === "powders"} />
+        <Pill label="TOOTHPASTE" href="/shop?category=toothpaste" active={category === "toothpaste"} />
+        <Pill label="SPA PACKAGES" href="/shop?category=spa-packages" active={category === "spa-packages"} />
       </div>
 
       {/* Product grid */}
@@ -50,15 +64,7 @@ export default function ShopPage({ searchParams }: PageProps) {
   );
 }
 
-function FilterPill({
-  label,
-  href,
-  active,
-}: {
-  label: string;
-  href: string;
-  active: boolean;
-}) {
+function Pill({ label, href, active }: { label: string; href: string; active: boolean }) {
   return (
     <Link
       href={href}
