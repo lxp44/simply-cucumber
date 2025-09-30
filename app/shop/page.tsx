@@ -1,17 +1,12 @@
-'use client';
-import { useSearchParams } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
-import { PRODUCTS } from "../../lib/products"; // <-- fixed path
-import { useMemo } from "react";
+import { PRODUCTS } from "../../lib/products";
 
-export default function ShopPage() {
-  const params = useSearchParams();
-  const category = params.get("category");
-  const items = useMemo(
-    () => (!category ? PRODUCTS : PRODUCTS.filter(p => p.category === category)),
-    [category]
-  );
+type Search = { category?: string };
+
+export default function ShopPage({ searchParams }: { searchParams: Search }) {
+  const category = searchParams?.category;
+  const items = !category ? PRODUCTS : PRODUCTS.filter(p => p.category === category);
 
   return (
     <section className="mx-auto max-w-6xl px-4 py-10">
@@ -43,21 +38,3 @@ export default function ShopPage() {
             <form action="/api/checkout" method="POST" className="mt-3">
               <input type="hidden" name="sku" value={p.sku} />
               <button className="w-full rounded bg-cucumber-600 px-4 py-2 text-white hover:bg-cucumber-700">Buy now</button>
-            </form>
-          </div>
-        ))}
-      </div>
-    </section>
-  );
-}
-
-function FilterPill({ label, href, active }:{ label:string; href:string; active:boolean }) {
-  return (
-    <Link
-      href={href}
-      className={`px-3 py-1.5 rounded-full text-sm border ${active ? 'bg-cucumber-600 text-white border-cucumber-600' : 'hover:bg-gray-50'}`}
-    >
-      {label}
-    </Link>
-  );
-}
