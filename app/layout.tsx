@@ -1,7 +1,7 @@
-import "./globals.css";
+import "../styles/globals.css";
 import Link from "next/link";
-import PromoBar from "@/components/PromoBar";
-import MegaMenu from "@/components/MegaMenu";
+import PromoBar from "../components/PromoBar";
+import MegaMenu from "../components/MegaMenu";
 
 export const metadata = {
   title: "Simply Cucumber",
