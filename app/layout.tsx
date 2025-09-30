@@ -2,6 +2,15 @@ import "../styles/globals.css";
 import Link from "next/link";
 import PromoBar from "../components/PromoBar";
 import MegaMenu from "../components/MegaMenu";
+import { Playfair_Display } from "next/font/google";
+
+// Load Playfair Display
+const playfair = Playfair_Display({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"], // pick the weights you’ll need
+  variable: "--font-playfair"           // this lets us call it in Tailwind
+});
+
 
 export const metadata = {
   title: "Simply Cucumber",
@@ -10,7 +19,7 @@ export const metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en">
+    <html lang="en" className={`${playfair.variable}`}>
       <body>
         <PromoBar />
         <header className="sticky top-0 z-40 bg-white/80 backdrop-blur border-b">
