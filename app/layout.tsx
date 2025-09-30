@@ -49,7 +49,7 @@ export default function RootLayout({
                 <img
                   alt="Simply Cucumber"
                   src="/assets/products/simply-cucumber-profile-logo.png"
-                  className="h-10 w-auto md:h-12"
+                  className="h-14 w-auto md:h-16"
                 />
               </Link>
 
