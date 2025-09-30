@@ -36,11 +36,13 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 
         {/* Footer */}
         <footer className="mt-24 border-t">
-          <div className="mx-auto max-w-6xl px-4 py-10 text-sm text-gray-600 flex justify-between items-center">
+          <div className="mx-auto max-w-6xl px-4 py-10 text-sm text-gray-600 flex flex-col md:flex-row justify-between md:items-center gap-4">
             <p>© {new Date().getFullYear()} Simply Cucumber · All rights reserved.</p>
-            <Link href="/contact" className="hover:text-cucumber-700">
-              Contact
-            </Link>
+            <nav className="flex gap-6">
+              <Link href="/contact" className="hover:text-cucumber-700">Contact</Link>
+              <Link href="/privacy" className="hover:text-cucumber-700">Privacy Policy</Link>
+              <Link href="/terms" className="hover:text-cucumber-700">Terms of Service</Link>
+            </nav>
           </div>
         </footer>
       </body>
