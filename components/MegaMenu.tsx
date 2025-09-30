@@ -1,66 +1,72 @@
+// components/MegaMenu.tsx
 import Link from "next/link";
 
-const columns = [
-  {
-    title: "FACE",
-    items: [
-      { label: "Cleansers", href: "/shop?category=face" },
-      { label: "Toners", href: "/shop?category=face" },
-      { label: "Masks", href: "/shop?category=face" },
-      { label: "Serums", href: "/shop?category=face" },
-      { label: "Moisturizers", href: "/shop?category=face" },
-    ]
-  },
-  {
-    title: "BODY",
-    items: [
-      { label: "Hand Creams", href: "/shop?category=body" },
-      { label: "Bath & Body", href: "/shop?category=body" },
-      { label: "Hair Products", href: "/shop?category=body" },
-    ]
-  },
-  {
-    title: "CONCERN",
-    items: [
-      { label: "Dryness", href: "/shop" },
-      { label: "Sensitivity", href: "/shop" },
-      { label: "Uneven Texture", href: "/shop" },
-    ]
-  },
-  {
-    title: "FEATURED",
-    items: [
-      { label: "Best Sellers", href: "/shop" },
-      { label: "New Arrivals", href: "/shop" },
-      { label: "Travel Collection", href: "/shop" },
-    ]
-  },
-  {
-    title: "SIMPLY CUCUMBER",
-    items: [
-      { label: "Powders", href: "/shop?category=powders" },
-      { label: "Toothpaste", href: "/shop?category=toothpaste" },
-      { label: "Spa Packages", href: "/shop?category=spa-packages" }
-    ]
-  }
-];
+const COL = "space-y-3";
+const ITEM = "block text-[15px] text-gray-800 hover:text-cucumber-700";
 
 export default function MegaMenu() {
   return (
-    <div className="menu-panel group-hover:menu-open absolute left-0 right-0 top-full bg-white border-b border-t shadow-sm">
-      <div className="mx-auto max-w-6xl px-4 py-8 grid grid-cols-2 md:grid-cols-5 gap-6">
-        {columns.map(col => (
-          <div key={col.title}>
-            <p className="text-xs font-semibold tracking-wider text-gray-800">{col.title}</p>
-            <ul className="mt-3 space-y-2 text-sm">
-              {col.items.map(i => (
-                <li key={i.label}>
-                  <Link href={i.href} className="hover:text-cucumber-700">{i.label}</Link>
-                </li>
-              ))}
-            </ul>
+    <div
+      className="
+        pointer-events-none absolute left-1/2 z-40 hidden w-[980px] -translate-x-1/2
+        rounded-xl border bg-white/95 p-8 shadow-lg backdrop-blur
+        group-hover:block group-focus-within:block
+      "
+      style={{ top: "calc(100% + 10px)" }}
+    >
+      <div className="grid grid-cols-4 gap-8">
+        {/* FACE */}
+        <div>
+          <p className="mb-4 font-semibold tracking-wide text-gray-900">FACE</p>
+          <div className={COL}>
+            <Link href="/shop?category=face" className={ITEM}>All Face</Link>
+            <Link href="/shop?category=cleansers" className={ITEM}>Cleansers</Link>
+            <Link href="/shop?category=toners" className={ITEM}>Toners</Link>
+            <Link href="/shop?category=serums" className={ITEM}>Serums</Link>
+            <Link href="/shop?category=moisturizers" className={ITEM}>Moisturizers</Link>
+            <Link href="/shop?category=masks" className={ITEM}>Masks</Link>
           </div>
-        ))}
+        </div>
+
+        {/* BODY */}
+        <div>
+          <p className="mb-4 font-semibold tracking-wide text-gray-900">BODY</p>
+          <div className={COL}>
+            <Link href="/shop?category=body" className={ITEM}>All Body</Link>
+            <Link href="/shop?category=bath-body" className={ITEM}>Bath &amp; Body</Link>
+            <Link href="/shop?category=hand-creams" className={ITEM}>Hand Creams</Link>
+            <Link href="/shop?category=hair-products" className={ITEM}>Hair Products</Link>
+          </div>
+        </div>
+
+        {/* YOUR CATEGORIES */}
+        <div>
+          <p className="mb-4 font-semibold tracking-wide text-gray-900">FEATURED</p>
+          <div className={COL}>
+            <Link href="/shop?category=powders" className={ITEM}>Powders</Link>
+            <Link href="/shop?category=toothpaste" className={ITEM}>Toothpaste</Link>
+            <Link href="/shop?category=spa-packages" className={ITEM}>Spa Packages</Link>
+            <Link href="/shop" className={ITEM}>All Products</Link>
+          </div>
+        </div>
+
+        {/* PROMO THUMB (optional images) */}
+        <div className="hidden lg:block">
+          <Link href="/shop" className="block overflow-hidden rounded-lg border">
+            <img
+              src="/assets/products/Simply Cucumber logo.png"
+              alt="Simply Cucumber"
+              className="h-48 w-full object-cover"
+            />
+          </Link>
+          <Link href="/shop" className="mt-4 block overflow-hidden rounded-lg border">
+            <img
+              src="/assets/products/simply cucumber banner google.png"
+              alt="New arrivals"
+              className="h-48 w-full object-cover"
+            />
+          </Link>
+        </div>
       </div>
     </div>
   );
