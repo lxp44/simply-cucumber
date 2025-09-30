@@ -4,7 +4,7 @@ module.exports = {
     "./app/**/*.{ts,tsx}",
     "./components/**/*.{ts,tsx}",
     "./styles/**/*.css"
-  ], // ← comma here
+  ],
   theme: {
     extend: {
       colors: {
