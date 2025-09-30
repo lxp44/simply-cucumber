@@ -2,11 +2,13 @@ import Link from "next/link";
 import Image from "next/image";
 import { PRODUCTS } from "../../lib/products";
 
-type Search = { category?: string };
+type PageProps = {
+  searchParams?: { category?: string };
+};
 
-export default function ShopPage({ searchParams }: { searchParams: Search }) {
+export default function ShopPage({ searchParams }: PageProps) {
   const category = searchParams?.category;
-  const items = !category ? PRODUCTS : PRODUCTS.filter(p => p.category === category);
+  const items = category ? PRODUCTS.filter(p => p.category === category) : PRODUCTS;
 
   return (
     <section className="mx-auto max-w-6xl px-4 py-10">
@@ -24,7 +26,7 @@ export default function ShopPage({ searchParams }: { searchParams: Search }) {
 
       {/* Product grid */}
       <div className="mt-8 grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-        {items.map(p => (
+        {items.map((p) => (
           <div key={p.sku} className="border rounded-lg p-4">
             <Link href={`/products/${p.slug}`}>
               <div className="relative h-44 rounded bg-gray-50 overflow-hidden">
@@ -37,4 +39,34 @@ export default function ShopPage({ searchParams }: { searchParams: Search }) {
             <p className="text-gray-600">${p.price.toFixed(2)}</p>
             <form action="/api/checkout" method="POST" className="mt-3">
               <input type="hidden" name="sku" value={p.sku} />
-              <button className="w-full rounded bg-cucumber-600 px-4 py-2 text-white hover:bg-cucumber-700">Buy now</button>
+              <button className="w-full rounded bg-cucumber-600 px-4 py-2 text-white hover:bg-cucumber-700">
+                Buy now
+              </button>
+            </form>
+          </div>
+        ))}
+      </div>
+    </section>
+  );
+}
+
+function FilterPill({
+  label,
+  href,
+  active,
+}: {
+  label: string;
+  href: string;
+  active: boolean;
+}) {
+  return (
+    <Link
+      href={href}
+      className={`px-3 py-1.5 rounded-full text-sm border ${
+        active ? "bg-cucumber-600 text-white border-cucumber-600" : "hover:bg-gray-50"
+      }`}
+    >
+      {label}
+    </Link>
+  );
+}
