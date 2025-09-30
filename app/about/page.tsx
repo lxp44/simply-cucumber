@@ -77,8 +77,8 @@ export default function AboutPage() {
 
               {/* Copy */}
               <div>
-                {/* Headline in a classy serif vibe; adjust font in CSS if you add a custom one */}
-                <h2 className="text-3xl md:text-4xl font-semibold tracking-tight">
+                {/* Serif headline */}
+                <h2 className="text-3xl md:text-4xl font-[var(--font-playfair)] font-semibold tracking-tight">
                   {s.title}
                 </h2>
                 <p className="mt-5 text-base md:text-lg text-gray-700 leading-relaxed">
@@ -93,7 +93,7 @@ export default function AboutPage() {
       {/* Soft CTA strip */}
       <section className="bg-cucumber-50">
         <div className="mx-auto max-w-6xl px-4 py-14 text-center">
-          <h3 className="text-2xl md:text-3xl font-semibold">
+          <h3 className="text-2xl md:text-3xl font-[var(--font-playfair)] font-semibold">
             Ready to refresh your ritual?
           </h3>
           <p className="mt-3 text-gray-700">
