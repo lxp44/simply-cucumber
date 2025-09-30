@@ -50,7 +50,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                   <img
                     alt="Simply Cucumber"
                     src="/assets/products/simply-cucumber-profile-logo.png"
-                    className="h-10 w-auto"
+                    className="h-16 w-auto" // 4rem tall
                   />
                 </Link>
               </div>
