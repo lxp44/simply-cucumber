@@ -14,7 +14,7 @@ const SECTIONS: Section[] = [
   {
     title: "Health is Wealth.",
     body:
-      "Born from the belief that true beauty begins with wellness, Simply Cucumber was created to bring the natural benefits of cucumber into everyday self-care. Using real freeze-dried Cucumbers as the first main ingredient in every product.",
+      "Born from the belief that true beauty begins with wellness, Simply Cucumber was created to bring the natural benefits of cucumber into everyday self-care. Using real freeze-dried cucumbers as the first main ingredient in every product.",
     image: "/assets/about/heritage-1.jpg", // ← add your B&W “old world” image
     imageAlt: "Old-world apothecary / heritage image",
     imageLeft: true,
@@ -22,7 +22,7 @@ const SECTIONS: Section[] = [
   {
     title: "Born from the belief in everyday wellness.",
     body:
-      "From hydration to rejuvenation, our cucumber-first formulas refresh the body and elevate the mind—bringing spa-level calm to daily ritual. Because our Cucumbers are freeze-dried and finely grained, we are able to maximize all the benefits from the fruit.",
+      "From hydration to rejuvenation, our cucumber-first formulas refresh the body and elevate the mind—bringing spa-level calm to daily ritual. Because our cucumbers are freeze-dried and finely grained, we are able to maximize all the benefits from the fruit.",
     image: "/assets/about/hero-2.jpg", // ← add your second image
     imageAlt: "Cucumber detail / water droplets",
     imageLeft: false,
@@ -30,7 +30,7 @@ const SECTIONS: Section[] = [
   {
     title: "Clean by design.",
     body:
-      "Short, readable ingredient lists. Vegan where possible. Dermatologist-minded formulas that keep what works and skip what doesn’t.",
+      "The first of its kind. Short, readable ingredient lists. Vegan where possible. Dermatologist-minded formulas that keep what works and skip what doesn’t.",
     image: "/assets/about/lab-3.jpg",
     imageAlt: "Minimal lab beakers with soft light",
     imageLeft: true,
@@ -38,7 +38,7 @@ const SECTIONS: Section[] = [
   {
     title: "Little rituals, big returns.",
     body:
-      "Skincare that fits your day—and pays you back in clarity, calm, and confidence. Because small daily choices compound.",
+      "Skincare that fits your day or electrolytes for a boost will pay you back in clarity, calm, and confidence. Because small daily choices compound.",
     image: "/assets/about/ritual-4.jpg",
     imageAlt: "Morning sink ritual in fresh green tones",
     imageLeft: false,
