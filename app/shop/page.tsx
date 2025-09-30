@@ -2,7 +2,7 @@
 import { useSearchParams } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
-import { PRODUCTS } from "@/lib/products";
+import { PRODUCTS } from "../../lib/products"; // <-- fixed path
 import { useMemo } from "react";
 
 export default function ShopPage() {
