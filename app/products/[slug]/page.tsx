@@ -1,6 +1,6 @@
 import { notFound } from "next/navigation";
 import Image from "next/image";
-import { bySlug } from "@/lib/products";
+import { bySlug } from "../../../lib/products"; // <-- fixed path
 
 export default function ProductPage({ params }: { params: { slug: string } }) {
   const product = bySlug(params.slug);
