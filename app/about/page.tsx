@@ -14,7 +14,7 @@ const SECTIONS: Section[] = [
   {
     title: "Health is Wealth.",
     body:
-      "Born from the belief that true beauty begins with wellness, Simply Cucumber was created to bring the natural benefits of cucumber into everyday self-care.",
+      "Born from the belief that true beauty begins with wellness, Simply Cucumber was created to bring the natural benefits of cucumber into everyday self-care. Using real freeze-dried Cucumbers as the first main ingredient in every product.",
     image: "/assets/about/heritage-1.jpg", // ← add your B&W “old world” image
     imageAlt: "Old-world apothecary / heritage image",
     imageLeft: true,
@@ -22,7 +22,7 @@ const SECTIONS: Section[] = [
   {
     title: "Born from the belief in everyday wellness.",
     body:
-      "From hydration to rejuvenation, our cucumber-first formulas refresh the body and elevate the mind—bringing spa-level calm to daily ritual.",
+      "From hydration to rejuvenation, our cucumber-first formulas refresh the body and elevate the mind—bringing spa-level calm to daily ritual. Because our Cucumbers are freeze-dried and finely grained, we are able to maximize all the benefits from the fruit.",
     image: "/assets/about/hero-2.jpg", // ← add your second image
     imageAlt: "Cucumber detail / water droplets",
     imageLeft: false,
