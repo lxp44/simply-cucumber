@@ -2,50 +2,32 @@ import Link from "next/link";
 
 export default function HomePage() {
   return (
-    <section className="mx-auto max-w-6xl px-4">
-      <div className="grid lg:grid-cols-2 gap-12 items-center py-16">
-        <div>
-          <h1 className="text-4xl md:text-5xl font-semibold leading-tight">
-            Hydrate. Soothe. Glow.<br/><span className="text-cucumber-700">Cucumber-first formulas.</span>
-          </h1>
-          <p className="mt-6 text-lg text-gray-700">
-            We craft clean, high‑performance beauty & wellness powered by freeze‑dried cucumber.
-          </p>
-          <div className="mt-8 flex gap-3">
-            <Link href="/products" className="rounded bg-cucumber-600 px-5 py-3 text-white hover:bg-cucumber-700">Shop Products</Link>
-            <Link href="/science" className="rounded border px-5 py-3 hover:bg-gray-50">Why Cucumber?</Link>
+    <>
+      {/* Hero */}
+      <section className="relative overflow-hidden">
+        <div className="mx-auto max-w-6xl px-4 py-16 text-center">
+          <div className="relative mx-auto h-64 md:h-80 rounded-xl bg-cucumber-100 flex items-center justify-center">
+            {/* You can swap this block for a hero image later */}
+            <h1 className="text-3xl md:text-4xl font-semibold tracking-wide">
+              ENJOY 30% OFF SITEWIDE
+            </h1>
           </div>
-          <ul className="mt-10 grid grid-cols-2 gap-4 text-sm">
-            <li className="elevate p-4 rounded">100% Natural</li>
-            <li className="elevate p-4 rounded">Lab Tested</li>
-            <li className="elevate p-4 rounded">No Parabens</li>
-            <li className="elevate p-4 rounded">Vegan & Cruelty‑Free</li>
-          </ul>
+          <p className="mt-4 text-gray-700">
+            Plus get a FREE Radiance Kit on $65+ · Use code: <span className="font-semibold">FRIENDS</span>
+          </p>
+          <div className="mt-6">
+            <Link href="/shop" className="inline-block rounded-full border px-6 py-3 hover:bg-gray-50">
+              SHOP NOW
+            </Link>
+          </div>
+          <div className="mt-6 flex items-center justify-center gap-2">
+            <span className="h-2 w-2 rounded-full bg-gray-300"></span>
+            <span className="h-2 w-2 rounded-full bg-gray-300"></span>
+            <span className="h-2 w-2 rounded-full bg-gray-300"></span>
+            <span className="h-2 w-2 rounded-full bg-gray-900"></span>
+          </div>
         </div>
-        <div className="brand-gradient h-96 rounded-xl elevate"></div>
-      </div>
-      <div className="py-8">
-        <h2 className="text-2xl font-semibold">Best Sellers</h2>
-        <div className="mt-6 grid md:grid-cols-3 gap-6">
-          <ProductCard />
-          <ProductCard title="Cucumber Toner" price={18} sku="toner" />
-          <ProductCard title="Hydra‑Gel Mask" price={24} sku="mask" />
-        </div>
-      </div>
-    </section>
+      </section>
+    </>
   );
-}
-
-function ProductCard({ title = "Sample Pack", price = 9, sku = "sample" }:{ title?: string; price?: number; sku?: string }) {
-  return (
-    <div className="border rounded-lg p-4">
-      <div className="h-44 rounded bg-gray-100"></div>
-      <h3 className="mt-4 font-medium">{title}</h3>
-      <p className="text-gray-600">${price.toFixed(2)}</p>
-      <form action="/api/checkout" method="POST" className="mt-3">
-        <input type="hidden" name="sku" value={sku} />
-        <button className="w-full rounded bg-cucumber-600 px-4 py-2 text-white hover:bg-cucumber-700">Buy now</button>
-      </form>
-    </div>
-  )
 }
