@@ -1,6 +1,10 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
- content: ["./app/**/*.{ts,tsx}", "./components/**/*.{ts,tsx}", "./styles/**/*.css"]
+  content: [
+    "./app/**/*.{ts,tsx}",
+    "./components/**/*.{ts,tsx}",
+    "./styles/**/*.css"
+  ], // ← comma here
   theme: {
     extend: {
       colors: {
@@ -16,7 +20,8 @@ module.exports = {
           800: "#185e37",
           900: "#0f3a22"
         }
-      }
+      },
+      dropShadow: { badge: "0 4px 12px rgba(0,0,0,0.12)" }
     }
   },
   plugins: []
