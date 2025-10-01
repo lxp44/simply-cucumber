@@ -78,33 +78,40 @@ export default function RootLayout({
 
         <main>{children}</main>
 
-        {/* Footer */}
-        <footer className="mt-24 border-t">
-          <div className="mx-auto max-w-6xl px-4 py-10 grid md:grid-cols-3 gap-8 text-sm text-gray-600">
-            <div>
-              <p className="font-medium text-gray-900">Simply Cucumber</p>
-              <p className="mt-2">
-                Clean, cucumber-first beauty & wellness.{" "}
-                <span className="font-[var(--font-playfair)]">Health is Wealth.</span>
-              </p>
-            </div>
+       {/* Footer */}
+<footer className="mt-24 bg-cucumber-700 text-white">
+  {/* Big message */}
+  <div className="border-b border-white/15">
+    <div className="mx-auto max-w-6xl px-4 py-10 md:py-14 text-center">
+      <h2 className="font-serif text-3xl md:text-5xl lg:text-6xl tracking-tight">
+        HEALTH IS WEALTH.
+      </h2>
+    </div>
+  </div>
 
-            <nav className="space-y-2">
-              <a href="/shop" className="hover:text-cucumber-700">Shop</a><br />
-              <a href="/about" className="hover:text-cucumber-700">About Us</a><br />
-              <a href="/contact" className="hover:text-cucumber-700">Contact</a>
-            </nav>
+  {/* Link columns */}
+  <div className="mx-auto max-w-6xl px-4 py-10 grid gap-10 md:grid-cols-3 text-sm">
+    <div>
+      <p className="text-white/90 font-medium">Simply Cucumber</p>
+      <p className="mt-3 text-white/80">
+        Clean, cucumber-first beauty & wellness. Little rituals, big returns.
+      </p>
+    </div>
 
-            <div className="md:text-right space-y-2">
-              <p>© {new Date().getFullYear()} Simply Cucumber</p>
-              <div className="space-x-4">
-                <Link href="/privacy" className="hover:text-cucumber-700">Privacy Policy</Link>
-                <Link href="/terms" className="hover:text-cucumber-700">Terms of Service</Link>
-              </div>
-            </div>
-          </div>
-        </footer>
-      </body>
-    </html>
-  );
-}
+    <nav className="space-y-2">
+      <p className="uppercase tracking-widest text-xs text-white/60">Customer Care</p>
+      <a href="/contact" className="block hover:underline">Contact</a>
+      <a href="/shop" className="block hover:underline">Shop</a>
+      <a href="/about" className="block hover:underline">About Us</a>
+    </nav>
+
+    <nav className="space-y-2 md:text-right">
+      <p className="uppercase tracking-widest text-xs text-white/60">More</p>
+      <a href="/privacy" className="block hover:underline">Privacy Policy</a>
+      <a href="/terms" className="block hover:underline">Terms of Service</a>
+      <p className="mt-4 text-white/70">
+        © {new Date().getFullYear()} Simply Cucumber
+      </p>
+    </nav>
+  </div>
+</footer>
