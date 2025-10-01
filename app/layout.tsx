@@ -34,15 +34,17 @@ export default function RootLayout({
 
               {/* Left nav items */}
               <nav className="hidden md:flex items-center gap-6 text-sm">
-                <div className="relative group">
-                  <Link href="/shop" className="hover:text-cucumber-700 inline-block py-2">
-                    Shop
-                  </Link>
-                  <MegaMenu />
-                </div>
-                <Link href="/best-sellers" className="hover:text-cucumber-700 py-2">Best Sellers</Link>
-                <Link href="/gifts" className="hover:text-cucumber-700 py-2">Gifts</Link>
-              </nav>
+                import ShopMenu from "../components/ShopMenu";
+...
+<nav className="flex items-center gap-6 text-sm relative">
+  <ShopMenu />
+  <Link href="/best-sellers" className="hover:text-cucumber-700 py-2">Best Sellers</Link>
+  <Link href="/gifts" className="hover:text-cucumber-700 py-2">Gifts</Link>
+  <Link href="/skin-analysis" className="hover:text-cucumber-700 py-2">Skin Analysis</Link>
+  <Link href="/rewards" className="hover:text-cucumber-700 py-2">Rewards</Link>
+  <Link href="/salon" className="hover:text-cucumber-700 py-2">Salon</Link>
+  ...
+</nav>
 
               {/* Center logo */}
               <Link href="/" className="absolute left-1/2 -translate-x-1/2">
