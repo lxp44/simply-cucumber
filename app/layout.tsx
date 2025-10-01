@@ -2,8 +2,9 @@
 import "../styles/globals.css";
 import Link from "next/link";
 import PromoBar from "../components/PromoBar";
-import MegaMenu from "../components/MegaMenu";
+import ShopMenu from "../components/ShopMenu";
 import { Playfair_Display } from "next/font/google";
+import type { Metadata } from "next";
 
 const playfair = Playfair_Display({
   subsets: ["latin"],
@@ -11,7 +12,7 @@ const playfair = Playfair_Display({
   variable: "--font-playfair",
 });
 
-export const metadata = {
+export const metadata: Metadata = {
   title: "Simply Cucumber",
   description: "Clean, natural cucumber beauty & wellness.",
 };
@@ -27,39 +28,35 @@ export default function RootLayout({
         {/* Top promo bar */}
         <PromoBar />
 
-        {/* Header with centered logo + hover mega menu */}
+        {/* Header */}
         <header className="sticky top-0 z-40 bg-white/80 backdrop-blur border-b">
           <div className="mx-auto max-w-6xl px-4">
-            <div className="relative flex items-center justify-between py-3">
-
-              {/* Left nav items */}
-              <nav className="hidden md:flex items-center gap-6 text-sm">
-                import ShopMenu from "../components/ShopMenu";
-...
-<nav className="flex items-center gap-6 text-sm relative">
-  <ShopMenu />
-  <Link href="/best-sellers" className="hover:text-cucumber-700 py-2">Best Sellers</Link>
-  <Link href="/gifts" className="hover:text-cucumber-700 py-2">Gifts</Link>
-  <Link href="/skin-analysis" className="hover:text-cucumber-700 py-2">Skin Analysis</Link>
-  <Link href="/rewards" className="hover:text-cucumber-700 py-2">Rewards</Link>
-  <Link href="/salon" className="hover:text-cucumber-700 py-2">Salon</Link>
-  ...
-</nav>
-
-              {/* Center logo */}
-              <Link href="/" className="absolute left-1/2 -translate-x-1/2">
+            <div className="flex items-center justify-between py-3">
+              <Link href="/" className="flex items-center gap-2">
                 <img
                   alt="Simply Cucumber"
                   src="/assets/products/simply-cucumber-profile-logo.png"
-                  className="h-16 w-auto md:h-18"
+                  className="h-8 w-auto"
                 />
               </Link>
 
-              {/* Right nav items */}
-              <nav className="hidden md:flex items-center gap-6 text-sm">
-                <Link href="/skin-analysis" className="hover:text-cucumber-700 py-2">Skin Analysis</Link>
-                <Link href="/rewards" className="hover:text-cucumber-700 py-2">Rewards</Link>
-                <Link href="/salon" className="hover:text-cucumber-700 py-2">Salon</Link>
+              <nav className="flex items-center gap-6 text-sm relative">
+                <ShopMenu />
+                <Link href="/best-sellers" className="hover:text-cucumber-700 py-2">
+                  Best Sellers
+                </Link>
+                <Link href="/gifts" className="hover:text-cucumber-700 py-2">
+                  Gifts
+                </Link>
+                <Link href="/skin-analysis" className="hover:text-cucumber-700 py-2">
+                  Skin Analysis
+                </Link>
+                <Link href="/rewards" className="hover:text-cucumber-700 py-2">
+                  Rewards
+                </Link>
+                <Link href="/salon" className="hover:text-cucumber-700 py-2">
+                  Salon
+                </Link>
                 <Link
                   href="/cart"
                   className="rounded bg-cucumber-600 px-3 py-1.5 text-white hover:bg-cucumber-700"
@@ -71,44 +68,32 @@ export default function RootLayout({
           </div>
         </header>
 
-        {/* Page content */}
         <main>{children}</main>
 
-        {/* Footer (green band + headline) */}
-        <footer className="mt-24 bg-cucumber-700 text-white">
-          {/* Big message */}
-          <div className="border-b border-white/15">
-            <div className="mx-auto max-w-6xl px-4 py-10 md:py-14 text-center">
-              <h2 className="font-[var(--font-playfair)] text-3xl md:text-5xl lg:text-6xl tracking-tight">
-                HEALTH IS WEALTH.
-              </h2>
-            </div>
-          </div>
-
-          {/* Link columns */}
-          <div className="mx-auto max-w-6xl px-4 py-10 grid gap-10 md:grid-cols-3 text-sm">
+        {/* Footer */}
+        <footer className="mt-24 border-t">
+          <div className="mx-auto max-w-6xl px-4 py-10 grid md:grid-cols-3 gap-8 text-sm text-gray-600">
             <div>
-              <p className="text-white/90 font-medium">Simply Cucumber</p>
-              <p className="mt-3 text-white/80">
-                Clean, cucumber-first beauty & wellness. Little rituals, big returns.
+              <p className="font-medium text-gray-900">Simply Cucumber</p>
+              <p className="mt-2">
+                Clean, cucumber-first beauty & wellness.{" "}
+                <span className="font-[var(--font-playfair)]">Health is Wealth.</span>
               </p>
             </div>
 
             <nav className="space-y-2">
-              <p className="uppercase tracking-widest text-xs text-white/60">Customer Care</p>
-              <a href="/contact" className="block hover:underline">Contact</a>
-              <a href="/shop" className="block hover:underline">Shop</a>
-              <a href="/about" className="block hover:underline">About Us</a>
+              <a href="/shop" className="hover:text-cucumber-700">Shop</a><br />
+              <a href="/about" className="hover:text-cucumber-700">About Us</a><br />
+              <a href="/contact" className="hover:text-cucumber-700">Contact</a>
             </nav>
 
-            <nav className="space-y-2 md:text-right">
-              <p className="uppercase tracking-widest text-xs text-white/60">More</p>
-              <a href="/privacy" className="block hover:underline">Privacy Policy</a>
-              <a href="/terms" className="block hover:underline">Terms of Service</a>
-              <p className="mt-4 text-white/70">
-                © {new Date().getFullYear()} Simply Cucumber
-              </p>
-            </nav>
+            <div className="md:text-right space-y-2">
+              <p>© {new Date().getFullYear()} Simply Cucumber</p>
+              <div className="space-x-4">
+                <Link href="/privacy" className="hover:text-cucumber-700">Privacy Policy</Link>
+                <Link href="/terms" className="hover:text-cucumber-700">Terms of Service</Link>
+              </div>
+            </div>
           </div>
         </footer>
       </body>
