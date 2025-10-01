@@ -78,40 +78,83 @@ export default function RootLayout({
 
         <main>{children}</main>
 
-       {/* Footer */}
-<footer className="mt-24 bg-cucumber-700 text-white">
-  {/* Big message */}
-  <div className="border-b border-white/15">
-    <div className="mx-auto max-w-6xl px-4 py-10 md:py-14 text-center">
-      <h2 className="font-serif text-3xl md:text-5xl lg:text-6xl tracking-tight">
-        HEALTH IS WEALTH.
-      </h2>
+      {/* Footer */}
+<footer className="bg-cucumber-600 text-white mt-24">
+  {/* Top message bar */}
+  <div className="text-center py-6">
+    <h2
+      className="text-3xl md:text-4xl font-[var(--font-playfair)] font-bold"
+      style={{
+        background: "linear-gradient(90deg, #d4af37, #ffd700, #b8860b)", // metallic gold tones
+        WebkitBackgroundClip: "text",
+        WebkitTextFillColor: "transparent",
+      }}
+    >
+      HEALTH IS WEALTH
+    </h2>
+  </div>
+
+  {/* Footer content */}
+  <div className="mx-auto max-w-6xl px-4 py-12 grid md:grid-cols-4 gap-8 text-sm">
+    {/* Newsletter */}
+    <div>
+      <p className="font-semibold mb-3">Stay in touch.</p>
+      <p className="mb-4">Signup to get first access to product launches & exclusive offers.</p>
+      <form className="space-y-3">
+        <input
+          type="email"
+          placeholder="Enter your email"
+          className="w-full px-3 py-2 rounded border text-black"
+        />
+        <input
+          type="text"
+          placeholder="Phone Number (Optional)"
+          className="w-full px-3 py-2 rounded border text-black"
+        />
+        <button
+          type="submit"
+          className="w-full bg-white text-cucumber-700 font-semibold py-2 rounded hover:bg-gray-100"
+        >
+          SIGN UP
+        </button>
+      </form>
+    </div>
+
+    {/* Customer Care */}
+    <div>
+      <p className="font-semibold mb-3">Customer Care</p>
+      <ul className="space-y-2">
+        <li><a href="/contact" className="hover:underline">Contact Us</a></li>
+        <li><a href="/faqs" className="hover:underline">FAQs</a></li>
+        <li><a href="/shipping" className="hover:underline">Shipping Policy</a></li>
+        <li><a href="/returns" className="hover:underline">Return Policy</a></li>
+      </ul>
+    </div>
+
+    {/* Get to Know Us */}
+    <div>
+      <p className="font-semibold mb-3">Get to Know Us</p>
+      <ul className="space-y-2">
+        <li><a href="/about" className="hover:underline">About Us</a></li>
+        <li><a href="/salon" className="hover:underline">Our Salon</a></li>
+        <li><a href="/blog" className="hover:underline">Blog</a></li>
+      </ul>
+    </div>
+
+    {/* Brand */}
+    <div>
+      <p className="font-semibold mb-3">Simply Cucumber</p>
+      <ul className="space-y-2">
+        <li><a href="/rewards" className="hover:underline">Rewards</a></li>
+        <li><a href="/skin-analysis" className="hover:underline">Skin Analysis</a></li>
+        <li><a href="/privacy" className="hover:underline">Privacy Policy</a></li>
+        <li><a href="/terms" className="hover:underline">Terms of Service</a></li>
+      </ul>
     </div>
   </div>
 
-  {/* Link columns */}
-  <div className="mx-auto max-w-6xl px-4 py-10 grid gap-10 md:grid-cols-3 text-sm">
-    <div>
-      <p className="text-white/90 font-medium">Simply Cucumber</p>
-      <p className="mt-3 text-white/80">
-        Clean, cucumber-first beauty & wellness. Little rituals, big returns.
-      </p>
-    </div>
-
-    <nav className="space-y-2">
-      <p className="uppercase tracking-widest text-xs text-white/60">Customer Care</p>
-      <a href="/contact" className="block hover:underline">Contact</a>
-      <a href="/shop" className="block hover:underline">Shop</a>
-      <a href="/about" className="block hover:underline">About Us</a>
-    </nav>
-
-    <nav className="space-y-2 md:text-right">
-      <p className="uppercase tracking-widest text-xs text-white/60">More</p>
-      <a href="/privacy" className="block hover:underline">Privacy Policy</a>
-      <a href="/terms" className="block hover:underline">Terms of Service</a>
-      <p className="mt-4 text-white/70">
-        © {new Date().getFullYear()} Simply Cucumber
-      </p>
-    </nav>
+  {/* Bottom bar */}
+  <div className="text-center py-6 text-xs border-t border-white/20">
+    © {new Date().getFullYear()} Simply Cucumber · All rights reserved.
   </div>
 </footer>
