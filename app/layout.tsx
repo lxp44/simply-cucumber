@@ -28,45 +28,53 @@ export default function RootLayout({
         {/* Top promo bar */}
         <PromoBar />
 
-        {/* Header */}
-        <header className="sticky top-0 z-40 bg-white/80 backdrop-blur border-b">
-          <div className="mx-auto max-w-6xl px-4">
-            <div className="flex items-center justify-between py-3">
-              <Link href="/" className="flex items-center gap-2">
-                <img
-                  alt="Simply Cucumber"
-                  src="/assets/products/simply-cucumber-profile-logo.png"
-                  className="h-8 w-auto"
-                />
-              </Link>
+       {/* Header with centered logo */}
+<header className="sticky top-0 z-40 bg-white/80 backdrop-blur border-b">
+  <div className="mx-auto max-w-6xl px-4">
+    <div className="grid grid-cols-3 items-center py-3">
+      {/* LEFT: primary nav */}
+      <nav className="flex items-center gap-6 text-sm">
+        <ShopMenu />
+        <Link href="/best-sellers" className="hover:text-cucumber-700 py-2">
+          Best Sellers
+        </Link>
+        <Link href="/gifts" className="hover:text-cucumber-700 py-2">
+          Gifts
+        </Link>
+      </nav>
 
-              <nav className="flex items-center gap-6 text-sm relative">
-                <ShopMenu />
-                <Link href="/best-sellers" className="hover:text-cucumber-700 py-2">
-                  Best Sellers
-                </Link>
-                <Link href="/gifts" className="hover:text-cucumber-700 py-2">
-                  Gifts
-                </Link>
-                <Link href="/skin-analysis" className="hover:text-cucumber-700 py-2">
-                  Skin Analysis
-                </Link>
-                <Link href="/rewards" className="hover:text-cucumber-700 py-2">
-                  Rewards
-                </Link>
-                <Link href="/salon" className="hover:text-cucumber-700 py-2">
-                  Salon
-                </Link>
-                <Link
-                  href="/cart"
-                  className="rounded bg-cucumber-600 px-3 py-1.5 text-white hover:bg-cucumber-700"
-                >
-                  Cart
-                </Link>
-              </nav>
-            </div>
-          </div>
-        </header>
+      {/* CENTER: logo */}
+      <div className="justify-self-center">
+        <Link href="/" aria-label="Simply Cucumber" className="inline-flex items-center">
+          <img
+            alt="Simply Cucumber"
+            src="/assets/products/simply-cucumber-profile-logo.png"
+            className="h-9 w-auto"
+          />
+        </Link>
+      </div>
+
+      {/* RIGHT: secondary nav / actions */}
+      <nav className="flex items-center gap-6 text-sm justify-self-end">
+        <Link href="/skin-analysis" className="hover:text-cucumber-700 py-2">
+          Skin Analysis
+        </Link>
+        <Link href="/rewards" className="hover:text-cucumber-700 py-2">
+          Rewards
+        </Link>
+        <Link href="/salon" className="hover:text-cucumber-700 py-2">
+          Salon
+        </Link>
+        <Link
+          href="/cart"
+          className="rounded bg-cucumber-600 px-3 py-1.5 text-white hover:bg-cucumber-700"
+        >
+          Cart
+        </Link>
+      </nav>
+    </div>
+  </div>
+</header>
 
         <main>{children}</main>
 
