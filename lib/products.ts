@@ -96,17 +96,25 @@ export const PRODUCTS: Product[] = [
   ],
   category: "toothpaste",
 },
-  {
-    sku: "paste",
-    slug: "cucumber-toothpaste",
-    title: "Cucumber Toothpaste",
-    price: 8,
-    description:
-      "Fresh cucumber-mint toothpaste for a clean, cool feel.",
-    image: "/assets/products/toothpaste.jpg",
-    benefits: ["Fluoride-Free", "Fresh Breath"],
-    category: "toothpaste",
-  },
+ {
+  sku: "body-scrub",
+  slug: "cucumber-body-scrub",
+  title: "Simply Cucumber Body Scrub",
+  tagline: "Refresh Your Glow — Naturally.",
+  price: 22,
+  description:
+    "Reveal your skin’s natural radiance with our Simply Cucumber Body Scrub, a refreshing blend of cucumber extract, fine sugar crystals, and nourishing plant oils. Designed to exfoliate gently yet effectively, this scrub buffs away dull, dry skin while replenishing essential moisture — leaving you silky-smooth, hydrated, and glowing. The cooling power of cucumber calms inflammation, while natural antioxidants help detoxify and brighten the skin. Each use feels like a spa treatment — fresh, clean, and crisp, with a scent that relaxes your senses and revives your energy. Perfect for daily or weekly use on body, hands, or feet.",
+  image: "/assets/products/cucumber-body-scrub.jpg",
+  benefits: [
+    "Deep exfoliation reveals softer, smoother skin",
+    "Hydrating formula with cucumber extract and coconut oil",
+    "Brightens skin tone and improves texture",
+    "Soothes redness, bumps, and irritation",
+    "Antioxidant protection from free radicals",
+    "Preps skin for moisture or self-tanning"
+  ],
+  category: "body",
+},
   {
     sku: "spa",
     slug: "at-home-spa-kit",
