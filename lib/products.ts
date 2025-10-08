@@ -116,6 +116,25 @@ export const PRODUCTS: Product[] = [
   category: "body",
 },
   {
+  sku: "deodorant",
+  slug: "cucumber-deodorant",
+  title: "Simply Cucumber Deodorant",
+  tagline: "Pure Confidence — Naturally.",
+  price: 14,
+  description:
+    "Stay confident all day with Simply Cucumber Deodorant, a clean, aluminum-free formula powered by cucumber, aloe, and mineral salts. Designed to neutralize odor naturally without blocking pores, it keeps you feeling fresh, balanced, and dry while letting your body breathe. Infused with cucumber extract and coconut oil, it soothes delicate underarm skin, prevents irritation, and delivers a cool, calming scent that’s refreshing and subtle. No harsh chemicals. No white residue. Just natural protection that works — and feels like skincare.",
+  image: "/assets/products/cucumber-deodorant.jpg",
+  benefits: [
+    "Long-lasting freshness powered by natural antibacterial ingredients",
+    "Aluminum & paraben-free formula that lets skin breathe",
+    "Soothes irritation with aloe and cucumber",
+    "Hydrating protection with coconut oil and shea butter",
+    "Clean, cooling cucumber scent that’s light and fresh",
+    "Stain-free formula — glides on clear with no residue"
+  ],
+  category: "body",
+},
+  {
     sku: "spa",
     slug: "at-home-spa-kit",
     title: "At-Home Spa Kit",
