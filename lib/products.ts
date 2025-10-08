@@ -26,7 +26,7 @@ export const PRODUCTS: Product[] = [
     title: "Cucumber Powder",
     price: 25,
     description: "Lightweight toner that calms and hydrates.",
-    image: "/assets/products/toner.jpg",
+    image: "/assets/products/cucumber-powder.jpg",
     benefits: ["Electrolytes","Energize fast","Daily vitamins"],
     category: "powder"
   },
