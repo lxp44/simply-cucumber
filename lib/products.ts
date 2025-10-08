@@ -60,6 +60,25 @@ export const PRODUCTS: Product[] = [
   category: "face",
 },
   {
+  sku: "toothpaste",
+  slug: "cucumber-toothpaste",
+  title: "Cucumber Toothpaste",
+  tagline: "Hydrate & Brighten — Naturally.",
+  price: 8,
+  description:
+    "Experience the refreshingly pure clean your mouth deserves. Our Simply Cucumber Toothpaste combines cool mint and crisp cucumber for a soothing yet powerful oral care ritual. Formulated with natural minerals like silica and potassium, it helps support strong enamel and healthy gums while staying gentle on sensitive teeth. Every brush delivers a burst of freshness that lasts — fighting inflammation, balancing oral pH, and nourishing with Vitamin C and Zinc for immunity and repair. Fluoride-free and clean by design, it’s perfect for those who crave nature’s touch in their daily routine. Available in travel-size tubes or eco-friendly glass jars, the Simply Cucumber Toothpaste is your soothing care for sensitive gums — refreshing, natural, and undeniably clean.",
+  image: "/assets/products/cucumber-toothpaste.jpg",
+  benefits: [
+    "Gentle on enamel and gums",
+    "Freshens breath with natural mint and cucumber",
+    "Fights inflammation and supports oral immunity",
+    "Zinc + Vitamin C aid in tissue repair",
+    "Clean, fluoride-free, and non-toxic formula",
+    "Balances oral pH for long-lasting freshness"
+  ],
+  category: "toothpaste",
+},
+  {
     sku: "mask",
     slug: "hydra-gel-mask",
     title: "Hydra-Gel Mask",
