@@ -12,8 +12,8 @@ export type Product = {
 export const PRODUCTS: Product[] = [
   {
     sku: "powder",
-    slug: "simply-cucumber-powder",
-    title: "Simply Cucumber Powder",
+    slug: "powder",
+    title: "Powder",
     price: 25,
     description:
       "Freeze-dried cucumber powder packed with vitamins and antioxidants. Blend it into drinks, face masks, or spa water for a daily boost of clarity and hydration.",
