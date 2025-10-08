@@ -39,6 +39,24 @@ export const PRODUCTS: Product[] = [
   category: "body",
 },
   {
+  sku: "face-mist",
+  slug: "face-mist",
+  title: "Cucumber Face Mist",
+  price: 18,
+  description:
+    "Hydration. Balance. Glow — Anywhere, Anytime. Give your skin a refreshing reset with our Simply Cucumber Face Mist, your instant dose of hydration and calm. Infused with cucumber extract, aloe, and natural antioxidants, this fine mist delivers cooling relief, deep moisture, and a healthy, dewy glow—whether you’re fresh out of the gym, setting your makeup, or winding down after a long day. Each spray feels like a cool breeze in a bottle, instantly soothing redness, reviving dull skin, and rebalancing oil without disrupting your routine. It’s skincare that travels with you—light, pure, and powerful.",
+  image: "/assets/products/cucumber-face-mist.jpg",
+  benefits: [
+    "Instant hydration — replenishes moisture anytime",
+    "Cooling & calming — reduces redness, puffiness, and heat",
+    "Brightening + refreshing — boosts natural glow",
+    "Antioxidant defense — shields from stressors and blue light",
+    "Balances oil & pH — keeps skin dewy, not greasy",
+    "Soothes sensitive skin — cucumber and aloe calm irritation"
+  ],
+  category: "face",
+},
+  {
     sku: "mask",
     slug: "hydra-gel-mask",
     title: "Hydra-Gel Mask",
