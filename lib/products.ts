@@ -77,18 +77,24 @@ export const PRODUCTS: Product[] = [
     "Balances oral pH for long-lasting freshness"
   ],
   category: "toothpaste",
+}{
+  sku: "gum",
+  slug: "cucumber-gum",
+  title: "Simply Cucumber Gum",
+  tagline: "Hydrate. Heal. Refresh.",
+  price: 4,
+  description:
+    "Chew clean. Refresh naturally. Our Simply Cucumber Gum blends cool mint and crisp cucumber for a spa-fresh taste that hydrates, heals, and refreshes with every chew. Infused with Vitamin C, Zinc, and xylitol to help fight bad bacteria, support gum health, and encourage healthy saliva flow—gently nourishing your mouth while keeping breath fresh.",
+  image: "/assets/products/cucumber-gum.jpg",
+  benefits: [
+    "Freshens breath naturally",
+    "Vitamin C + Zinc support gum and immune health",
+    "Xylitol helps fight bad bacteria",
+    "Soothes dry mouth; boosts saliva production",
+    "Helps protect enamel; balances oral pH"
+  ],
+  category: "toothpaste",
 },
-  {
-    sku: "mask",
-    slug: "hydra-gel-mask",
-    title: "Hydra-Gel Mask",
-    price: 24,
-    description:
-      "Cooling gel mask for instant plumpness and glow.",
-    image: "/assets/products/mask.jpg",
-    benefits: ["Plumps Skin", "Cooling Feel"],
-    category: "face",
-  },
   {
     sku: "paste",
     slug: "cucumber-toothpaste",
