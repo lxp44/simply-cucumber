@@ -17,7 +17,7 @@ export const PRODUCTS: Product[] = [
     price: 25,
     description:
       "Freeze-dried cucumber powder packed with vitamins and antioxidants. Blend it into drinks, face masks, or spa water for a daily boost of clarity and hydration.",
-    image: "/assets/products/simply-cucumber-powder.jpg",
+    image: "/assets/products/cucumber-powder.jpg",
     benefits: ["100% Natural", "Rich in Vitamins", "Hydration Boost"],
     category: "powders",
   },
