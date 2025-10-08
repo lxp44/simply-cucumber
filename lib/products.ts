@@ -21,14 +21,14 @@ export const PRODUCTS: Product[] = [
     category: "powders"
   },
   {
-    sku: "toner",
-    slug: "cucumber-toner",
-    title: "Cucumber Toner",
-    price: 18,
+    sku: "powder",
+    slug: "cucumber-powder",
+    title: "Cucumber Powder",
+    price: 25,
     description: "Lightweight toner that calms and hydrates.",
     image: "/assets/products/toner.jpg",
-    benefits: ["Soothes redness","Hydrates fast","pH balanced"],
-    category: "face"
+    benefits: ["Electrolytes","Energize fast","Daily vitamins"],
+    category: "powder"
   },
   {
     sku: "mask",
