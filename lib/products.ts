@@ -77,7 +77,8 @@ export const PRODUCTS: Product[] = [
     "Balances oral pH for long-lasting freshness"
   ],
   category: "toothpaste",
-}{
+},
+  {
   sku: "gum",
   slug: "cucumber-gum",
   title: "Simply Cucumber Gum",
