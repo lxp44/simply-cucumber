@@ -30,34 +30,50 @@ export default function RootLayout({
         {/* Header with centered logo + hover mega menu */}
         <header className="sticky top-0 z-40 bg-white/80 backdrop-blur border-b">
           <div className="mx-auto max-w-6xl px-4">
-            <div className="flex items-center justify-between py-3">
+            {/* changed to grid so the logo column is always centered */}
+            <div className="grid grid-cols-3 items-center py-3">
               {/* Left nav */}
-              <nav className="flex items-center gap-6 text-sm relative">
+              <nav className="flex items-center gap-6 text-sm relative justify-start">
                 <div className="relative group">
-                  <Link href="/shop" className="hover:text-cucumber-700 inline-block py-2">
+                  <Link
+                    href="/shop"
+                    className="hover:text-cucumber-700 inline-block py-2"
+                  >
                     Shop
                   </Link>
                   {/* Keep menu open while pointer is over trigger or panel */}
                   <MegaMenu />
                 </div>
-                <Link href="/best-sellers" className="hover:text-cucumber-700 py-2">Best Sellers</Link>
-                <Link href="/gifts" className="hover:text-cucumber-700 py-2">Gifts</Link>
+                <Link href="/best-sellers" className="hover:text-cucumber-700 py-2">
+                  Best Sellers
+                </Link>
+                <Link href="/gifts" className="hover:text-cucumber-700 py-2">
+                  Gifts
+                </Link>
               </nav>
 
               {/* Centered logo */}
-              <Link href="/" className="flex items-center gap-2">
-                <img
-                  src="/assets/products/simply-cucumber-profile-logo.png"
-                  alt="Simply Cucumber"
-                  className="h-12 w-auto md:h-14"
-                />
-              </Link>
+              <div className="flex justify-center">
+                <Link href="/" className="flex items-center gap-2">
+                  <img
+                    src="/assets/products/simply-cucumber-profile-logo.png"
+                    alt="Simply Cucumber"
+                    className="h-12 w-auto md:h-14"
+                  />
+                </Link>
+              </div>
 
               {/* Right nav */}
-              <nav className="flex items-center gap-6 text-sm">
-                <Link href="/skin-analysis" className="hover:text-cucumber-700 py-2">Skin Analysis</Link>
-                <Link href="/rewards" className="hover:text-cucumber-700 py-2">Rewards</Link>
-                <Link href="/salon" className="hover:text-cucumber-700 py-2">Salon</Link>
+              <nav className="flex items-center gap-6 text-sm justify-end">
+                <Link href="/skin-analysis" className="hover:text-cucumber-700 py-2">
+                  Skin Analysis
+                </Link>
+                <Link href="/rewards" className="hover:text-cucumber-700 py-2">
+                  Rewards
+                </Link>
+                <Link href="/salon" className="hover:text-cucumber-700 py-2">
+                  Salon
+                </Link>
                 <Link
                   href="/cart"
                   className="rounded bg-cucumber-600 px-3 py-1.5 text-white hover:bg-cucumber-700"
