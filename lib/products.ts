@@ -216,7 +216,7 @@ export const PRODUCTS: Product[] = [
   price: 6,
   description:
     "Refresh tired eyes in minutes with our Simply Cucumber Eye Pads, infused with cooling cucumber extract, aloe, and vitamin-rich botanicals that bring instant relief to delicate under-eye skin. Each pad delivers a soothing, hydrating boost that reduces puffiness, brightens dark circles, and revives your natural glow—whether you’re recovering from a long night or a long day. Powered by Vitamin C, niacinamide, and green tea antioxidants, these pads fight fatigue and early signs of aging, while cucumber’s cooling touch calms and refreshes. Store them in the fridge for the ultimate spa-at-home experience.",
-  image: "/assets/products/cucumber-eye-pads.jpg",
+  image: "/assets/products/cucumber-eye-pads-single.jpg",
   benefits: [
     "Reduces puffiness and under-eye bags",
     "Brightens dark circles (Vitamin C + niacinamide)",
@@ -234,7 +234,7 @@ export const PRODUCTS: Product[] = [
   price: 100,
   description:
     "Refresh tired eyes in minutes with our Simply Cucumber Eye Pads, infused with cooling cucumber extract, aloe, and vitamin-rich botanicals that bring instant relief to delicate under-eye skin. Each pad delivers a soothing, hydrating boost that reduces puffiness, brightens dark circles, and revives your natural glow—whether you’re recovering from a long night or a long day. Powered by Vitamin C, niacinamide, and green tea antioxidants, these pads fight fatigue and early signs of aging, while cucumber’s cooling touch calms and refreshes. Store them in the fridge for the ultimate spa-at-home experience.",
-  image: "/assets/products/cucumber-eye-pads.jpg",
+  image: "/assets/products/cucumber-eye-pads-pack.jpg",
   benefits: [
     "Reduces puffiness and under-eye bags",
     "Brightens dark circles (Vitamin C + niacinamide)",
