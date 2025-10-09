@@ -69,7 +69,6 @@ export default function ShopPage({ searchParams }: PageProps) {
         />
         <div className="absolute inset-0 bg-black/10" />
         <h1 className="absolute left-6 bottom-6 text-3xl md:text-4xl font-semibold text-white drop-shadow-lg drop-shadow">
-          All Products
         </h1>
       </div>
 
