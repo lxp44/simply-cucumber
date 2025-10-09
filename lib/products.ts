@@ -31,6 +31,7 @@ export const PRODUCTS: Product[] = [
   description:
     "Indulge your skin in the refreshing simplicity of cucumber. Our Simply Cucumber Soap cleanses deeply without stripping away natural oils, leaving your skin feeling soft, balanced, and hydrated. Each bar is crafted with real cucumber extract—rich in antioxidants and natural antibacterial properties—to help calm irritation, fight body acne, and reduce dryness. The fresh cucumber scent awakens your senses while providing a cooling, spa-like experience every time you bathe. Perfect for daily use on face and body, this bar transforms your shower into a moment of clean, natural clarity.",
   image: "/assets/products/cucumber-soap.jpg",
+hoverImage: "/assets/products/cucumber-soap-2.jpg",
   benefits: [
     "100% Natural",
     "Gently cleanses without stripping",
