@@ -154,6 +154,25 @@ export const PRODUCTS: Product[] = [
   category: "face",
 },
   {
+  sku: "lip-balm",
+  slug: "cucumber-lip-balm",
+  title: "Simply Cucumber Lip Balm",
+  tagline: "Softness, Simplified.",
+  price: 9,
+  description:
+    "Nourish your lips with the cooling comfort of cucumber. Our Simply Cucumber Lip Balm is crafted with cucumber extract, shea butter, and vitamin E to deliver lasting hydration and protection in one swipe. It melts effortlessly into dry lips, sealing in moisture while creating a soft, natural finish — no shine, no stickiness, just smooth, healthy lips. Infused with antioxidants and natural oils, it helps heal cracks, calm irritation, and defend against dryness from weather or daily wear. The subtle cucumber scent feels light and refreshing — perfect for anyone who loves clean, effortless care.",
+  image: "/assets/products/cucumber-lip-balm.jpg",
+  benefits: [
+    "Deep moisture locks in softness all day",
+    "Healing cucumber + vitamin E repair dryness",
+    "Protective barrier against wind and sun",
+    "Smooth non-sticky finish with natural matte sheen",
+    "Antioxidant support keeps lips youthful and supple",
+    "Subtle cucumber scent for a fresh, calming feel"
+  ],
+  category: "face",
+},
+  {
   sku: "face-mask",
   slug: "cucumber-face-mask",
   title: "Simply Cucumber Face Mask (Single Use)",
@@ -186,6 +205,42 @@ export const PRODUCTS: Product[] = [
     "Calms irritation with antioxidants and Vitamin C",
     "Tightens pores and refines skin texture",
     "Brightens and softens for a healthy, natural glow"
+  ],
+  category: "face",
+},
+  {
+  sku: "eye-pads",
+  slug: "cucumber-eye-pads",
+  title: "Simply Cucumber Eye Pads (Single Use)",
+  tagline: "Wake Up Beautifully.",
+  price: 6,
+  description:
+    "Refresh tired eyes in minutes with our Simply Cucumber Eye Pads, infused with cooling cucumber extract, aloe, and vitamin-rich botanicals that bring instant relief to delicate under-eye skin. Each pad delivers a soothing, hydrating boost that reduces puffiness, brightens dark circles, and revives your natural glow—whether you’re recovering from a long night or a long day. Powered by Vitamin C, niacinamide, and green tea antioxidants, these pads fight fatigue and early signs of aging, while cucumber’s cooling touch calms and refreshes. Store them in the fridge for the ultimate spa-at-home experience.",
+  image: "/assets/products/cucumber-eye-pads.jpg",
+  benefits: [
+    "Reduces puffiness and under-eye bags",
+    "Brightens dark circles (Vitamin C + niacinamide)",
+    "Deep hydration without irritation (aloe + glycerin)",
+    "Soothes sensitive, tired eyes",
+    "Antioxidant protection (cucumber + green tea)"
+  ],
+  category: "face",
+},
+{
+  sku: "eye-pads",
+  slug: "cucumber-eye-pads",
+  title: "Simply Cucumber Eye Pads (16 count)",
+  tagline: "Wake Up Beautifully.",
+  price: 100,
+  description:
+    "Refresh tired eyes in minutes with our Simply Cucumber Eye Pads, infused with cooling cucumber extract, aloe, and vitamin-rich botanicals that bring instant relief to delicate under-eye skin. Each pad delivers a soothing, hydrating boost that reduces puffiness, brightens dark circles, and revives your natural glow—whether you’re recovering from a long night or a long day. Powered by Vitamin C, niacinamide, and green tea antioxidants, these pads fight fatigue and early signs of aging, while cucumber’s cooling touch calms and refreshes. Store them in the fridge for the ultimate spa-at-home experience.",
+  image: "/assets/products/cucumber-eye-pads.jpg",
+  benefits: [
+    "Reduces puffiness and under-eye bags",
+    "Brightens dark circles (Vitamin C + niacinamide)",
+    "Deep hydration without irritation (aloe + glycerin)",
+    "Soothes sensitive, tired eyes",
+    "Antioxidant protection (cucumber + green tea)"
   ],
   category: "face",
 },
