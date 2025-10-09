@@ -179,7 +179,7 @@ export const PRODUCTS: Product[] = [
   price: 100,
   description:
     "Reset your skin with the refreshing power of cucumber. The Simply Cucumber Face Mask delivers a surge of deep hydration, antioxidants, and Vitamin C to instantly cool, soothe, and brighten your complexion. Designed for all skin types — even sensitive — it helps reduce puffiness, tighten pores, and restore a naturally balanced glow. The gel-based formula feels icy and weightless, melting into skin to calm inflammation and boost radiance in minutes. Whether used after a long day, a flight, or a night out, this mask brings your skin back to life — refreshed, smooth, and luminous.",
-  image: "/assets/products/cucumber-face-mask.jpg",
+  image: "/assets/products/cucumber-face-mask-pack.jpg",
   benefits: [
     "Deep hydration that replenishes and locks in moisture",
     "Reduces puffiness and dark circles for energized skin",
