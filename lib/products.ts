@@ -29,7 +29,7 @@ export const PRODUCTS: Product[] = [
     sku: "soap",
     slug: "soap",
     title: "Cucumber Soap",
-    price: 6,
+    price: 14,
     description:
       "Indulge your skin in the refreshing simplicity of cucumber. Our Simply Cucumber Soap cleanses deeply without stripping away natural oils, leaving your skin feeling soft, balanced, and hydrated. Each bar is crafted with real cucumber extract—rich in antioxidants and natural antibacterial properties—to help calm irritation, fight body acne, and reduce dryness. The fresh cucumber scent awakens your senses while providing a cooling, spa-like experience every time you bathe. Perfect for daily use on face and body, this bar transforms your shower into a moment of clean, natural clarity.",
     image: "/assets/products/cucumber-soap.jpg",
@@ -48,7 +48,7 @@ export const PRODUCTS: Product[] = [
     slug: "face-mist",
     title: "Cucumber Face Mist",
     tagline: "Your daily dew in a bottle — calm, hydrate, refresh.",
-    price: 18,
+    price: 27,
     description:
       "Hydration. Balance. Glow — Anywhere, Anytime. Give your skin a refreshing reset with our Simply Cucumber Face Mist, your instant dose of hydration and calm. Infused with cucumber extract, aloe, and natural antioxidants, this fine mist delivers cooling relief, deep moisture, and a healthy, dewy glow—whether you’re fresh out of the gym, setting your makeup, or winding down after a long day. Each spray feels like a cool breeze in a bottle, instantly soothing redness, reviving dull skin, and rebalancing oil without disrupting your routine. It’s skincare that travels with you—light, pure, and powerful.",
     image: "/assets/products/cucumber-face-mist.jpg",
@@ -68,7 +68,7 @@ export const PRODUCTS: Product[] = [
     slug: "cucumber-toothpaste",
     title: "Cucumber Toothpaste",
     tagline: "Hydrate & Brighten — Naturally.",
-    price: 8,
+    price: 15,
     description:
       "Experience the refreshingly pure clean your mouth deserves. Our Simply Cucumber Toothpaste combines cool mint and crisp cucumber for a soothing yet powerful oral care ritual. Formulated with natural minerals like silica and potassium, it helps support strong enamel and healthy gums while staying gentle on sensitive teeth. Every brush delivers a burst of freshness that lasts — fighting inflammation, balancing oral pH, and nourishing with Vitamin C and Zinc for immunity and repair. Fluoride-free and clean by design, it’s perfect for those who crave nature’s touch in their daily routine. Available in travel-size tubes or eco-friendly glass jars, the Simply Cucumber Toothpaste is your soothing care for sensitive gums — refreshing, natural, and undeniably clean.",
     image: "/assets/products/cucumber-toothpaste.jpg",
@@ -88,7 +88,7 @@ export const PRODUCTS: Product[] = [
     slug: "cucumber-gum",
     title: "Simply Cucumber Gum",
     tagline: "Hydrate. Heal. Refresh.",
-    price: 4,
+    price: 10,
     description:
       "Chew clean. Refresh naturally. Our Simply Cucumber Gum blends cool mint and crisp cucumber for a spa-fresh taste that hydrates, heals, and refreshes with every chew. Infused with Vitamin C, Zinc, and xylitol to help fight bad bacteria, support gum health, and encourage healthy saliva flow—gently nourishing your mouth while keeping breath fresh.",
     image: "/assets/products/cucumber-gum.jpg",
@@ -107,7 +107,7 @@ export const PRODUCTS: Product[] = [
     slug: "cucumber-body-scrub",
     title: "Simply Cucumber Body Scrub",
     tagline: "Refresh Your Glow — Naturally.",
-    price: 22,
+    price: 40,
     description:
       "Reveal your skin’s natural radiance with our Simply Cucumber Body Scrub, a refreshing blend of cucumber extract, fine sugar crystals, and nourishing plant oils. Designed to exfoliate gently yet effectively, this scrub buffs away dull, dry skin while replenishing essential moisture — leaving you silky-smooth, hydrated, and glowing. The cooling power of cucumber calms inflammation, while natural antioxidants help detoxify and brighten the skin. Each use feels like a spa treatment — fresh, clean, and crisp, with a scent that relaxes your senses and revives your energy. Perfect for daily or weekly use on body, hands, or feet.",
     image: "/assets/products/cucumber-body-scrub.jpg",
@@ -167,7 +167,7 @@ export const PRODUCTS: Product[] = [
     slug: "cucumber-lip-balm",
     title: "Simply Cucumber Lip Balm",
     tagline: "Softness, Simplified.",
-    price: 9,
+    price: 10,
     description:
       "Nourish your lips with the cooling comfort of cucumber. Our Simply Cucumber Lip Balm is crafted with cucumber extract, shea butter, and vitamin E to deliver lasting hydration and protection in one swipe. It melts effortlessly into dry lips, sealing in moisture while creating a soft, natural finish — no shine, no stickiness, just smooth, healthy lips. Infused with antioxidants and natural oils, it helps heal cracks, calm irritation, and defend against dryness from weather or daily wear. The subtle cucumber scent feels light and refreshing — perfect for anyone who loves clean, effortless care.",
     image: "/assets/products/cucumber-lip-balm.jpg",
@@ -262,7 +262,7 @@ export const PRODUCTS: Product[] = [
     sku: "spa",
     slug: "at-home-spa-kit",
     title: "At-Home Spa Kit",
-    price: 39,
+    price: 200,
     description:
       "Curated cucumber spa ritual — includes mist, scrub, mask, and gel pads for full-body rejuvenation.",
     image: "/assets/products/spa.jpg",
@@ -274,7 +274,7 @@ export const PRODUCTS: Product[] = [
     sku: "lotion",
     slug: "cucumber-body-lotion",
     title: "Cucumber Body Lotion",
-    price: 16,
+    price: 25,
     description:
       "Lightweight daily hydration infused with cooling cucumber extract.",
     image: "/assets/products/lotion.jpg",
