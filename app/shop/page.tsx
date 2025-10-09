@@ -61,14 +61,14 @@ export default function ShopPage({ searchParams }: PageProps) {
       {/* Hero header image like the reference */}
       <div className="relative h-56 md:h-72 w-full rounded-xl overflow-hidden bg-gray-50">
         <Image
-          src="/assets/shop/hero.jpg" // put your banner image here
+          src="/assets/shop/products-hero.jpg" // put your banner image here
           alt="Shop header"
           fill
           className="object-cover"
           priority
         />
         <div className="absolute inset-0 bg-black/10" />
-        <h1 className="absolute left-6 bottom-6 text-3xl md:text-4xl font-semibold text-white drop-shadow">
+        <h1 className="absolute left-6 bottom-6 text-3xl md:text-4xl font-semibold text-white drop-shadow-lg drop-shadow">
           All Products
         </h1>
       </div>
