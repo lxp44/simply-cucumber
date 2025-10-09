@@ -61,7 +61,7 @@ export default function MegaMenu() {
           </Link>
           <Link href="/shop" className="mt-4 block overflow-hidden rounded-lg border">
             <img
-              src="/assets/products/simply cucumber banner google.png"
+              src="/assets/menu/drop-down-menu-2.jpg"
               alt="New arrivals"
               className="h-48 w-full object-cover"
             />
