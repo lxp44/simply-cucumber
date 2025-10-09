@@ -135,6 +135,61 @@ export const PRODUCTS: Product[] = [
   category: "body",
 },
   {
+  sku: "lip-oil",
+  slug: "cucumber-lip-oil",
+  title: "Simply Cucumber Lip Oil",
+  tagline: "Gloss Meets Wellness.",
+  price: 12,
+  description:
+    "Give your lips the love they deserve with our Simply Cucumber Lip Oil — a weightless blend of cold-pressed cucumber seed oil, vitamin E, and plant-based gloss enhancers that instantly hydrates, soothes, and restores dry or chapped lips. Unlike sticky glosses or heavy balms, this formula melts in smoothly, leaving a soft, glass-like shine with long-lasting moisture. The cooling cucumber infusion refreshes on contact, delivering a clean, subtle scent that feels like skincare, not makeup.",
+  image: "/assets/products/cucumber-lip-oil.jpg",
+  benefits: [
+    "Deep hydration that locks in moisture for hours",
+    "Healing blend of Vitamin E + cucumber oil for repair and protection",
+    "Lightweight, non-sticky shine with a natural finish",
+    "Soothes and cools irritation or dryness",
+    "Antioxidant-rich to keep lips youthful and supple",
+    "Perfect alone or over lipstick for hydrated glow"
+  ],
+  category: "face",
+},
+  {
+  sku: "face-mask",
+  slug: "cucumber-face-mask",
+  title: "Simply Cucumber Face Mask (Single Use)",
+  tagline: "Cool Your Skin. Revive Your Glow.",
+  price: 6,
+  description:
+    "Reset your skin with the refreshing power of cucumber. The Simply Cucumber Face Mask delivers a surge of deep hydration, antioxidants, and Vitamin C to instantly cool, soothe, and brighten your complexion. Designed for all skin types — even sensitive — it helps reduce puffiness, tighten pores, and restore a naturally balanced glow. The gel-based formula feels icy and weightless, melting into skin to calm inflammation and boost radiance in minutes. Whether used after a long day, a flight, or a night out, this mask brings your skin back to life — refreshed, smooth, and luminous.",
+  image: "/assets/products/cucumber-face-mask-single.jpg",
+  benefits: [
+    "Deep hydration that replenishes and locks in moisture",
+    "Reduces puffiness and dark circles for energized skin",
+    "Calms irritation with antioxidants and Vitamin C",
+    "Tightens pores and refines skin texture",
+    "Brightens and softens for a healthy, natural glow"
+  ],
+  category: "face",
+},
+  {
+  sku: "face-mask",
+  slug: "cucumber-face-mask",
+  title: "Simply Cucumber Face Mask (16 count)",
+  tagline: "Cool Your Skin. Revive Your Glow.",
+  price: 100,
+  description:
+    "Reset your skin with the refreshing power of cucumber. The Simply Cucumber Face Mask delivers a surge of deep hydration, antioxidants, and Vitamin C to instantly cool, soothe, and brighten your complexion. Designed for all skin types — even sensitive — it helps reduce puffiness, tighten pores, and restore a naturally balanced glow. The gel-based formula feels icy and weightless, melting into skin to calm inflammation and boost radiance in minutes. Whether used after a long day, a flight, or a night out, this mask brings your skin back to life — refreshed, smooth, and luminous.",
+  image: "/assets/products/cucumber-face-mask.jpg",
+  benefits: [
+    "Deep hydration that replenishes and locks in moisture",
+    "Reduces puffiness and dark circles for energized skin",
+    "Calms irritation with antioxidants and Vitamin C",
+    "Tightens pores and refines skin texture",
+    "Brightens and softens for a healthy, natural glow"
+  ],
+  category: "face",
+},
+  {
     sku: "spa",
     slug: "at-home-spa-kit",
     title: "At-Home Spa Kit",
