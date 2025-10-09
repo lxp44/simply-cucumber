@@ -17,10 +17,11 @@ export const PRODUCTS: Product[] = [
     sku: "powder",
     slug: "powder",
     title: "Powder",
-    price: 25,
+    price: 50,
     description:
       "Freeze-dried cucumber powder packed with vitamins and antioxidants. Blend it into drinks, face masks, or spa water for a daily boost of clarity and hydration.",
     image: "/assets/products/cucumber-powder.jpg",
+   hoverImage: "cucumber-powder-hover.jpg",
     hoverImage: "/assets/products/cucumber-powder-hover.jpg",
     benefits: ["100% Natural", "Rich in Vitamins", "Hydration Boost"],
     category: "powders",
