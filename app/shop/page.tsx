@@ -15,6 +15,9 @@ const GROUPS: Record<string, string[]> = {
 
 type PageProps = { searchParams?: { category?: string; sort?: string } };
 
+// Local helper so TS doesn't complain before you add `hoverImage` in products.ts
+type WithHover = { hoverImage?: string };
+
 export default function ShopPage({ searchParams }: PageProps) {
   const category = searchParams?.category ?? null;
   const sort = searchParams?.sort ?? null;
@@ -43,8 +46,7 @@ export default function ShopPage({ searchParams }: PageProps) {
       items.sort((a, b) => b.price - a.price);
       break;
     case "date-asc":
-      // If you later add "addedAt" dates, switch to those; for now keep list order.
-      // items.sort((a,b)=> new Date(a.addedAt).getTime() - new Date(b.addedAt).getTime());
+      // keep list order for now
       break;
     case "date-desc":
       items.reverse();
@@ -52,24 +54,23 @@ export default function ShopPage({ searchParams }: PageProps) {
     case "best":
     case "featured":
     default:
-      // leave as-is (your seed order acts as featured/best)
+      // leave as-is (seed order)
       break;
   }
 
   return (
     <section className="mx-auto max-w-6xl px-4 py-10">
-      {/* Hero header image like the reference */}
+      {/* Hero header image */}
       <div className="relative h-56 md:h-72 w-full rounded-xl overflow-hidden bg-gray-50">
         <Image
-          src="/assets/shop/products-hero.jpg" // put your banner image here
+          src="/assets/shop/products-hero.jpg"
           alt="Shop header"
           fill
           className="object-cover"
           priority
         />
         <div className="absolute inset-0 bg-black/10" />
-        <h1 className="absolute left-6 bottom-6 text-3xl md:text-4xl font-semibold text-white drop-shadow-lg drop-shadow">
-        </h1>
+        <h1 className="absolute left-6 bottom-6 text-3xl md:text-4xl font-semibold text-white drop-shadow-lg" />
       </div>
 
       {/* Filters + content */}
@@ -114,25 +115,43 @@ export default function ShopPage({ searchParams }: PageProps) {
 
           {/* Product grid */}
           <div className="mt-6 grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {items.map((p) => (
-              <div key={p.sku} className="border rounded-lg p-4">
-                <Link href={`/products/${p.slug}`}>
-                  <div className="relative h-44 rounded bg-gray-50 overflow-hidden">
-                    <Image src={p.image} alt={p.title} fill className="object-cover" />
-                  </div>
-                </Link>
-                <h3 className="mt-4 font-medium">
-                  <Link href={`/products/${p.slug}`}>{p.title}</Link>
-                </h3>
-                <p className="text-gray-600">${p.price.toFixed(2)}</p>
-                <form action="/api/checkout" method="POST" className="mt-3">
-                  <input type="hidden" name="sku" value={p.sku} />
-                  <button className="w-full rounded bg-cucumber-600 px-4 py-2 text-white hover:bg-cucumber-700">
-                    Buy now
-                  </button>
-                </form>
-              </div>
-            ))}
+            {items.map((p) => {
+              const hoverImage = (p as unknown as WithHover).hoverImage;
+              return (
+                <div key={p.sku} className="border rounded-lg p-4">
+                  <Link href={`/products/${p.slug}`}>
+                    {/* Hover-swap image block */}
+                    <div className="relative h-44 rounded bg-gray-50 overflow-hidden group">
+                      <Image
+                        src={p.image}
+                        alt={p.title}
+                        fill
+                        className="object-cover transition-all duration-300 group-hover:opacity-0 group-hover:scale-105"
+                      />
+                      {hoverImage && (
+                        <Image
+                          src={hoverImage}
+                          alt={`${p.title} alternate view`}
+                          fill
+                          className="object-cover opacity-0 transition-all duration-300 group-hover:opacity-100 group-hover:scale-105"
+                        />
+                      )}
+                    </div>
+                  </Link>
+
+                  <h3 className="mt-4 font-medium">
+                    <Link href={`/products/${p.slug}`}>{p.title}</Link>
+                  </h3>
+                  <p className="text-gray-600">${p.price.toFixed(2)}</p>
+                  <form action="/api/checkout" method="POST" className="mt-3">
+                    <input type="hidden" name="sku" value={p.sku} />
+                    <button className="w-full rounded bg-cucumber-600 px-4 py-2 text-white hover:bg-cucumber-700">
+                      Buy now
+                    </button>
+                  </form>
+                </div>
+              );
+            })}
           </div>
         </div>
       </div>
@@ -152,5 +171,3 @@ function Pill({ label, href, active }: { label: string; href: string; active: bo
     </Link>
   );
 }
-
-
