@@ -31,7 +31,7 @@ export const PRODUCTS: Product[] = [
   description:
     "Indulge your skin in the refreshing simplicity of cucumber. Our Simply Cucumber Soap cleanses deeply without stripping away natural oils, leaving your skin feeling soft, balanced, and hydrated. Each bar is crafted with real cucumber extract—rich in antioxidants and natural antibacterial properties—to help calm irritation, fight body acne, and reduce dryness. The fresh cucumber scent awakens your senses while providing a cooling, spa-like experience every time you bathe. Perfect for daily use on face and body, this bar transforms your shower into a moment of clean, natural clarity.",
   image: "/assets/products/cucumber-soap.jpg",
-hoverImage: "/assets/products/cucumber-soap-hover.jpg",
+hoverImage?: string; "/assets/products/cucumber-soap-hover.jpg",
   benefits: [
     "100% Natural",
     "Gently cleanses without stripping",
@@ -50,7 +50,7 @@ hoverImage: "/assets/products/cucumber-soap-hover.jpg",
   description:
     "Hydration. Balance. Glow — Anywhere, Anytime. Give your skin a refreshing reset with our Simply Cucumber Face Mist, your instant dose of hydration and calm. Infused with cucumber extract, aloe, and natural antioxidants, this fine mist delivers cooling relief, deep moisture, and a healthy, dewy glow—whether you’re fresh out of the gym, setting your makeup, or winding down after a long day. Each spray feels like a cool breeze in a bottle, instantly soothing redness, reviving dull skin, and rebalancing oil without disrupting your routine. It’s skincare that travels with you—light, pure, and powerful.",
   image: "/assets/products/cucumber-face-mist.jpg",
-   hoverImage: "/assets/products/cucumber-face-mist-hover.jpg",
+   hoverImage?: string; "/assets/products/cucumber-face-mist-hover.jpg",
   benefits: [
     "Instant hydration — replenishes moisture anytime",
     "Cooling & calming — reduces redness, puffiness, and heat",
@@ -107,7 +107,7 @@ hoverImage: "/assets/products/cucumber-soap-hover.jpg",
   description:
     "Reveal your skin’s natural radiance with our Simply Cucumber Body Scrub, a refreshing blend of cucumber extract, fine sugar crystals, and nourishing plant oils. Designed to exfoliate gently yet effectively, this scrub buffs away dull, dry skin while replenishing essential moisture — leaving you silky-smooth, hydrated, and glowing. The cooling power of cucumber calms inflammation, while natural antioxidants help detoxify and brighten the skin. Each use feels like a spa treatment — fresh, clean, and crisp, with a scent that relaxes your senses and revives your energy. Perfect for daily or weekly use on body, hands, or feet.",
   image: "/assets/products/cucumber-body-scrub.jpg",
-   hoverImage: "/assets/products/cucumber-body-scrub-hover.jpg",
+   hoverImage?: string; "/assets/products/cucumber-body-scrub-hover.jpg",
   benefits: [
     "Deep exfoliation reveals softer, smoother skin",
     "Hydrating formula with cucumber extract and coconut oil",
@@ -127,7 +127,7 @@ hoverImage: "/assets/products/cucumber-soap-hover.jpg",
   description:
     "Stay confident all day with Simply Cucumber Deodorant, a clean, aluminum-free formula powered by cucumber, aloe, and mineral salts. Designed to neutralize odor naturally without blocking pores, it keeps you feeling fresh, balanced, and dry while letting your body breathe. Infused with cucumber extract and coconut oil, it soothes delicate underarm skin, prevents irritation, and delivers a cool, calming scent that’s refreshing and subtle. No harsh chemicals. No white residue. Just natural protection that works — and feels like skincare.",
   image: "/assets/products/cucumber-deodorant-2.jpg",
-    hoverImage: "/assets/products/cucumber-deordorant-hover.jpg",
+    hoverImage?: string; "/assets/products/cucumber-deordorant-hover.jpg",
   benefits: [
     "Long-lasting freshness powered by natural antibacterial ingredients",
     "Aluminum & paraben-free formula that lets skin breathe",
@@ -147,7 +147,7 @@ hoverImage: "/assets/products/cucumber-soap-hover.jpg",
   description:
     "Give your lips the love they deserve with our Simply Cucumber Lip Oil — a weightless blend of cold-pressed cucumber seed oil, vitamin E, and plant-based gloss enhancers that instantly hydrates, soothes, and restores dry or chapped lips. Unlike sticky glosses or heavy balms, this formula melts in smoothly, leaving a soft, glass-like shine with long-lasting moisture. The cooling cucumber infusion refreshes on contact, delivering a clean, subtle scent that feels like skincare, not makeup.",
   image: "/assets/products/cucumber-lip-oil.jpg",
-    hoverImage: "/assets/products/cucumber-lip-oil-hover.jpg",
+    hoverImage?: string; "/assets/products/cucumber-lip-oil-hover.jpg",
   benefits: [
     "Deep hydration that locks in moisture for hours",
     "Healing blend of Vitamin E + cucumber oil for repair and protection",
@@ -167,7 +167,7 @@ hoverImage: "/assets/products/cucumber-soap-hover.jpg",
   description:
     "Nourish your lips with the cooling comfort of cucumber. Our Simply Cucumber Lip Balm is crafted with cucumber extract, shea butter, and vitamin E to deliver lasting hydration and protection in one swipe. It melts effortlessly into dry lips, sealing in moisture while creating a soft, natural finish — no shine, no stickiness, just smooth, healthy lips. Infused with antioxidants and natural oils, it helps heal cracks, calm irritation, and defend against dryness from weather or daily wear. The subtle cucumber scent feels light and refreshing — perfect for anyone who loves clean, effortless care.",
   image: "/assets/products/cucumber-lip-balm.jpg",
-    hoverImage: "/assets/products/cucumber-lip-balm-hover.jpg",
+    hoverImage?: string; "/assets/products/cucumber-lip-balm-hover.jpg",
   benefits: [
     "Deep moisture locks in softness all day",
     "Healing cucumber + vitamin E repair dryness",
@@ -187,7 +187,7 @@ hoverImage: "/assets/products/cucumber-soap-hover.jpg",
   description:
     "Reset your skin with the refreshing power of cucumber. The Simply Cucumber Face Mask delivers a surge of deep hydration, antioxidants, and Vitamin C to instantly cool, soothe, and brighten your complexion. Designed for all skin types — even sensitive — it helps reduce puffiness, tighten pores, and restore a naturally balanced glow. The gel-based formula feels icy and weightless, melting into skin to calm inflammation and boost radiance in minutes. Whether used after a long day, a flight, or a night out, this mask brings your skin back to life — refreshed, smooth, and luminous.",
   image: "/assets/products/cucumber-face-mask-single.jpg",
-    hoverImage: "/assets/products/cucumber-face-mask-hover.jpg",
+    hoverImage?: string; "/assets/products/cucumber-face-mask-hover.jpg",
   benefits: [
     "Deep hydration that replenishes and locks in moisture",
     "Reduces puffiness and dark circles for energized skin",
@@ -224,7 +224,7 @@ hoverImage: "/assets/products/cucumber-soap-hover.jpg",
   description:
     "Refresh tired eyes in minutes with our Simply Cucumber Eye Pads, infused with cooling cucumber extract, aloe, and vitamin-rich botanicals that bring instant relief to delicate under-eye skin. Each pad delivers a soothing, hydrating boost that reduces puffiness, brightens dark circles, and revives your natural glow—whether you’re recovering from a long night or a long day. Powered by Vitamin C, niacinamide, and green tea antioxidants, these pads fight fatigue and early signs of aging, while cucumber’s cooling touch calms and refreshes. Store them in the fridge for the ultimate spa-at-home experience.",
   image: "/assets/products/cucumber-eye-pads-single.jpg",
-    hoverImage: "/assets/products/cucumber-eye-pads-hover.jpg",
+    hoverImage?: string; "/assets/products/cucumber-eye-pads-hover.jpg",
   benefits: [
     "Reduces puffiness and under-eye bags",
     "Brightens dark circles (Vitamin C + niacinamide)",
