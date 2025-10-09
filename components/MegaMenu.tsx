@@ -54,7 +54,7 @@ export default function MegaMenu() {
         <div className="hidden lg:block">
           <Link href="/shop" className="block overflow-hidden rounded-lg border">
             <img
-              src="/assets/products/Simply Cucumber logo.png"
+              src="/assets/menu/drop-down-menu-1.jpg"
               alt="Simply Cucumber"
               className="h-48 w-full object-cover"
             />
