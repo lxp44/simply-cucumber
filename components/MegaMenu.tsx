@@ -9,7 +9,7 @@ export default function MegaMenu() {
     <div
       className="
         pointer-events-none absolute left-1/2 z-40 hidden w-[980px] -translate-x-1/2
-        rounded-xl border bg-white/95 p-8 shadow-lg backdrop-blur
+        rounded-xl border bg-[#e3d3b3]/95 p-8 shadow-lg backdrop-blur
         group-hover:block group-focus-within:block
       "
       style={{ top: "calc(100% + 10px)" }}
