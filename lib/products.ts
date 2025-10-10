@@ -102,6 +102,26 @@ export const PRODUCTS: Product[] = [
     ],
     category: "toothpaste",
   },
+   {
+  sku: "charcoal-toothpaste",
+  slug: "simply-cucumber-charcoal-toothpaste",
+  title: "Simply Cucumber Charcoal Toothpaste",
+  tagline: "Detox. Brighten. Refresh — Naturally.",
+  price: 10,
+  description:
+    "Deep-clean your smile with Simply Cucumber Charcoal Toothpaste — a natural detoxifying formula powered by activated charcoal, mint, and cucumber extract. Designed to lift surface stains, balance oral pH, and freshen breath, this fluoride-free blend delivers a cool, clean polish that leaves your mouth feeling refreshed and renewed. The smooth black paste foams gently without grit, while cucumber and coconut oil hydrate and soothe sensitive gums. Safe for daily use and ideal for anyone seeking a bright, naturally balanced smile.",
+  image: "/assets/products/cucumber-charcoal-toothpaste.jpg",
+  hoverImage: "/assets/products/cucumber-charcoal-toothpaste-hover.png",
+  benefits: [
+    "Whitens and detoxifies with activated charcoal",
+    "Gently removes stains and buildup without harsh abrasives",
+    "Balances pH and supports oral microbiome health",
+    "Hydrates and soothes with cucumber + coconut oil",
+    "Fluoride-free, non-toxic, and safe for daily use",
+    "Cool, mint-cucumber freshness that lasts",
+  ],
+  category: "toothpaste",
+},
   {
   sku: "mouthwash",
   slug: "simply-cucumber-mouthwash",
@@ -377,26 +397,6 @@ export const PRODUCTS: Product[] = [
     "Fridge-friendly and perfect for daily self-care",
   ],
   category: "face",
-},
-  {
-  sku: "charcoal-toothpaste",
-  slug: "simply-cucumber-charcoal-toothpaste",
-  title: "Simply Cucumber Charcoal Toothpaste",
-  tagline: "Detox. Brighten. Refresh — Naturally.",
-  price: 10,
-  description:
-    "Deep-clean your smile with Simply Cucumber Charcoal Toothpaste — a natural detoxifying formula powered by activated charcoal, mint, and cucumber extract. Designed to lift surface stains, balance oral pH, and freshen breath, this fluoride-free blend delivers a cool, clean polish that leaves your mouth feeling refreshed and renewed. The smooth black paste foams gently without grit, while cucumber and coconut oil hydrate and soothe sensitive gums. Safe for daily use and ideal for anyone seeking a bright, naturally balanced smile.",
-  image: "/assets/products/cucumber-charcoal-toothpaste.jpg",
-  hoverImage: "/assets/products/cucumber-charcoal-toothpaste-hover.png",
-  benefits: [
-    "Whitens and detoxifies with activated charcoal",
-    "Gently removes stains and buildup without harsh abrasives",
-    "Balances pH and supports oral microbiome health",
-    "Hydrates and soothes with cucumber + coconut oil",
-    "Fluoride-free, non-toxic, and safe for daily use",
-    "Cool, mint-cucumber freshness that lasts",
-  ],
-  category: "toothpaste",
 },
   {
     sku: "spa",
