@@ -1,4 +1,3 @@
-// app/products/[slug]/page.tsx
 import { notFound } from "next/navigation";
 import { bySlug } from "../../../lib/products";
 import ProductGallery from "../../../components/ProductGallery";
@@ -18,7 +17,7 @@ const playfair = Playfair_Display({
   weight: ["400", "500", "600", "700"],
 });
 
-// icon dictionary
+// ICON MAP
 const ICON_MAP: Record<string, JSX.Element> = {
   Vegan: <Leaf className="w-5 h-5 text-[#b8860b]" />,
   "Paraben-Free": <FlaskConical className="w-5 h-5 text-[#b8860b]" />,
@@ -40,11 +39,14 @@ export default function ProductPage({ params }: PageProps) {
   return (
     <section className="mx-auto max-w-6xl px-4 py-12">
       <div className="grid gap-10 lg:grid-cols-2">
-        {/* LEFT: product image + highlights */}
+        {/* LEFT: Product image and highlights */}
         <div className="flex flex-col items-center">
-          <ProductGallery images={images} />
+          {/* ✅ Product Gallery */}
+          <div className="w-full max-w-md">
+            <ProductGallery images={images} />
+          </div>
 
-          {/* ICON HIGHLIGHTS under photo */}
+          {/* ✅ Highlights under image */}
           {!!product.highlights?.length && (
             <div className="mt-6 flex flex-wrap justify-center gap-6">
               {product.highlights.map((h) => {
@@ -63,8 +65,11 @@ export default function ProductPage({ params }: PageProps) {
                       hover:border-[#b8860b]/70
                     "
                   >
+                    {/* icon */}
                     <span className="shrink-0">{Icon}</span>
                     <span className="whitespace-nowrap">{h}</span>
+
+                    {/* Chanel shimmer */}
                     <span
                       className="
                         pointer-events-none absolute inset-0
@@ -78,20 +83,23 @@ export default function ProductPage({ params }: PageProps) {
               })}
             </div>
           )}
-        </div> {/* ← CLOSE LEFT COLUMN */}
+        </div>
 
-        {/* RIGHT: product info */}
+        {/* RIGHT: Product info */}
         <div className="flex flex-col justify-center">
+          {/* Product Title */}
           <h1
             className={`${playfair.className} text-4xl md:text-5xl font-bold tracking-tight text-gray-900`}
           >
             {product.title}
           </h1>
 
+          {/* Tagline */}
           {product.tagline && (
             <p className="mt-2 text-lg italic text-gray-600">{product.tagline}</p>
           )}
 
+          {/* Price */}
           <div className="mt-4 flex items-center gap-2">
             <span
               className="text-sm tracking-widest uppercase text-gray-500"
@@ -104,8 +112,12 @@ export default function ProductPage({ params }: PageProps) {
             </span>
           </div>
 
-          <p className="mt-6 text-gray-700 leading-relaxed">{product.description}</p>
+          {/* Description */}
+          <p className="mt-6 text-gray-700 leading-relaxed">
+            {product.description}
+          </p>
 
+          {/* Benefits */}
           {!!product.benefits?.length && (
             <ul className="mt-6 flex flex-wrap gap-2 text-sm">
               {product.benefits.map((b) => (
@@ -119,6 +131,7 @@ export default function ProductPage({ params }: PageProps) {
             </ul>
           )}
 
+          {/* CTA */}
           <form action="/api/checkout" method="POST" className="mt-10">
             <input type="hidden" name="sku" value={product.sku} />
             <button
