@@ -10,6 +10,7 @@ export type Product = {
     images?: string[]; 
   hoverImage?: string; // 👈 allow optional hover image
   benefits: string[];
+   highlights?: string[]; 
   category: "face" | "body" | "powders" | "toothpaste" | "spa-packages";
 };
 
