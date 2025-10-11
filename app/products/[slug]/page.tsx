@@ -44,25 +44,43 @@ export default function ProductPage({ params }: PageProps) {
           <ProductGallery images={images} />
 
           {/* ICON HIGHLIGHTS under photo */}
-          {!!product.highlights?.length && (
-            <div className="mt-6 flex flex-wrap justify-center gap-6">
-              {product.highlights.map((h) => {
-                const Icon = ICON_MAP[h] ?? (
-                  <Sparkles className="w-5 h-5 text-[#b8860b]" />
-                );
-                return (
-                  <div
-                    key={h}
-                    className="flex flex-col items-center text-sm text-gray-700"
-                  >
-                    {Icon}
-                    <span className="mt-1 text-gray-700">{h}</span>
-                  </div>
-                );
-              })}
-            </div>
-          )}
+{!!product.highlights?.length && (
+  <div className="mt-6 flex flex-wrap justify-center gap-6">
+    {product.highlights.map((h) => {
+      const Icon = ICON_MAP[h] ?? (
+        <Sparkles className="w-5 h-5 text-[#b8860b]" />
+      );
+      return (
+        <div
+          key={h}
+          className="
+            group relative overflow-hidden
+            flex items-center gap-2 rounded-full
+            border border-[#d6c28a]/60 bg-white/80 px-3 py-1.5
+            text-sm text-gray-800 shadow-sm
+            transition
+            hover:-translate-y-0.5 hover:shadow-md hover:bg-white
+            hover:border-[#b8860b]/70
+          "
+        >
+          {/* icon */}
+          <span className="shrink-0">{Icon}</span>
+          <span className="whitespace-nowrap">{h}</span>
+
+          {/* shimmer sheen */}
+          <span
+            className="
+              pointer-events-none absolute inset-0
+              -translate-x-full
+              bg-gradient-to-r from-transparent via-white/40 to-transparent
+              group-hover:animate-shimmer
+            "
+          />
         </div>
+      );
+    })}
+  </div>
+)}
 
         {/* RIGHT: product info */}
         <div className="flex flex-col justify-center">
