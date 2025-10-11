@@ -1,3 +1,4 @@
+// app/products/[slug]/page.tsx
 import { notFound } from "next/navigation";
 import { bySlug } from "../../../lib/products";
 import ProductGallery from "../../../components/ProductGallery";
@@ -10,22 +11,22 @@ import {
   ShieldCheck,
   Snowflake,
   Sun,
-} from "lucide-react"; // icons
+} from "lucide-react";
 
 const playfair = Playfair_Display({
   subsets: ["latin"],
   weight: ["400", "500", "600", "700"],
 });
 
-// Icon dictionary
+// icon dictionary
 const ICON_MAP: Record<string, JSX.Element> = {
   Vegan: <Leaf className="w-5 h-5 text-[#b8860b]" />,
   "Paraben-Free": <FlaskConical className="w-5 h-5 text-[#b8860b]" />,
   "Synthetic Fragrance-Free": <Sparkles className="w-5 h-5 text-[#b8860b]" />,
   "Alcohol-Free": <Droplets className="w-5 h-5 text-[#b8860b]" />,
-  "Cooling": <Snowflake className="w-5 h-5 text-[#b8860b]" />,
-  "Brightening": <Sun className="w-5 h-5 text-[#b8860b]" />,
-  "Antioxidant": <ShieldCheck className="w-5 h-5 text-[#b8860b]" />,
+  Cooling: <Snowflake className="w-5 h-5 text-[#b8860b]" />,
+  Brightening: <Sun className="w-5 h-5 text-[#b8860b]" />,
+  Antioxidant: <ShieldCheck className="w-5 h-5 text-[#b8860b]" />,
 };
 
 type PageProps = { params: { slug: string } };
@@ -44,61 +45,53 @@ export default function ProductPage({ params }: PageProps) {
           <ProductGallery images={images} />
 
           {/* ICON HIGHLIGHTS under photo */}
-{!!product.highlights?.length && (
-  <div className="mt-6 flex flex-wrap justify-center gap-6">
-    {product.highlights.map((h) => {
-      const Icon = ICON_MAP[h] ?? (
-        <Sparkles className="w-5 h-5 text-[#b8860b]" />
-      );
-      return (
-        <div
-          key={h}
-          className="
-            group relative overflow-hidden
-            flex items-center gap-2 rounded-full
-            border border-[#d6c28a]/60 bg-white/80 px-3 py-1.5
-            text-sm text-gray-800 shadow-sm
-            transition
-            hover:-translate-y-0.5 hover:shadow-md hover:bg-white
-            hover:border-[#b8860b]/70
-          "
-        >
-          {/* icon */}
-          <span className="shrink-0">{Icon}</span>
-          <span className="whitespace-nowrap">{h}</span>
-
-          {/* shimmer sheen */}
-          <span
-            className="
-              pointer-events-none absolute inset-0
-              -translate-x-full
-              bg-gradient-to-r from-transparent via-white/40 to-transparent
-              group-hover:animate-shimmer
-            "
-          />
-        </div>
-      );
-    })}
-  </div>
-)}
+          {!!product.highlights?.length && (
+            <div className="mt-6 flex flex-wrap justify-center gap-6">
+              {product.highlights.map((h) => {
+                const Icon =
+                  ICON_MAP[h] ?? <Sparkles className="w-5 h-5 text-[#b8860b]" />;
+                return (
+                  <div
+                    key={h}
+                    className="
+                      group relative overflow-hidden
+                      flex items-center gap-2 rounded-full
+                      border border-[#d6c28a]/60 bg-white/80 px-3 py-1.5
+                      text-sm text-gray-800 shadow-sm
+                      transition
+                      hover:-translate-y-0.5 hover:shadow-md hover:bg-white
+                      hover:border-[#b8860b]/70
+                    "
+                  >
+                    <span className="shrink-0">{Icon}</span>
+                    <span className="whitespace-nowrap">{h}</span>
+                    <span
+                      className="
+                        pointer-events-none absolute inset-0
+                        -translate-x-full
+                        bg-gradient-to-r from-transparent via-white/40 to-transparent
+                        group-hover:animate-shimmer
+                      "
+                    />
+                  </div>
+                );
+              })}
+            </div>
+          )}
+        </div> {/* ← CLOSE LEFT COLUMN */}
 
         {/* RIGHT: product info */}
         <div className="flex flex-col justify-center">
-          {/* Product Title */}
           <h1
             className={`${playfair.className} text-4xl md:text-5xl font-bold tracking-tight text-gray-900`}
           >
             {product.title}
           </h1>
 
-          {/* Tagline */}
           {product.tagline && (
-            <p className="mt-2 text-lg italic text-gray-600">
-              {product.tagline}
-            </p>
+            <p className="mt-2 text-lg italic text-gray-600">{product.tagline}</p>
           )}
 
-          {/* PRICE */}
           <div className="mt-4 flex items-center gap-2">
             <span
               className="text-sm tracking-widest uppercase text-gray-500"
@@ -106,22 +99,13 @@ export default function ProductPage({ params }: PageProps) {
             >
               USD
             </span>
-            <span
-              className="text-2xl font-semibold"
-              style={{
-                color: "#b8860b",
-              }}
-            >
+            <span className="text-2xl font-semibold" style={{ color: "#b8860b" }}>
               ${product.price.toFixed(2)}
             </span>
           </div>
 
-          {/* DESCRIPTION */}
-          <p className="mt-6 text-gray-700 leading-relaxed">
-            {product.description}
-          </p>
+          <p className="mt-6 text-gray-700 leading-relaxed">{product.description}</p>
 
-          {/* BENEFITS */}
           {!!product.benefits?.length && (
             <ul className="mt-6 flex flex-wrap gap-2 text-sm">
               {product.benefits.map((b) => (
@@ -135,14 +119,11 @@ export default function ProductPage({ params }: PageProps) {
             </ul>
           )}
 
-          {/* CTA */}
           <form action="/api/checkout" method="POST" className="mt-10">
             <input type="hidden" name="sku" value={product.sku} />
             <button
               className="w-full rounded bg-cucumber-700 px-5 py-3 text-white font-semibold tracking-wide hover:bg-cucumber-800 transition"
-              style={{
-                boxShadow: "0 4px 14px rgba(27,120,69,0.25)",
-              }}
+              style={{ boxShadow: "0 4px 14px rgba(27,120,69,0.25)" }}
             >
               Buy now
             </button>
