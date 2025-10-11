@@ -40,8 +40,8 @@ export default function ProductPage({ params }: PageProps) {
   return (
     // 🌤 Full-page gradient background (extends beyond footer)
     <div
-      className="min-h-[120vh] w-full bg-gradient-to-b from-[#f7f2e9] to-[#e3d3b3] animate-fadeIn pb-32"
-    >
+  className="min-h-screen w-full bg-gradient-to-b from-[#f7f2e9] via-[#e3d3b3] to-[#d6b98c] animate-fadeIn pb-40"
+>
       <section className="mx-auto max-w-6xl px-4 py-12 animate-riseUp">
         <div className="grid gap-10 lg:grid-cols-2">
           {/* LEFT: Product image + highlights */}
