@@ -17,7 +17,6 @@ const playfair = Playfair_Display({
   weight: ["400", "500", "600", "700"],
 });
 
-// ICON MAP
 const ICON_MAP: Record<string, JSX.Element> = {
   Vegan: <Leaf className="w-5 h-5 text-[#b8860b]" />,
   "Paraben-Free": <FlaskConical className="w-5 h-5 text-[#b8860b]" />,
@@ -37,9 +36,11 @@ export default function ProductPage({ params }: PageProps) {
   const images = product.images?.length ? product.images : [product.image];
 
   return (
-    // 🟤 Full background container
-    <div className="min-h-screen w-full" style={{ backgroundColor: "#e3d3b3" }}>
-      <section className="mx-auto max-w-6xl px-4 py-12">
+    // 🌤 Fade-in gradient background
+    <div
+      className="min-h-screen w-full bg-gradient-to-b from-[#f7f2e9] to-[#e3d3b3] animate-fadeIn"
+    >
+      <section className="mx-auto max-w-6xl px-4 py-12 animate-riseUp">
         <div className="grid gap-10 lg:grid-cols-2">
           {/* LEFT: Product image + highlights */}
           <div className="flex flex-col items-center">
@@ -87,14 +88,12 @@ export default function ProductPage({ params }: PageProps) {
 
           {/* RIGHT: Product info */}
           <div className="flex flex-col justify-center">
-            {/* Product Title */}
             <h1
               className={`${playfair.className} text-4xl md:text-5xl font-bold tracking-tight text-gray-900`}
             >
               {product.title}
             </h1>
 
-            {/* Tagline */}
             {product.tagline && (
               <p className="mt-2 text-lg italic text-gray-700">
                 {product.tagline}
