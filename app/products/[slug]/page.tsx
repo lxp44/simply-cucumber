@@ -37,16 +37,18 @@ export default function ProductPage({ params }: PageProps) {
   const images = product.images?.length ? product.images : [product.image];
 
   return (
-    <section className="mx-auto max-w-6xl px-4 py-12">
+    <section
+      className="mx-auto max-w-6xl px-4 py-12 rounded-lg"
+      style={{ backgroundColor: "#e3d3b3" }} // 🟤 Add tan background
+    >
       <div className="grid gap-10 lg:grid-cols-2">
         {/* LEFT: Product image and highlights */}
         <div className="flex flex-col items-center">
-          {/* ✅ Product Gallery */}
           <div className="w-full max-w-md">
             <ProductGallery images={images} />
           </div>
 
-          {/* ✅ Highlights under image */}
+          {/* ICON HIGHLIGHTS under image */}
           {!!product.highlights?.length && (
             <div className="mt-6 flex flex-wrap justify-center gap-6">
               {product.highlights.map((h) => {
@@ -65,7 +67,6 @@ export default function ProductPage({ params }: PageProps) {
                       hover:border-[#b8860b]/70
                     "
                   >
-                    {/* icon */}
                     <span className="shrink-0">{Icon}</span>
                     <span className="whitespace-nowrap">{h}</span>
 
@@ -87,22 +88,22 @@ export default function ProductPage({ params }: PageProps) {
 
         {/* RIGHT: Product info */}
         <div className="flex flex-col justify-center">
-          {/* Product Title */}
           <h1
             className={`${playfair.className} text-4xl md:text-5xl font-bold tracking-tight text-gray-900`}
           >
             {product.title}
           </h1>
 
-          {/* Tagline */}
           {product.tagline && (
-            <p className="mt-2 text-lg italic text-gray-600">{product.tagline}</p>
+            <p className="mt-2 text-lg italic text-gray-700">
+              {product.tagline}
+            </p>
           )}
 
-          {/* Price */}
+          {/* PRICE */}
           <div className="mt-4 flex items-center gap-2">
             <span
-              className="text-sm tracking-widest uppercase text-gray-500"
+              className="text-sm tracking-widest uppercase text-gray-600"
               style={{ letterSpacing: "0.2em" }}
             >
               USD
@@ -112,12 +113,12 @@ export default function ProductPage({ params }: PageProps) {
             </span>
           </div>
 
-          {/* Description */}
-          <p className="mt-6 text-gray-700 leading-relaxed">
+          {/* DESCRIPTION */}
+          <p className="mt-6 text-gray-800 leading-relaxed">
             {product.description}
           </p>
 
-          {/* Benefits */}
+          {/* BENEFITS */}
           {!!product.benefits?.length && (
             <ul className="mt-6 flex flex-wrap gap-2 text-sm">
               {product.benefits.map((b) => (
