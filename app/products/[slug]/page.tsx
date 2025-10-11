@@ -1,20 +1,31 @@
-// app/products/[slug]/page.tsx
 import { notFound } from "next/navigation";
 import { bySlug } from "../../../lib/products";
 import ProductGallery from "../../../components/ProductGallery";
 import { Playfair_Display } from "next/font/google";
-import { Leaf, Droplets, FlaskConical, Sparkles } from "lucide-react"; // icons
+import {
+  Leaf,
+  Droplets,
+  FlaskConical,
+  Sparkles,
+  ShieldCheck,
+  Snowflake,
+  Sun,
+} from "lucide-react"; // icons
 
 const playfair = Playfair_Display({
   subsets: ["latin"],
   weight: ["400", "500", "600", "700"],
 });
 
+// Icon dictionary
 const ICON_MAP: Record<string, JSX.Element> = {
-  Vegan: <Leaf className="w-4 h-4 text-cucumber-700" />,
-  "Paraben-Free": <FlaskConical className="w-4 h-4 text-cucumber-700" />,
-  "Synthetic Fragrance-Free": <Sparkles className="w-4 h-4 text-cucumber-700" />,
-  "Alcohol-Free": <Droplets className="w-4 h-4 text-cucumber-700" />,
+  Vegan: <Leaf className="w-5 h-5 text-[#b8860b]" />,
+  "Paraben-Free": <FlaskConical className="w-5 h-5 text-[#b8860b]" />,
+  "Synthetic Fragrance-Free": <Sparkles className="w-5 h-5 text-[#b8860b]" />,
+  "Alcohol-Free": <Droplets className="w-5 h-5 text-[#b8860b]" />,
+  "Cooling": <Snowflake className="w-5 h-5 text-[#b8860b]" />,
+  "Brightening": <Sun className="w-5 h-5 text-[#b8860b]" />,
+  "Antioxidant": <ShieldCheck className="w-5 h-5 text-[#b8860b]" />,
 };
 
 type PageProps = { params: { slug: string } };
@@ -28,8 +39,30 @@ export default function ProductPage({ params }: PageProps) {
   return (
     <section className="mx-auto max-w-6xl px-4 py-12">
       <div className="grid gap-10 lg:grid-cols-2">
-        {/* LEFT: product image gallery */}
-        <ProductGallery images={images} />
+        {/* LEFT: product image + highlights */}
+        <div className="flex flex-col items-center">
+          <ProductGallery images={images} />
+
+          {/* ICON HIGHLIGHTS under photo */}
+          {!!product.highlights?.length && (
+            <div className="mt-6 flex flex-wrap justify-center gap-6">
+              {product.highlights.map((h) => {
+                const Icon = ICON_MAP[h] ?? (
+                  <Sparkles className="w-5 h-5 text-[#b8860b]" />
+                );
+                return (
+                  <div
+                    key={h}
+                    className="flex flex-col items-center text-sm text-gray-700"
+                  >
+                    {Icon}
+                    <span className="mt-1 text-gray-700">{h}</span>
+                  </div>
+                );
+              })}
+            </div>
+          )}
+        </div>
 
         {/* RIGHT: product info */}
         <div className="flex flex-col justify-center">
@@ -65,18 +98,6 @@ export default function ProductPage({ params }: PageProps) {
             </span>
           </div>
 
-          {/* ICON HIGHLIGHTS */}
-          {!!product.highlights?.length && (
-            <div className="mt-5 flex flex-wrap gap-5">
-              {product.highlights.map((h) => (
-                <div key={h} className="flex items-center gap-2 text-sm text-gray-700">
-                  {ICON_MAP[h] ?? <Sparkles className="w-4 h-4 text-cucumber-700" />}
-                  <span>{h}</span>
-                </div>
-              ))}
-            </div>
-          )}
-
           {/* DESCRIPTION */}
           <p className="mt-6 text-gray-700 leading-relaxed">
             {product.description}
@@ -102,8 +123,7 @@ export default function ProductPage({ params }: PageProps) {
             <button
               className="w-full rounded bg-cucumber-700 px-5 py-3 text-white font-semibold tracking-wide hover:bg-cucumber-800 transition"
               style={{
-                boxShadow:
-                  "0 4px 14px rgba(27,120,69,0.25)",
+                boxShadow: "0 4px 14px rgba(27,120,69,0.25)",
               }}
             >
               Buy now
