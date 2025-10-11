@@ -1,3 +1,5 @@
+// app/products/[slug]/page.tsx
+
 import { notFound } from "next/navigation";
 import { bySlug } from "../../../lib/products";
 import ProductGallery from "../../../components/ProductGallery";
@@ -36,9 +38,9 @@ export default function ProductPage({ params }: PageProps) {
   const images = product.images?.length ? product.images : [product.image];
 
   return (
-    // 🌤 Fade-in gradient background
+    // 🌤 Full-page gradient background (extends beyond footer)
     <div
-      className="min-h-screen w-full bg-gradient-to-b from-[#f7f2e9] to-[#e3d3b3] animate-fadeIn"
+      className="min-h-[120vh] w-full bg-gradient-to-b from-[#f7f2e9] to-[#e3d3b3] animate-fadeIn pb-32"
     >
       <section className="mx-auto max-w-6xl px-4 py-12 animate-riseUp">
         <div className="grid gap-10 lg:grid-cols-2">
@@ -48,7 +50,6 @@ export default function ProductPage({ params }: PageProps) {
               <ProductGallery images={images} />
             </div>
 
-            {/* ICON HIGHLIGHTS under image */}
             {!!product.highlights?.length && (
               <div className="mt-6 flex flex-wrap justify-center gap-6">
                 {product.highlights.map((h) => {
@@ -69,8 +70,6 @@ export default function ProductPage({ params }: PageProps) {
                     >
                       <span className="shrink-0">{Icon}</span>
                       <span className="whitespace-nowrap">{h}</span>
-
-                      {/* Chanel shimmer */}
                       <span
                         className="
                           pointer-events-none absolute inset-0
@@ -100,7 +99,6 @@ export default function ProductPage({ params }: PageProps) {
               </p>
             )}
 
-            {/* PRICE */}
             <div className="mt-4 flex items-center gap-2">
               <span
                 className="text-sm tracking-widest uppercase text-gray-600"
@@ -116,12 +114,10 @@ export default function ProductPage({ params }: PageProps) {
               </span>
             </div>
 
-            {/* DESCRIPTION */}
             <p className="mt-6 text-gray-800 leading-relaxed">
               {product.description}
             </p>
 
-            {/* BENEFITS */}
             {!!product.benefits?.length && (
               <ul className="mt-6 flex flex-wrap gap-2 text-sm">
                 {product.benefits.map((b) => (
@@ -135,7 +131,6 @@ export default function ProductPage({ params }: PageProps) {
               </ul>
             )}
 
-            {/* CTA */}
             <form action="/api/checkout" method="POST" className="mt-10">
               <input type="hidden" name="sku" value={product.sku} />
               <button
