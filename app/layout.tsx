@@ -91,7 +91,7 @@ export default function RootLayout({
         {/* Footer (green) with shimmering gold vibe */}
         <footer
           className="
-            mt-24 text-white
+            mt-0 text-white
             bg-gradient-to-r from-cucumber-700 via-cucumber-800 to-cucumber-700
             bg-[length:200%_200%] animate-shimmer-gold
           "
