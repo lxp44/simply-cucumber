@@ -403,7 +403,7 @@ export const PRODUCTS: Product[] = [
        "/assets/products/face-mask-single-product-2.jpg",
               "/assets/products/face-mask-single-product-3.jpg",
              ],
-    hoverImage: "/assets/products/cucumber-face-mask-hover.jpg",
+    hoverImage: "/assets/products/face-mask-single-product-3.jpg",
     benefits: [
       "Deep hydration that replenishes and locks in moisture",
       "Reduces puffiness and dark circles for energized skin",
@@ -426,7 +426,7 @@ export const PRODUCTS: Product[] = [
        "/assets/products/face-mask-pack-product-2.jpg",
               "/assets/products/face-mask-pack-product-3.jpg",
              ],
-    hoverImage: "/assets/products/cucumber-face-mask-pack-hover.jpg",
+    hoverImage: "/assets/products/face-mask-pack-product-3.jpg",
     benefits: [
       "Deep hydration that replenishes and locks in moisture",
       "Reduces puffiness and dark circles for energized skin",
@@ -472,7 +472,7 @@ export const PRODUCTS: Product[] = [
        "/assets/products/eye-pads-pack-product-2.jpg",
               "/assets/products/eye-pads-pack-product-3.jpg",
              ],
-    hoverImage: "/assets/products/cucumber-eye-pads-pack-hover.jpg",
+    hoverImage: "/assets/products/eye-pads-pack-product-3.jpg",
     benefits: [
       "Reduces puffiness and under-eye bags",
       "Brightens dark circles (Vitamin C + niacinamide)",
