@@ -31,7 +31,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               <div className="grid grid-cols-3 items-center py-3">
                 {/* Left nav */}
                 <nav className="flex items-center gap-6 text-sm relative justify-start">
-                  <div className="relative group">
+                  {/* ⬇️ changed 'group' → 'group/menu' */}
+                  <div className="relative group/menu">
                     <Link
                       href="/shop"
                       className="hover:text-cucumber-700 inline-block py-2"
