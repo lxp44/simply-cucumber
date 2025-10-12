@@ -42,13 +42,16 @@ export default function ProductCard({ product }: Props) {
         <p className="text-sm text-gray-700">${p.price.toFixed(2)}</p>
       </Link>
 
-      {/* CTA */}
-      <form action="/api/checkout" method="POST" className="mt-3">
-        <input type="hidden" name="sku" value={p.sku} />
-        <button className="w-full rounded bg-cucumber-700 px-4 py-2 text-white hover:bg-cucumber-800 transition">
-          Buy now
-        </button>
-      </form>
+     {/* CTA */}
+<form action="/api/checkout" method="POST" className="mt-3">
+  <input type="hidden" name="sku" value={p.sku} />
+  <button
+    className="w-full rounded bg-cucumber-700 px-4 py-2 text-white hover:bg-cucumber-800 transition"
+    type="submit"
+  >
+    Add to cart
+  </button>
+</form>
     </div>
   );
 }
