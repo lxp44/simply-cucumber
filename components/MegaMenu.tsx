@@ -7,12 +7,20 @@ const ITEM = "block text-[15px] text-gray-800 hover:text-cucumber-700";
 export default function MegaMenu() {
   return (
     <div
-      className="
-        pointer-events-none absolute left-1/2 z-40 hidden w-[980px] -translate-x-1/2
-        rounded-xl border bg-[#e3d3b3]/95 p-8 shadow-lg backdrop-blur
-        group-hover:block group-focus-within:block
-      "
-      style={{ top: "calc(100% + 10px)" }}
+      className={[
+        // position
+        "absolute left-1/2 top-full z-40 mt-2 w-[980px] -translate-x-1/2",
+        // surface
+        "rounded-xl border bg-[#e3d3b3]/95 p-8 shadow-lg backdrop-blur",
+        // hidden by default
+        "invisible opacity-0 translate-y-2 pointer-events-none",
+        "transition duration-200",
+        // show while hovering trigger OR panel
+        "group-hover/menu:visible group-hover/menu:opacity-100 group-hover/menu:translate-y-0 group-hover/menu:pointer-events-auto",
+        "hover:visible hover:opacity-100 hover:translate-y-0 hover:pointer-events-auto",
+      ].join(" ")}
+      role="menu"
+      aria-label="Shop menu"
     >
       <div className="grid grid-cols-4 gap-8">
         {/* FACE */}
@@ -39,7 +47,7 @@ export default function MegaMenu() {
           </div>
         </div>
 
-        {/* YOUR CATEGORIES */}
+        {/* FEATURED */}
         <div>
           <p className="mb-4 font-semibold tracking-wide text-gray-900">FEATURED</p>
           <div className={COL}>
@@ -50,7 +58,7 @@ export default function MegaMenu() {
           </div>
         </div>
 
-        {/* PROMO THUMB (optional images) */}
+        {/* PROMO THUMBS */}
         <div className="hidden lg:block">
           <Link href="/shop" className="block overflow-hidden rounded-lg border">
             <img
