@@ -365,6 +365,31 @@ export const PRODUCTS: Product[] = [
     ],
     category: "face",
   },
+{
+  sku: "face-dry-mask",
+  slug: "face-dry-mask",
+  title: "Simply Cucumber Face Dry Mask",
+  tagline: "Detox. Revive. Glow.",
+  price: 25,
+  description:
+    "Purify and refresh your skin with our Simply Cucumber Face Dry Mask — a powdered botanical blend designed to activate instantly with water or toner. Each use delivers a concentrated dose of cucumber enzymes, clay minerals, and antioxidants that draw out impurities while restoring essential hydration. Mix just what you need for a fresh, clean treatment every time. Ideal for all skin types, this mask calms inflammation, reduces oil buildup, and leaves skin smooth, balanced, and visibly renewed.",
+  image: "/assets/products/cucumber-dry-mask.jpg",
+  images: [
+    "/assets/products/cucumber-dry-mask-front.jpg",
+    "/assets/products/cucumber-dry-mask-back.jpg",
+    "/assets/products/cucumber-dry-mask-lifestyle.jpg"
+  ],
+  hoverImage: "/assets/products/cucumber-dry-mask-hover.jpg",
+  highlights: ["Vegan", "Paraben-Free", "Brightening", "Cooling"],
+  benefits: [
+    "Balances oil without over-drying",
+    "Cucumber enzymes refresh and soothe skin",
+    "Draws out impurities and tightens pores",
+    "Powder activates fresh for every use",
+    "Leaves skin soft, matte, and radiant"
+  ],
+  category: "face",
+},
   {
     sku: "face-mask-1",
     slug: "cucumber-face-mask",
