@@ -4,8 +4,8 @@ import Link from "next/link";
 import PromoBar from "../components/PromoBar";
 import MegaMenu from "../components/MegaMenu";
 import { Playfair_Display } from "next/font/google";
-import { CartProvider } from "../components/CartProvider"; // ← server can import provider
-import CartLink from "../components/CartLink";              // ← client cart badge
+import { CartProvider } from "../components/CartProvider";
+import CartLink from "../components/CartLink";
 
 const playfair = Playfair_Display({
   subsets: ["latin"],
@@ -26,13 +26,18 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 
         <CartProvider>
           {/* Header */}
-          <header className="sticky top-0 z-40 bg-white/80 backdrop-blur border-b">
+          <header className="sticky top-0 z-40 bg-white/80 backdrop-blur border-b overflow-visible">
             <div className="mx-auto max-w-6xl px-4">
               <div className="grid grid-cols-3 items-center py-3">
                 {/* Left nav */}
                 <nav className="flex items-center gap-6 text-sm relative justify-start">
                   <div className="relative group">
-                    <Link href="/shop" className="hover:text-cucumber-700 inline-block py-2">
+                    <Link
+                      href="/shop"
+                      className="hover:text-cucumber-700 inline-block py-2"
+                      aria-haspopup="true"
+                      aria-expanded="false"
+                    >
                       Shop
                     </Link>
                     <MegaMenu />
@@ -57,7 +62,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                   <Link href="/skin-analysis" className="hover:text-cucumber-700 py-2">Skin Analysis</Link>
                   <Link href="/rewards" className="hover:text-cucumber-700 py-2">Rewards</Link>
                   <Link href="/salon" className="hover:text-cucumber-700 py-2">Salon</Link>
-                  <CartLink /> {/* live count badge */}
+                  <CartLink />
                 </nav>
               </div>
             </div>
@@ -91,9 +96,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               {/* Newsletter */}
               <div>
                 <p className="font-semibold mb-3">Stay in touch.</p>
-                <p className="mb-4">
-                  Signup to get first access to product launches & exclusive offers.
-                </p>
+                <p className="mb-4">Signup to get first access to product launches & exclusive offers.</p>
                 <form className="space-y-3">
                   <input type="email" placeholder="Enter your email" className="w-full px-3 py-2 rounded border text-black" />
                   <input type="text" placeholder="Phone Number (Optional)" className="w-full px-3 py-2 rounded border text-black" />
