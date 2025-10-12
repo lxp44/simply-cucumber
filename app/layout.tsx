@@ -32,25 +32,22 @@ export default function RootLayout({
           <div className="mx-auto max-w-6xl px-4">
             {/* changed to grid so the logo column is always centered */}
             <div className="grid grid-cols-3 items-center py-3">
-              {/* Left nav */}
-              <nav className="flex items-center gap-6 text-sm relative justify-start">
-                <div className="relative group">
-                  <Link
-                    href="/shop"
-                    className="hover:text-cucumber-700 inline-block py-2"
-                  >
-                    Shop
-                  </Link>
-                  {/* Keep menu open while pointer is over trigger or panel */}
-                  <MegaMenu />
-                </div>
-                <Link href="/best-sellers" className="hover:text-cucumber-700 py-2">
-                  Best Sellers
-                </Link>
-                <Link href="/gifts" className="hover:text-cucumber-700 py-2">
-                  Gifts
-                </Link>
-              </nav>
+            {/* Left nav */}
+<nav className="flex items-center gap-6 text-sm relative justify-start">
+  {/* Use group/menu + tiny invisible bridge to prevent flicker */}
+  <div className="relative group/menu before:absolute before:left-0 before:right-0 before:top-full before:h-2 before:content-['']">
+    <Link
+      href="/shop"
+      className="hover:text-cucumber-700 inline-block py-2"
+    >
+      Shop
+    </Link>
+    <MegaMenu />
+  </div>
+
+  <Link href="/best-sellers" className="hover:text-cucumber-700 py-2">Best Sellers</Link>
+  <Link href="/gifts" className="hover:text-cucumber-700 py-2">Gifts</Link>
+</nav>
 
               {/* Centered logo */}
               <div className="flex justify-center">
