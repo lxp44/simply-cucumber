@@ -4,7 +4,8 @@ import Link from "next/link";
 import PromoBar from "../components/PromoBar";
 import MegaMenu from "../components/MegaMenu";
 import { Playfair_Display } from "next/font/google";
-import { CartProvider, useCart } from "../components/CartProvider"; // ← add
+import { CartProvider } from "../components/CartProvider"; // ← server can import provider
+import CartLink from "../components/CartLink";              // ← client cart badge
 
 const playfair = Playfair_Display({
   subsets: ["latin"],
@@ -16,25 +17,6 @@ export const metadata = {
   title: "Simply Cucumber",
   description: "Clean, natural cucumber beauty & wellness.",
 };
-
-// Small client cart badge for header
-function CartLink() {
-  // client-only component
-  const { count } = useCart();
-  return (
-    <Link
-      href="/cart"
-      className="relative rounded bg-cucumber-600 px-3 py-1.5 text-white hover:bg-cucumber-700"
-    >
-      Cart
-      {count > 0 && (
-        <span className="absolute -right-2 -top-2 inline-flex h-5 min-w-[1.25rem] items-center justify-center rounded-full bg-white px-1 text-xs font-semibold text-cucumber-700">
-          {count}
-        </span>
-      )}
-    </Link>
-  );
-}
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
@@ -50,7 +32,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                 {/* Left nav */}
                 <nav className="flex items-center gap-6 text-sm relative justify-start">
                   <div className="relative group">
-                    <Link href="/shop" className="hover:text-cucumber-700 inline-block py-2">Shop</Link>
+                    <Link href="/shop" className="hover:text-cucumber-700 inline-block py-2">
+                      Shop
+                    </Link>
                     <MegaMenu />
                   </div>
                   <Link href="/best-sellers" className="hover:text-cucumber-700 py-2">Best Sellers</Link>
@@ -73,7 +57,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                   <Link href="/skin-analysis" className="hover:text-cucumber-700 py-2">Skin Analysis</Link>
                   <Link href="/rewards" className="hover:text-cucumber-700 py-2">Rewards</Link>
                   <Link href="/salon" className="hover:text-cucumber-700 py-2">Salon</Link>
-                  <CartLink /> {/* ← live count */}
+                  <CartLink /> {/* live count badge */}
                 </nav>
               </div>
             </div>
@@ -82,94 +66,81 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           {/* Page content */}
           <main>{children}</main>
 
-      {/* Footer (green) with shimmering gold vibe */}
-        <footer
-          className="
-            mt-0 text-white
-            bg-gradient-to-r from-cucumber-700 via-cucumber-800 to-cucumber-700
-            bg-[length:200%_200%] animate-shimmer-gold
-          "
-        >
-          {/* Top message bar */}
-          <div className="text-center py-6">
-            <h2
-              className="text-3xl md:text-4xl font-[var(--font-playfair)] font-bold"
-              style={{
-                background: "linear-gradient(90deg,#d4af37,#ffd700,#b8860b)",
-                WebkitBackgroundClip: "text",
-                WebkitTextFillColor: "transparent",
-              }}
-            >
-              HEALTH IS WEALTH
-            </h2>
-          </div>
-
-          {/* Footer content */}
-          <div className="mx-auto max-w-6xl px-4 py-12 grid md:grid-cols-4 gap-8 text-sm">
-            {/* Newsletter */}
-            <div>
-              <p className="font-semibold mb-3">Stay in touch.</p>
-              <p className="mb-4">
-                Signup to get first access to product launches & exclusive offers.
-              </p>
-              <form className="space-y-3">
-                <input
-                  type="email"
-                  placeholder="Enter your email"
-                  className="w-full px-3 py-2 rounded border text-black"
-                />
-                <input
-                  type="text"
-                  placeholder="Phone Number (Optional)"
-                  className="w-full px-3 py-2 rounded border text-black"
-                />
-                <button
-                  type="submit"
-                  className="w-full bg-white text-cucumber-700 font-semibold py-2 rounded hover:bg-gray-100"
-                >
-                  SIGN UP
-                </button>
-              </form>
+          {/* Footer */}
+          <footer
+            className="
+              mt-0 text-white
+              bg-gradient-to-r from-cucumber-700 via-cucumber-800 to-cucumber-700
+              bg-[length:200%_200%] animate-shimmer-gold
+            "
+          >
+            <div className="text-center py-6">
+              <h2
+                className="text-3xl md:text-4xl font-[var(--font-playfair)] font-bold"
+                style={{
+                  background: "linear-gradient(90deg,#d4af37,#ffd700,#b8860b)",
+                  WebkitBackgroundClip: "text",
+                  WebkitTextFillColor: "transparent",
+                }}
+              >
+                HEALTH IS WEALTH
+              </h2>
             </div>
 
-            {/* Customer Care */}
-            <div>
-              <p className="font-semibold mb-3">Customer Care</p>
-              <ul className="space-y-2">
-                <li><Link href="/contact" className="hover:underline">Contact Us</Link></li>
-                <li><Link href="/faqs" className="hover:underline">FAQs</Link></li>
-                <li><Link href="/shipping" className="hover:underline">Shipping Policy</Link></li>
-                <li><Link href="/returns" className="hover:underline">Return Policy</Link></li>
-              </ul>
+            <div className="mx-auto max-w-6xl px-4 py-12 grid md:grid-cols-4 gap-8 text-sm">
+              {/* Newsletter */}
+              <div>
+                <p className="font-semibold mb-3">Stay in touch.</p>
+                <p className="mb-4">
+                  Signup to get first access to product launches & exclusive offers.
+                </p>
+                <form className="space-y-3">
+                  <input type="email" placeholder="Enter your email" className="w-full px-3 py-2 rounded border text-black" />
+                  <input type="text" placeholder="Phone Number (Optional)" className="w-full px-3 py-2 rounded border text-black" />
+                  <button type="submit" className="w-full bg-white text-cucumber-700 font-semibold py-2 rounded hover:bg-gray-100">
+                    SIGN UP
+                  </button>
+                </form>
+              </div>
+
+              {/* Customer Care */}
+              <div>
+                <p className="font-semibold mb-3">Customer Care</p>
+                <ul className="space-y-2">
+                  <li><Link href="/contact" className="hover:underline">Contact Us</Link></li>
+                  <li><Link href="/faqs" className="hover:underline">FAQs</Link></li>
+                  <li><Link href="/shipping" className="hover:underline">Shipping Policy</Link></li>
+                  <li><Link href="/returns" className="hover:underline">Return Policy</Link></li>
+                </ul>
+              </div>
+
+              {/* Get to Know Us */}
+              <div>
+                <p className="font-semibold mb-3">Get to Know Us</p>
+                <ul className="space-y-2">
+                  <li><Link href="/about" className="hover:underline">About Us</Link></li>
+                  <li><Link href="/salon" className="hover:underline">Our Salon</Link></li>
+                  <li><Link href="/blog" className="hover:underline">Blog</Link></li>
+                </ul>
+              </div>
+
+              {/* Brand */}
+              <div>
+                <p className="font-semibold mb-3">Simply Cucumber</p>
+                <ul className="space-y-2">
+                  <li><Link href="/rewards" className="hover:underline">Rewards</Link></li>
+                  <li><Link href="/skin-analysis" className="hover:underline">Skin Analysis</Link></li>
+                  <li><Link href="/privacy" className="hover:underline">Privacy Policy</Link></li>
+                  <li><Link href="/terms" className="hover:underline">Terms of Service</Link></li>
+                </ul>
+              </div>
             </div>
 
-            {/* Get to Know Us */}
-            <div>
-              <p className="font-semibold mb-3">Get to Know Us</p>
-              <ul className="space-y-2">
-                <li><Link href="/about" className="hover:underline">About Us</Link></li>
-                <li><Link href="/salon" className="hover:underline">Our Salon</Link></li>
-                <li><Link href="/blog" className="hover:underline">Blog</Link></li>
-              </ul>
+            <div className="text-center py-6 text-xs border-t border-white/20">
+              © {new Date().getFullYear()} Simply Cucumber · All rights reserved.
             </div>
-
-            {/* Brand */}
-            <div>
-              <p className="font-semibold mb-3">Simply Cucumber</p>
-              <ul className="space-y-2">
-                <li><Link href="/rewards" className="hover:underline">Rewards</Link></li>
-                <li><Link href="/skin-analysis" className="hover:underline">Skin Analysis</Link></li>
-                <li><Link href="/privacy" className="hover:underline">Privacy Policy</Link></li>
-                <li><Link href="/terms" className="hover:underline">Terms of Service</Link></li>
-              </ul>
-            </div>
-          </div>
-
-          {/* Bottom bar */}
-          <div className="text-center py-6 text-xs border-t border-white/20">
-            © {new Date().getFullYear()} Simply Cucumber · All rights reserved.
-          </div>
-        </footer>
+          </footer>
+        </CartProvider>
       </body>
     </html>
   );
