@@ -3,6 +3,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { PRODUCTS } from "../../lib/products";
 import SortBy from "../../components/SortBy";
+import ProductCard from "../../components/ProductCard"; // ← use the new sleek card
 
 const GROUPS: Record<string, string[]> = {
   face: ["cleansers", "toners", "serums", "moisturizers", "masks"],
@@ -13,12 +14,12 @@ const GROUPS: Record<string, string[]> = {
 };
 
 type PageProps = { searchParams?: { category?: string; sort?: string } };
-type WithHover = { hoverImage?: string };
 
 export default function ShopPage({ searchParams }: PageProps) {
   const category = searchParams?.category ?? null;
   const sort = searchParams?.sort ?? null;
 
+  // Filter
   let items = (!category
     ? PRODUCTS
     : PRODUCTS.filter((p) => {
@@ -27,6 +28,7 @@ export default function ShopPage({ searchParams }: PageProps) {
       })
   ).slice();
 
+  // Sort
   switch (sort) {
     case "az":
       items.sort((a, b) => a.title.localeCompare(b.title));
@@ -50,7 +52,7 @@ export default function ShopPage({ searchParams }: PageProps) {
   return (
     <section className="min-h-screen bg-[#e3d3b3]">
       <div className="mx-auto max-w-6xl px-4 py-10">
-        {/* Hero header image */}
+        {/* Hero */}
         <div className="relative h-56 md:h-72 w-full rounded-xl overflow-hidden">
           <Image
             src="/assets/shop/products-hero.jpg"
@@ -65,7 +67,7 @@ export default function ShopPage({ searchParams }: PageProps) {
 
         {/* Filters + content */}
         <div className="mt-8 grid grid-cols-1 lg:grid-cols-[240px_1fr] gap-8">
-          {/* Sidebar */}
+          {/* Sidebar (kept subtle glass effect) */}
           <aside className="border rounded-lg bg-white/60 backdrop-blur p-4 h-max sticky top-24">
             <p className="font-medium">Filter by</p>
             <div className="mt-4 space-y-3 text-sm">
@@ -101,43 +103,11 @@ export default function ShopPage({ searchParams }: PageProps) {
               <SortBy category={category} sort={sort} />
             </div>
 
-            {/* Product grid */}
-            <div className="mt-6 grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-              {items.map((p) => {
-                const hoverImage = (p as unknown as WithHover).hoverImage;
-                return (
-                  <div key={p.sku} className="border rounded-lg bg-white/70 backdrop-blur p-4 shadow-sm hover:shadow-md transition-shadow">
-                    <Link href={`/products/${p.slug}`}>
-                      <div className="relative h-44 rounded overflow-hidden group">
-                        <Image
-                          src={p.image}
-                          alt={p.title}
-                          fill
-                          className="object-cover transition-all duration-300 group-hover:opacity-0 group-hover:scale-105"
-                        />
-                        {hoverImage && (
-                          <Image
-                            src={hoverImage}
-                            alt={`${p.title} alternate view`}
-                            fill
-                            className="object-cover opacity-0 transition-all duration-300 group-hover:opacity-100 group-hover:scale-105"
-                          />
-                        )}
-                      </div>
-                    </Link>
-                    <h3 className="mt-4 font-medium">
-                      <Link href={`/products/${p.slug}`}>{p.title}</Link>
-                    </h3>
-                    <p className="text-gray-600">${p.price.toFixed(2)}</p>
-                    <form action="/api/checkout" method="POST" className="mt-3">
-                      <input type="hidden" name="sku" value={p.sku} />
-                      <button className="w-full rounded bg-cucumber-600 px-4 py-2 text-white hover:bg-cucumber-700">
-                        Buy now
-                      </button>
-                    </form>
-                  </div>
-                );
-              })}
+            {/* Product grid — no borders/shadows now */}
+            <div className="mt-6 grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
+              {items.map((p) => (
+                <ProductCard key={p.sku} product={p} />
+              ))}
             </div>
           </div>
         </div>
