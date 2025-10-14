@@ -22,3 +22,18 @@ body { @apply bg-white text-gray-900 antialiased; }
     animation: shimmer-sweep 1.2s ease-out 0.1s 1 forwards;
   }
 }
+@layer utilities {
+  .text-gold-metallic {
+    background: linear-gradient(90deg, #d4af37, #ffd700, #b8860b, #d4af37);
+    background-size: 300%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: goldShift 6s linear infinite;
+  }
+
+  @keyframes goldShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+}
