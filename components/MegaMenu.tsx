@@ -1,34 +1,32 @@
-// components/MegaMenu.tsx
 import Link from "next/link";
 
 const COL = "space-y-2";
-const ITEM = "block text-[13px] text-gray-800 hover:text-cucumber-700";
+const ITEM = "block text-[13px] text-gray-800 hover:text-cucumber-700 transition-colors";
 
 export default function MegaMenu() {
   return (
-   <div
-  className={[
-    // position — under “Shop” trigger, slightly more to the right
-    "absolute top-full z-50 mt-2",
-    // keep width flexible but not too wide
-    "w-[920px] max-w-[92vw]",
-    // surface
-    "rounded-lg border bg-[#e3d3b3]/95 p-5 shadow-lg backdrop-blur",
-    // hidden by default
-    "invisible opacity-0 translate-y-2 pointer-events-none",
-    "transition duration-200",
-    // show while hovering trigger OR the panel
-    "group-hover/menu:visible group-hover/menu:opacity-100 group-hover/menu:translate-y-0 group-hover/menu:pointer-events-auto",
-    "hover:visible hover:opacity-100 hover:translate-y-0 hover:pointer-events-auto",
-  ].join(" ")}
-  role="menu"
-  aria-label="Shop menu"
-  style={{
-    left: "50%",
-    transform: "translateX(-11%)", // adjust this: -35% or -45% if needed
-  }}
->
-      <div className="grid grid-cols-3 gap-6">
+    <div
+      className={[
+        // positioning
+        "absolute top-full left-1/2 z-50 mt-3 -translate-x-[30%]",
+        // size and surface
+        "w-[920px] max-w-[92vw] rounded-lg border bg-[#e3d3b3]/95 p-6 shadow-lg backdrop-blur-md",
+        // fade shadow at bottom
+        "after:content-[''] after:absolute after:inset-x-0 after:-bottom-6 after:h-6 after:bg-gradient-to-b after:from-black/10 after:to-transparent after:pointer-events-none",
+        // default hidden
+        "invisible opacity-0 translate-y-3 pointer-events-none",
+        // transitions
+        "transition-all duration-300 ease-out",
+        // show on hover
+        "group-hover/menu:visible group-hover/menu:opacity-100 group-hover/menu:translate-y-0 group-hover/menu:pointer-events-auto",
+        "hover:visible hover:opacity-100 hover:translate-y-0 hover:pointer-events-auto",
+        // luxury glow on hover
+        "hover:shadow-[0_0_25px_rgba(217,182,119,0.25)] hover:ring-1 hover:ring-[#b8860b]/40",
+      ].join(" ")}
+      role="menu"
+      aria-label="Shop menu"
+    >
+      <div className="grid grid-cols-3 gap-6 relative z-10">
         {/* FACE */}
         <div>
           <p className="mb-3 font-semibold tracking-wide text-gray-900 text-sm">FACE</p>
@@ -53,7 +51,7 @@ export default function MegaMenu() {
           </div>
         </div>
 
-        {/* FEATURED + Images */}
+        {/* FEATURED */}
         <div>
           <p className="mb-3 font-semibold tracking-wide text-gray-900 text-sm">FEATURED</p>
           <div className={COL}>
