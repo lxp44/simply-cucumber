@@ -34,7 +34,7 @@ export default function HeroCarousel({ slides, interval = 6000 }: { slides: Slid
           <p className="inline-block rounded-full bg-white/80 px-3 py-1 text-xs tracking-wide">
             Friends & Family
           </p>
-          <h1 className="mt-4 text-white drop-shadow-sm font-[var(--font-playfair)] text-3xl md:text-5xl">
+          <h1 className="mt-4 text-gold-metallic drop-shadow-sm font-[var(--font-playfair)] text-3xl md:text-5xl">
             {s.headline}
           </h1>
           <p className="mt-3 text-white/90">{s.sub}</p>
