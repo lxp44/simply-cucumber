@@ -40,7 +40,7 @@ export default function HeroCarousel({ slides, interval = 6000 }: { slides: Slid
           <p className="mt-3 text-gold-metallic">{s.sub}</p>
           <a
             href={s.ctaHref}
-            className="mt-6 inline-block rounded bg-white/90 px-6 py-3 text-white font-medium hover:bg-white"
+            className="mt-6 inline-block rounded bg-sm/90 px-6 py-3 text-white font-medium hover:bg-white"
           >
             {s.ctaLabel}
           </a>
