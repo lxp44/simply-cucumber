@@ -31,6 +31,10 @@ export default function MegaMenu() {
   ].join(" ")}
   role="menu"
   aria-label="Shop menu"
+style={{
+    left: "50%",
+    transform: "translateX(-11%)",
+  }}
 >
       <div className="grid grid-cols-3 gap-6 relative z-10">
         {/* FACE */}
