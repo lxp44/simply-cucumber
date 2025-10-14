@@ -8,7 +8,7 @@ export default function MegaMenu() {
   <div
   className={[
     // positioning
-    "absolute top-full left-1/2 z-50 mt-3 -translate-x-[30%]",
+    "absolute top-full left-1/2 z-50 mt-3 -translate-x-[11%]", // ← use one X offset
     // size + surface
     "w-[920px] max-w-[92vw] rounded-lg border bg-[#e3d3b3]/95 p-6 shadow-lg backdrop-blur-md",
     // soft bottom fade
@@ -31,10 +31,6 @@ export default function MegaMenu() {
   ].join(" ")}
   role="menu"
   aria-label="Shop menu"
-style={{
-    left: "50%",
-    transform: "translateX(-11%)",
-  }}
 >
       <div className="grid grid-cols-3 gap-6 relative z-10">
         {/* FACE */}
