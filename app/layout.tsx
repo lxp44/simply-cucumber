@@ -93,7 +93,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               </h2>
             </div>
 
-            <div className="mx-auto max-w-6xl px-4 py-12 grid md:grid-cols-4 gap-8 text-sm">
+            <div className="mx-auto max-w-6xl px-4 py-12 grid md:grid-cols-4 gap-8 text-gold-metallic">
               {/* Newsletter */}
               <div>
                 <p className="font-semibold mb-3">Stay in touch.</p>
