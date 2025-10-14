@@ -1,8 +1,8 @@
 // components/MegaMenu.tsx
 import Link from "next/link";
 
-const COL = "space-y-2.5";
-const ITEM = "block text-sm text-gray-800 hover:text-cucumber-700";
+const COL = "space-y-2";
+const ITEM = "block text-[13px] text-gray-800 hover:text-cucumber-700";
 
 export default function MegaMenu() {
   return (
@@ -10,10 +10,10 @@ export default function MegaMenu() {
       className={[
         // position (under the "Shop" trigger)
         "absolute left-1/2 top-full z-50 mt-2 -translate-x-1/2",
-        // responsive width caps
-        "w-[92vw] max-w-[860px] md:max-w-[900px] lg:max-w-[980px]",
+        // smaller width cap
+        "w-[85vw] max-w-[720px]",
         // surface
-        "rounded-xl border bg-[#e3d3b3]/95 p-6 md:p-7 shadow-lg backdrop-blur",
+        "rounded-lg border bg-[#e3d3b3]/95 p-5 shadow-lg backdrop-blur",
         // hidden by default
         "invisible opacity-0 translate-y-2 pointer-events-none",
         "transition duration-200",
@@ -24,11 +24,10 @@ export default function MegaMenu() {
       role="menu"
       aria-label="Shop menu"
     >
-      {/* 3 columns on md+, 2 on small screens */}
-      <div className="grid grid-cols-2 md:grid-cols-3 gap-6 md:gap-7">
+      <div className="grid grid-cols-3 gap-6">
         {/* FACE */}
         <div>
-          <p className="mb-3 md:mb-4 font-semibold tracking-wide text-gray-900">FACE</p>
+          <p className="mb-3 font-semibold tracking-wide text-gray-900 text-sm">FACE</p>
           <div className={COL}>
             <Link href="/shop?category=face" className={ITEM}>All Face</Link>
             <Link href="/shop?category=cleansers" className={ITEM}>Cleansers</Link>
@@ -41,7 +40,7 @@ export default function MegaMenu() {
 
         {/* BODY */}
         <div>
-          <p className="mb-3 md:mb-4 font-semibold tracking-wide text-gray-900">BODY</p>
+          <p className="mb-3 font-semibold tracking-wide text-gray-900 text-sm">BODY</p>
           <div className={COL}>
             <Link href="/shop?category=body" className={ITEM}>All Body</Link>
             <Link href="/shop?category=bath-body" className={ITEM}>Bath &amp; Body</Link>
@@ -50,32 +49,30 @@ export default function MegaMenu() {
           </div>
         </div>
 
-        {/* RIGHT: Featured + promos (stacked) */}
-        <div className="grid grid-cols-1 gap-5">
-          <div>
-            <p className="mb-3 md:mb-4 font-semibold tracking-wide text-gray-900">FEATURED</p>
-            <div className={COL}>
-              <Link href="/shop?category=powders" className={ITEM}>Powders</Link>
-              <Link href="/shop?category=toothpaste" className={ITEM}>Toothpaste</Link>
-              <Link href="/shop?category=spa-packages" className={ITEM}>Spa Packages</Link>
-              <Link href="/shop" className={ITEM}>All Products</Link>
-            </div>
+        {/* FEATURED + Images */}
+        <div>
+          <p className="mb-3 font-semibold tracking-wide text-gray-900 text-sm">FEATURED</p>
+          <div className={COL}>
+            <Link href="/shop?category=powders" className={ITEM}>Powders</Link>
+            <Link href="/shop?category=toothpaste" className={ITEM}>Toothpaste</Link>
+            <Link href="/shop?category=spa-packages" className={ITEM}>Spa Packages</Link>
+            <Link href="/shop" className={ITEM}>All Products</Link>
           </div>
 
-          {/* Promo thumbs (auto scale smaller) */}
-          <div className="hidden sm:grid grid-cols-2 gap-4">
-            <Link href="/shop" className="block overflow-hidden rounded-lg border">
+          {/* Promo thumbnails */}
+          <div className="mt-4 grid grid-cols-2 gap-3">
+            <Link href="/shop" className="block overflow-hidden rounded-md border">
               <img
                 src="/assets/menu/drop-down-menu-1.jpg"
                 alt="Simply Cucumber"
-                className="h-28 w-full object-cover md:h-32"
+                className="h-24 w-full object-cover"
               />
             </Link>
-            <Link href="/shop" className="block overflow-hidden rounded-lg border">
+            <Link href="/shop" className="block overflow-hidden rounded-md border">
               <img
                 src="/assets/menu/drop-down-menu-2.jpg"
                 alt="New arrivals"
-                className="h-28 w-full object-cover md:h-32"
+                className="h-24 w-full object-cover"
               />
             </Link>
           </div>
