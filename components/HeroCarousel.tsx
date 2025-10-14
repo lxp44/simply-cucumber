@@ -40,10 +40,10 @@ export default function HeroCarousel({
           <h1 className="mt-4 text-gold-metallic drop-shadow-sm font-[var(--font-playfair)] text-3xl md:text-5xl">
             {s.headline}
           </h1>
-          <p className="mt-3 text-gold-metallic">{s.sub}</p>
+          <p className="mt-3 text-black">{s.sub}</p>
           <a
             href={s.ctaHref}
-            className="mt-6 inline-block rounded bg-white/90 px-6 py-3 text-white font-medium hover:bg-white"
+            className="mt-6 inline-block rounded bg-white/90 px-6 py-3 text-black font-medium hover:bg-white"
           >
             {s.ctaLabel}
           </a>
