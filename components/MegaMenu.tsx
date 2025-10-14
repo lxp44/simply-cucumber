@@ -62,24 +62,6 @@ export default function MegaMenu() {
             <Link href="/shop?category=spa-packages" className={ITEM}>Spa Packages</Link>
             <Link href="/shop" className={ITEM}>All Products</Link>
           </div>
-
-          {/* Promo thumbnails */}
-          <div className="mt-4 grid grid-cols-2 gap-3">
-            <Link href="/shop" className="block overflow-hidden rounded-md border">
-              <img
-                src="/assets/menu/drop-down-menu-1.jpg"
-                alt="Simply Cucumber"
-                className="h-24 w-full object-cover"
-              />
-            </Link>
-            <Link href="/shop" className="block overflow-hidden rounded-md border">
-              <img
-                src="/assets/menu/drop-down-menu-2.jpg"
-                alt="New arrivals"
-                className="h-24 w-full object-cover"
-              />
-            </Link>
-          </div>
         </div>
       </div>
     </div>
