@@ -25,7 +25,7 @@ export default function MegaMenu() {
   aria-label="Shop menu"
   style={{
     left: "50%",
-    transform: "translateX(-15%)", // adjust this: -35% or -45% if needed
+    transform: "translateX(-10%)", // adjust this: -35% or -45% if needed
   }}
 >
       <div className="grid grid-cols-3 gap-6">
