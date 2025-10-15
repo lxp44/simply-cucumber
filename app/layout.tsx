@@ -60,7 +60,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                     <img
                       src="/assets/products/simply-cucumber-profile-logo.png"
                       alt="Simply Cucumber"
-                      className="h-12 w-auto md:h-14"
+                      className="h-14 w-auto md:h-16"
                     />
                   </Link>
                 </div>
