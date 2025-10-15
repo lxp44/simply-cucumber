@@ -1,9 +1,10 @@
-// app/shop/page.tsx  (SERVER COMPONENT)
+// app/shop/page.tsx
 import Link from "next/link";
 import Image from "next/image";
 import { PRODUCTS } from "../../lib/products";
 import SortBy from "../../components/SortBy";
-import ProductCard from "../../components/ProductCard"; // ← use the new sleek card
+import ProductCard from "../../components/ProductCard";
+import FilterSidebar from "../../components/FilterSidebar"; // ← client sidebar
 
 const GROUPS: Record<string, string[]> = {
   face: ["cleansers", "toners", "serums", "moisturizers", "masks"],
@@ -13,13 +14,24 @@ const GROUPS: Record<string, string[]> = {
   "spa-packages": ["spa-packages"],
 };
 
-type PageProps = { searchParams?: { category?: string; sort?: string } };
+type PageProps = {
+  searchParams?: {
+    category?: string;
+    sort?: string;
+    type?: string; // comma-separated product categories to include (from checkboxes)
+    skin?: string; // comma-separated skin tags to include (from checkboxes)
+  };
+};
 
 export default function ShopPage({ searchParams }: PageProps) {
   const category = searchParams?.category ?? null;
   const sort = searchParams?.sort ?? null;
 
-  // Filter
+  // read filter params from URL (comma-separated lists)
+  const selectedTypes = new Set((searchParams?.type ?? "").split(",").filter(Boolean));
+  const selectedSkin = new Set((searchParams?.skin ?? "").split(",").filter(Boolean));
+
+  // Category filter first
   let items = (!category
     ? PRODUCTS
     : PRODUCTS.filter((p) => {
@@ -27,6 +39,20 @@ export default function ShopPage({ searchParams }: PageProps) {
         return p.category === category || leaves.includes(p.category);
       })
   ).slice();
+
+  // "Filter by" → matches product.category against selectedTypes
+  if (selectedTypes.size > 0) {
+    items = items.filter((p) => selectedTypes.has(p.category));
+  }
+
+  // "Skin Type" → matches any tag in product.skin (string[]) against selectedSkin
+  if (selectedSkin.size > 0) {
+    items = items.filter((p: any) => {
+      const tags: string[] | undefined = (p as any).skin;
+      if (!tags || tags.length === 0) return false;
+      return [...selectedSkin].some((s) => tags.includes(s));
+    });
+  }
 
   // Sort
   switch (sort) {
@@ -65,28 +91,10 @@ export default function ShopPage({ searchParams }: PageProps) {
           <h1 className="absolute left-6 bottom-6 text-3xl md:text-4xl font-semibold text-white drop-shadow-lg" />
         </div>
 
-        {/* Filters + content */}
+        {/* Sidebar + content */}
         <div className="mt-8 grid grid-cols-1 lg:grid-cols-[240px_1fr] gap-8">
-          {/* Sidebar (kept subtle glass effect) */}
-          <aside className="border rounded-lg bg-white/60 backdrop-blur p-4 h-max sticky top-24">
-            <p className="font-medium">Filter by</p>
-            <div className="mt-4 space-y-3 text-sm">
-              {[
-                "Acne Products",
-                "Cleansers",
-                "Toners",
-                "Serums",
-                "Moisturizers",
-                "Masks",
-                "Bath & Body",
-              ].map((label) => (
-                <label key={label} className="flex items-center gap-2">
-                  <input type="checkbox" className="accent-cucumber-600" />
-                  {label}
-                </label>
-              ))}
-            </div>
-          </aside>
+          {/* Sidebar */}
+          <FilterSidebar />
 
           {/* Right column */}
           <div>
@@ -103,7 +111,7 @@ export default function ShopPage({ searchParams }: PageProps) {
               <SortBy category={category} sort={sort} />
             </div>
 
-            {/* Product grid — no borders/shadows now */}
+            {/* Product grid */}
             <div className="mt-6 grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
               {items.map((p) => (
                 <ProductCard key={p.sku} product={p} />
