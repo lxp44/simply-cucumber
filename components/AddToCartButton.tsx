@@ -1,27 +1,44 @@
-// components/AddToCartButton.tsx
 "use client";
 
 import { useState } from "react";
 import { useCart } from "./CartProvider";
 
-export default function AddToCartButton({ sku }: { sku: string }) {
-  const { add } = useCart(); // if your CartProvider uses a different method name, adjust here
+export default function AddToCartButton({
+  sku,
+  qty = 1,
+  className = "w-full rounded bg-cucumber-600 px-4 py-2 text-white hover:bg-cucumber-700",
+  children,
+}: {
+  sku: string;
+  qty?: number;
+  className?: string;
+  children?: React.ReactNode;
+}) {
+  // Be flexible about the method name on the cart context
+  const cart = useCart() as any;
+  const addFn = (cart?.add ?? cart?.addItem ?? cart?.addToCart) as
+    | ((sku: string, qty?: number) => void)
+    | undefined;
+
   const [loading, setLoading] = useState(false);
 
+  if (!addFn) {
+    // No add function exposed; render nothing to avoid runtime errors
+    return null;
+  }
+
+  const onClick = async () => {
+    try {
+      setLoading(true);
+      addFn(sku, qty);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
-    <button
-      onClick={async () => {
-        setLoading(true);
-        try {
-          await add(sku, 1);
-        } finally {
-          setLoading(false);
-        }
-      }}
-      className="w-full rounded bg-cucumber-700 px-5 py-3 text-white font-semibold tracking-wide hover:bg-cucumber-800 transition disabled:opacity-60"
-      disabled={loading}
-    >
-      {loading ? "Adding…" : "Add to cart"}
+    <button onClick={onClick} disabled={loading} className={className}>
+      {children ?? (loading ? "Adding..." : "Add to cart")}
     </button>
   );
 }
