@@ -154,7 +154,7 @@ export const PRODUCTS: Product[] = [
   slug: "simply-cucumber-mouthwash",
   title: "Simply Cucumber Mouthwash",
   tagline: "Fresh. Clean. Cool — Naturally.",
-  price: 10,
+  price: 25,
   description:
     "Rinse, refresh, and restore with Simply Cucumber Mouthwash — a fluoride-free, alcohol-free formula that leaves your mouth feeling clean and hydrated. Infused with cucumber extract, mint, and zinc, this gentle rinse neutralizes odor, balances pH, and supports gum health without the burn. The cool cucumber-mint blend provides a refreshing finish while naturally soothing irritation and dryness. Perfect for daily use morning and night, it’s the ideal complement to your Simply Cucumber Toothpaste — for a pure, cooling clean that lasts.",
   image: "/assets/products/cucumber-mouth-wash.jpg",
@@ -202,7 +202,7 @@ export const PRODUCTS: Product[] = [
   slug: "cucumber-face-scrub",
   title: "Simply Cucumber Face Scrub",
   tagline: "Polish, Purify, and Glow — Naturally.",
-  price: 20,
+  price: 40,
   description:
     "Give your skin a fresh start every day with our Simply Cucumber Face Scrub. This gentle, yet powerful exfoliator blends cucumber extract, fine rice powder, and natural fruit enzymes to smooth away dead skin cells and impurities without irritation. Enriched with aloe and green tea, it calms redness while promoting an even, radiant complexion. Designed for all skin types, this refreshing scrub refines texture, unclogs pores, and enhances the absorption of serums and moisturizers. The result — clean, balanced, and glowing skin that feels as soft as it looks.",
   image: "/assets/products/cucumber-face-scrub.jpg",
@@ -370,7 +370,7 @@ export const PRODUCTS: Product[] = [
   slug: "face-dry-mask",
   title: "Simply Cucumber Face Dry Mask",
   tagline: "Detox. Revive. Glow.",
-  price: 25,
+  price: 40,
   description:
     "Purify and refresh your skin with our Simply Cucumber Face Dry Mask — a powdered botanical blend designed to activate instantly with water or toner. Each use delivers a concentrated dose of cucumber enzymes, clay minerals, and antioxidants that draw out impurities while restoring essential hydration. Mix just what you need for a fresh, clean treatment every time. Ideal for all skin types, this mask calms inflammation, reduces oil buildup, and leaves skin smooth, balanced, and visibly renewed.",
   image: "/assets/products/cucumber-dry-mask.jpg",
