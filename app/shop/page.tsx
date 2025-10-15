@@ -53,7 +53,7 @@ export default function ShopPage({ searchParams }: PageProps) {
     <section className="min-h-screen bg-[#e3d3b3]">
       <div className="mx-auto max-w-6xl px-4 py-10">
         {/* Hero */}
-        <div className="relative h-56 md:h-72 w-full rounded-xl overflow-hidden">
+        <div className="relative h-48 md:h-60 w-full rounded-xl overflow-hidden -mt-6">
           <Image
             src="/assets/shop/products-hero.jpg"
             alt="Shop header"
