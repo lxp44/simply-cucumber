@@ -52,6 +52,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 >
   Gifts
 </Link>
+</nav> 
 
                 {/* Center logo */}
                 <div className="flex justify-center">
