@@ -37,3 +37,16 @@ body { @apply bg-white text-gray-900 antialiased; }
     100% { background-position: 0% 50%; }
   }
 }
+@layer utilities {
+  .text-gold-rich {
+    background: linear-gradient(90deg, #d4af37, #ffd700, #b8860b);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-weight: 600;
+    letter-spacing: 0.03em;
+  }
+
+  .text-gold-rich:hover {
+    background: linear-gradient(90deg, #ffd700, #fff6c2, #d4af37);
+  }
+}
