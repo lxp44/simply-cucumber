@@ -65,6 +65,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                   <Link href="/skin-analysis" className="hover:text-cucumber-700 py-2">Skin Analysis</Link>
                   <Link href="/rewards" className="hover:text-cucumber-700 py-2">Rewards</Link>
                   <Link href="/salon" className="hover:text-cucumber-700 py-2">Salon</Link>
+                    {/* 🔎 Product search */}
+  <div className="hidden sm:block">
+    <ProductSearch />
+  </div>
                   <CartLink />
                 </nav>
               </div>
