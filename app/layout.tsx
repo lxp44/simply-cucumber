@@ -46,8 +46,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                     <MegaMenu />
                   </div>
                   <Link href="/best-sellers"  className="text-gold-rich py-2 hover:drop-shadow-[0_0_8px_rgba(212,175,55,0.5)] transition-all duration-300">Best Sellers</Link>
-                  <Link href="/gifts" className="text-gold-rich py-2 hover:drop-shadow-[0_0_8px_rgba(212,175,55,0.5)] transition-all duration-300"">Gifts</Link>
-                </nav>
+                 <Link
+  href="/gifts"
+  className="text-gold-rich py-2 hover:drop-shadow-[0_0_8px_rgba(212,175,55,0.5)] transition-all duration-300"
+>
+  Gifts
+</Link>
 
                 {/* Center logo */}
                 <div className="flex justify-center">
