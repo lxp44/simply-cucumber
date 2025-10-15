@@ -6,6 +6,8 @@ import MegaMenu from "../components/MegaMenu";
 import { Playfair_Display } from "next/font/google";
 import { CartProvider } from "../components/CartProvider";
 import CartLink from "../components/CartLink";
+import ProductSearch from "../components/ProductSearch";
+
 
 const playfair = Playfair_Display({
   subsets: ["latin"],
