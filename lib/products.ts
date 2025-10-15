@@ -6,11 +6,13 @@ export type Product = {
   tagline?: string;
   price: number;
   description: string;
+bio?: string;          // ← optional long-form “full bio”
   image: string;
     images?: string[]; 
   hoverImage?: string; // 👈 allow optional hover image
   benefits: string[];
    highlights?: string[]; 
+bestSeller?: boolean;  // ← mark best sellers
   category: "face" | "body" | "powders" | "toothpaste" | "spa-packages";
 };
 
@@ -31,6 +33,7 @@ export const PRODUCTS: Product[] = [
     benefits: ["100% Natural", "Rich in Vitamins", "Hydration Boost"],
     highlights: ["Vegan", "Paraben-Free", "Synthetic Fragrance-Free"],
     category: "powders",
+bestSeller: true, 
   },
   {
     sku: "soap",
