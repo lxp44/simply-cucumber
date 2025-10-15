@@ -1,7 +1,7 @@
 "use client";
 
-import { useRouter, useSearchParams } from "next/navigation";
 import { useMemo } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
 
 const PRODUCT_FILTERS = [
   { label: "Cleansers", value: "cleansers" },
@@ -10,7 +10,6 @@ const PRODUCT_FILTERS = [
   { label: "Moisturizers", value: "moisturizers" },
   { label: "Masks", value: "masks" },
   { label: "Bath & Body", value: "bath-body" },
-  // If you add more categories, just drop them in here.
 ];
 
 const SKIN_FILTERS = [
@@ -25,7 +24,6 @@ export default function FilterSidebar() {
   const router = useRouter();
   const sp = useSearchParams();
 
-  // read current selections from URL (?type=a,b&skin=x,y)
   const typeSet = useMemo(() => new Set((sp.get("type") ?? "").split(",").filter(Boolean)), [sp]);
   const skinSet = useMemo(() => new Set((sp.get("skin") ?? "").split(",").filter(Boolean)), [sp]);
 
@@ -34,7 +32,6 @@ export default function FilterSidebar() {
     const set = new Set((params.get(name) ?? "").split(",").filter(Boolean));
     checked ? set.add(value) : set.delete(value);
     set.size ? params.set(name, [...set].join(",")) : params.delete(name);
-    // preserve everything else (category, sort, etc.)
     router.replace(`?${params.toString()}`, { scroll: false });
   };
 
@@ -56,7 +53,7 @@ export default function FilterSidebar() {
         ))}
       </div>
 
-      {/* SKIN TYPE FILTERS */}
+      {/* SKIN TYPE */}
       <p className="mt-6 font-medium">Skin Type</p>
       <div className="mt-4 space-y-3 text-sm">
         {SKIN_FILTERS.map(({ label, value }) => (
