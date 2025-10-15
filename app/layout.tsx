@@ -37,7 +37,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                   <div className="relative group/menu">
                     <Link
                       href="/shop"
-                      className="hover:text-cucumber-700 inline-block py-2"
+                      className="text-gold-rich inline-block py-2 hover:drop-shadow-[0_0_8px_rgba(212,175,55,0.5)] transition-all duration-300"
                       aria-haspopup="true"
                       aria-expanded="false"
                     >
@@ -45,8 +45,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                     </Link>
                     <MegaMenu />
                   </div>
-                  <Link href="/best-sellers" className="hover:text-cucumber-700 py-2">Best Sellers</Link>
-                  <Link href="/gifts" className="hover:text-cucumber-700 py-2">Gifts</Link>
+                  <Link href="/best-sellers"  className="text-gold-rich py-2 hover:drop-shadow-[0_0_8px_rgba(212,175,55,0.5)] transition-all duration-300">Best Sellers</Link>
+                  <Link href="/gifts" className="text-gold-rich py-2 hover:drop-shadow-[0_0_8px_rgba(212,175,55,0.5)] transition-all duration-300"">Gifts</Link>
                 </nav>
 
                 {/* Center logo */}
@@ -62,8 +62,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 
                 {/* Right nav */}
                 <nav className="flex items-center gap-6 text-sm justify-end">
-                  <Link href="/rewards" className="hover:text-cucumber-700 py-2">Rewards</Link>
-                  <Link href="/salon" className="hover:text-cucumber-700 py-2">Salon</Link>
+                  <Link href="/rewards" className="text-gold-rich py-2 hover:drop-shadow-[0_0_8px_rgba(212,175,55,0.5)] transition-all duration-300">Rewards</Link>
+                  <Link href="/salon" className="text-gold-rich py-2 hover:drop-shadow-[0_0_8px_rgba(212,175,55,0.5)] transition-all duration-300">Salon</Link>
                     {/* 🔎 Product search */}
   <div className="hidden sm:block">
     <ProductSearch />
