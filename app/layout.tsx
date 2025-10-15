@@ -62,7 +62,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 
                 {/* Right nav */}
                 <nav className="flex items-center gap-6 text-sm justify-end">
-                  <Link href="/skin-analysis" className="hover:text-cucumber-700 py-2">Skin Analysis</Link>
                   <Link href="/rewards" className="hover:text-cucumber-700 py-2">Rewards</Link>
                   <Link href="/salon" className="hover:text-cucumber-700 py-2">Salon</Link>
                     {/* 🔎 Product search */}
@@ -139,7 +138,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                 <p className="font-semibold mb-3">Simply Cucumber</p>
                 <ul className="space-y-2">
                   <li><Link href="/rewards" className="hover:underline">Rewards</Link></li>
-                  <li><Link href="/skin-analysis" className="hover:underline">Skin Analysis</Link></li>
                   <li><Link href="/privacy" className="hover:underline">Privacy Policy</Link></li>
                   <li><Link href="/terms" className="hover:underline">Terms of Service</Link></li>
                 </ul>
