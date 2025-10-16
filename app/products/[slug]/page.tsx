@@ -132,15 +132,10 @@ export default function ProductPage({ params }: PageProps) {
               </ul>
             )}
 
-            {/* CTA — replace the old form with Add to Cart */}
-            <div className="mt-10">
-              <AddToCartButton
-                sku={product.sku}
-                title={product.title}
-                price={product.price}
-                image={product.image}
-              />
-            </div>
+            {/* CTA — replace the old form with Add to {/* CTA — Add to Cart */}
+<div className="mt-10">
+  <AddToCartButton sku={product.sku} />
+</div>
           </div>
         </div>
       </section>
