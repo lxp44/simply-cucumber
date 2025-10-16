@@ -3,34 +3,32 @@
 import { useState } from "react";
 import { useCart } from "./CartProvider";
 
-export default function AddToCartButton({
-  sku,
-  qty = 1,
-  className = "w-full rounded bg-cucumber-600 px-4 py-2 text-white hover:bg-cucumber-700",
-  children,
-}: {
+type Props = {
   sku: string;
+  title: string;
+  price: number;
+  image: string;
   qty?: number;
   className?: string;
   children?: React.ReactNode;
-}) {
-  // Be flexible about the method name on the cart context
-  const cart = useCart() as any;
-  const addFn = (cart?.add ?? cart?.addItem ?? cart?.addToCart) as
-    | ((sku: string, qty?: number) => void)
-    | undefined;
+};
 
+export default function AddToCartButton({
+  sku,
+  title,
+  price,
+  image,
+  qty = 1,
+  className = "w-full rounded bg-cucumber-600 px-4 py-2 text-white hover:bg-cucumber-700",
+  children,
+}: Props) {
+  const { addItem } = useCart();
   const [loading, setLoading] = useState(false);
 
-  if (!addFn) {
-    // No add function exposed; render nothing to avoid runtime errors
-    return null;
-  }
-
-  const onClick = async () => {
+  const onClick = () => {
+    setLoading(true);
     try {
-      setLoading(true);
-      addFn(sku, qty);
+      addItem({ sku, title, price, image }, qty);
     } finally {
       setLoading(false);
     }
