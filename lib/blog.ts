@@ -25,7 +25,7 @@ export const BLOG_POSTS: BlogPost[] = [
       <p>High water content replenishes moisture without heaviness.</p>
       <p>Try our <a href="/products/face-mist" class="underline text-cucumber-700">Cucumber Face Mist</a> for an instant reset.</p>
     `,
-    cover: "/assets/blog/cucumber-benefits.jpg",
+    cover: "/assets/blog/cucumber-group-product.png",
     date: "2025-01-08",
     tags: ["Skincare 101", "Ingredients"],
     author: "Simply Cucumber Editors",
