@@ -19,15 +19,22 @@ export default function AddToCartButton({
   price,
   image,
   qty = 1,
-  className = "w-full rounded bg-cucumber-600 px-4 py-2 text-white hover:bg-cucumber-700",
+  className = "w-full rounded bg-cucumber-700 px-5 py-3 text-white font-semibold tracking-wide hover:bg-cucumber-800 transition",
   children,
 }: Props) {
-  const { addItem } = useCart();
+  const cart = useCart();
   const [loading, setLoading] = useState(false);
 
-  const onClick = () => {
-    setLoading(true);
+  const addItem =
+    (cart as any).addItem ??
+    (cart as any).add ?? // fallback if you rename later
+    (cart as any).addToCart;
+
+  if (!addItem) return null;
+
+  const onClick = async () => {
     try {
+      setLoading(true);
       addItem({ sku, title, price, image }, qty);
     } finally {
       setLoading(false);
