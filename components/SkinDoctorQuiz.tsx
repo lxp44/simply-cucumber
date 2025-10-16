@@ -6,6 +6,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { PRODUCTS } from "../lib/products";
 import AddToCartButton from "./AddToCartButton"; // uses your CartProvider
+import { useCart } from "./CartProvider";        // ⬅️ for bulk add
 
 type Answers = {
   gender: "female" | "male" | "nonbinary" | "prefer-not";
@@ -38,6 +39,7 @@ export default function SkinDoctorQuiz() {
   const [step, setStep] = useState(0);
   const [a, setA] = useState<Answers>(defaultAnswers);
   const [submitted, setSubmitted] = useState(false);
+  const { addItem } = useCart(); // ⬅️ bulk add
 
   const toggleConcern = (c: Answers["concerns"][number]) =>
     setA((s) => ({
@@ -363,6 +365,23 @@ export default function SkinDoctorQuiz() {
             ))}
           </div>
 
+          {/* Bulk add */}
+          <div className="mt-6 text-center">
+            <button
+              onClick={() => {
+                recs.forEach((p) =>
+                  addItem(
+                    { sku: p.sku, title: p.title, price: p.price, image: p.image },
+                    1
+                  )
+                );
+              }}
+              className="inline-block rounded bg-cucumber-700 text-white px-6 py-3 font-semibold hover:bg-cucumber-800"
+            >
+              Add Full Routine to Cart
+            </button>
+          </div>
+
           <div className="mt-6 text-center">
             <Link
               href="/shop"
@@ -377,51 +396,55 @@ export default function SkinDoctorQuiz() {
   );
 }
 
-/* ---------- Simple rules engine ---------- */
+/* ---------- Simple rules engine (TS-safe) ---------- */
 
 function getRecommendations(a: Answers) {
-  // prefer face categories we actually sell
-  const FACE_CATS = [
-    "cleansers",
-    "toners",
-    "serums",
-    "moisturizers",
-    "masks",
-    "face", // if you grouped some here
-  ];
+  // Helper: loose “category” detection by title/slug keywords
+  const CAT_RULES: Record<string, RegExp> = {
+    cleansers: /clean|wash|soap|scrub/i,
+    toners: /toner|mist|spray/i,
+    serums: /serum|treatment|oil/i,
+    moisturizers: /moist|lotion|cream|balm|butter/i,
+    masks: /mask/i,
+  };
+  const matchesCat = (p: (typeof PRODUCTS)[number], cat: keyof typeof CAT_RULES) =>
+    CAT_RULES[cat].test(p.title) || CAT_RULES[cat].test(p.slug);
 
-  const pick = (arr: any[], n: number) => arr.slice(0, n);
+  const pick = <T,>(arr: T[], n: number) => arr.slice(0, n);
 
-  // base pool = face products
-  let pool = PRODUCTS.filter((p) => FACE_CATS.includes(p.category));
+  // Base pool: items likely for face care
+  let pool = PRODUCTS.filter(
+    (p) =>
+      p.category === "face" ||
+      /face|lip|eye|mist|toner|serum|mask/i.test(p.title + " " + p.slug)
+  );
 
-  // filter by skin-type leaning
+  // Skin-type leaning / concerns
   if (a.skinType === "oily" || a.concerns.includes("acne")) {
     pool = pool.filter(
       (p) =>
-        /clean|soap|toner|mist|mask|powder/i.test(p.title) ||
-        ["cleansers", "toners", "masks"].includes(p.category)
+        /clean|soap|toner|mist|mask|powder|scrub/i.test(p.title) ||
+        matchesCat(p, "cleansers") ||
+        matchesCat(p, "toners") ||
+        matchesCat(p, "masks")
     );
   }
   if (a.skinType === "dry") {
     pool = pool.filter(
       (p) =>
-        /hydr|moist|serum|cream|mist/i.test(p.title) ||
-        ["moisturizers", "serums"].includes(p.category)
+        /hydr|moist|serum|cream|mist|balm|lotion/i.test(p.title) ||
+        matchesCat(p, "moisturizers") ||
+        matchesCat(p, "serums")
     );
   }
   if (a.concerns.includes("dullness") || a.exfoliate !== "rarely") {
-    pool = pool.filter(
-      (p) => /bright|tone|glow|serum|mask/i.test(p.title)
-    );
+    pool = pool.filter((p) => /bright|tone|glow|serum|mask|scrub/i.test(p.title));
   }
   if (a.concerns.includes("redness") || a.concerns.includes("sensitivity")) {
-    pool = pool.filter(
-      (p) => /soothe|calm|gentle|mist|toner/i.test(p.title)
-    );
+    pool = pool.filter((p) => /soothe|calm|gentle|mist|toner|aloe/i.test(p.title));
   }
 
-  // budget nudge
+  // Budget nudge
   const priceSort =
     a.budget === "value"
       ? (x: any, y: any) => x.price - y.price
@@ -431,8 +454,8 @@ function getRecommendations(a: Answers) {
 
   pool.sort(priceSort);
 
-  // ensure a routine shape (cleanser → treatment → moisturize → mask)
-  const byCat = (cat: string) => pool.filter((p) => p.category === cat);
+  // Routine shape using regex-based category matching
+  const byCat = (cat: keyof typeof CAT_RULES) => pool.filter((p) => matchesCat(p, cat));
   const routine = [
     ...pick(byCat("cleansers"), 1),
     ...pick(byCat("toners"), 1),
@@ -441,9 +464,7 @@ function getRecommendations(a: Answers) {
     ...pick(byCat("masks"), 1),
   ].filter(Boolean);
 
-  // if we couldn't hit all steps, just fall back to top 6 from pool
+  // Fallbacks
   const result = routine.length ? routine : pick(pool, 6);
-
-  // final fallback: take any 3 overall
   return result.length ? result : pick(PRODUCTS, 3);
 }
