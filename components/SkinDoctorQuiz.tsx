@@ -412,7 +412,7 @@ function getRecommendations(a: Answers) {
   }
   if (a.concerns.includes("dullness") || a.exfoliate !== "rarely") {
     pool = pool.filter(
-      (p) => /bright|tone|glow|serum|mask/i.test(p.title) || p.category === "serums"
+      (p) => /bright|tone|glow|serum|mask/i.test(p.title)
     );
   }
   if (a.concerns.includes("redness") || a.concerns.includes("sensitivity")) {
