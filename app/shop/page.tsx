@@ -4,7 +4,7 @@ import Image from "next/image";
 import { PRODUCTS } from "../../lib/products";
 import SortBy from "../../components/SortBy";
 import ProductCard from "../../components/ProductCard";
-import FilterSidebar from "../../components/FilterSidebar"; // ← client sidebar
+import FilterSidebar from "../../components/FilterSidebar";
 
 const GROUPS: Record<string, string[]> = {
   face: ["cleansers", "toners", "serums", "moisturizers", "masks"],
@@ -46,6 +46,7 @@ export default function ShopPage({ searchParams }: PageProps) {
   }
 
   // "Skin Type" → matches any tag in product.skin (string[]) against selectedSkin
+  // NOTE: add a `skin: string[]` field to products to use this filter effectively.
   if (selectedSkin.size > 0) {
     items = items.filter((p: any) => {
       const tags: string[] | undefined = (p as any).skin;
@@ -88,7 +89,9 @@ export default function ShopPage({ searchParams }: PageProps) {
             priority
           />
           <div className="absolute inset-0 bg-black/10" />
-          <h1 className="absolute left-6 bottom-6 text-3xl md:text-4xl font-semibold text-white drop-shadow-lg" />
+          <h1 className="absolute left-6 bottom-6 text-3xl md:text-4xl font-semibold text-gold-metallic drop-shadow-[0_1px_2px_rgba(0,0,0,0.35)]">
+            Shop
+          </h1>
         </div>
 
         {/* Sidebar + content */}
@@ -108,14 +111,33 @@ export default function ShopPage({ searchParams }: PageProps) {
                 <Pill label="TOOTHPASTE" href="/shop?category=toothpaste" active={category === "toothpaste"} />
                 <Pill label="SPA PACKAGES" href="/shop?category=spa-packages" active={category === "spa-packages"} />
               </div>
-              <SortBy category={category} sort={sort} />
+              <div className="flex items-center gap-4">
+                <span className="text-sm text-gray-700">Results: {items.length}</span>
+                <SortBy category={category} sort={sort} />
+              </div>
             </div>
 
-            {/* Product grid */}
-            <div className="mt-6 grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
-              {items.map((p) => (
-                <ProductCard key={p.sku} product={p} />
-              ))}
+            {/* Product grid OR empty state */}
+            <div className="mt-6">
+              {items.length === 0 ? (
+                <div className="rounded-lg border bg-white/70 p-8 text-center">
+                  <p className="text-gray-800 font-medium">No products match your filters.</p>
+                  <div className="mt-4">
+                    <Link
+                      href="/shop"
+                      className="inline-block rounded bg-cucumber-700 px-4 py-2 text-white hover:bg-cucumber-800"
+                    >
+                      Reset filters
+                    </Link>
+                  </div>
+                </div>
+              ) : (
+                <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                  {items.map((p) => (
+                    <ProductCard key={p.sku} product={p} />
+                  ))}
+                </div>
+              )}
             </div>
           </div>
         </div>
