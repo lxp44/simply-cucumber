@@ -1,6 +1,9 @@
 // app/faq/page.tsx
 
+"use client";
+import { useState } from "react";
 import Link from "next/link";
+import { ChevronDown, ChevronUp } from "lucide-react";
 
 export const metadata = {
   title: "FAQ · Simply Cucumber",
@@ -101,6 +104,8 @@ export default function FAQPage() {
     },
   ];
 
+  const [openIndex, setOpenIndex] = useState<number | null>(null);
+
   return (
     <section className="min-h-screen bg-gradient-to-b from-[#f7f2e9] via-[#e3d3b3] to-[#d6b98c] py-16 px-4">
       <div className="mx-auto max-w-3xl">
@@ -111,16 +116,38 @@ export default function FAQPage() {
           </p>
         </header>
 
-        <div className="space-y-6">
-          {faqs.map((faq) => (
-            <div
-              key={faq.q}
-              className="rounded-xl border bg-white/85 backdrop-blur p-5 hover:shadow-md transition"
-            >
-              <h3 className="font-semibold text-cucumber-800">{faq.q}</h3>
-              <p className="mt-2 text-gray-700">{faq.a}</p>
-            </div>
-          ))}
+        <div className="space-y-4">
+          {faqs.map((faq, i) => {
+            const isOpen = openIndex === i;
+            return (
+              <div
+                key={faq.q}
+                className={`rounded-xl border bg-white/85 backdrop-blur p-5 transition-all ${
+                  isOpen ? "shadow-lg border-cucumber-400" : "hover:shadow-md"
+                }`}
+              >
+                <button
+                  onClick={() => setOpenIndex(isOpen ? null : i)}
+                  className="flex w-full items-center justify-between text-left"
+                >
+                  <h3 className="font-semibold text-cucumber-800 text-base md:text-lg">
+                    {faq.q}
+                  </h3>
+                  {isOpen ? (
+                    <ChevronUp className="w-5 h-5 text-cucumber-700" />
+                  ) : (
+                    <ChevronDown className="w-5 h-5 text-cucumber-700" />
+                  )}
+                </button>
+
+                {isOpen && (
+                  <div className="mt-3 text-gray-700 text-sm md:text-base animate-fadeIn">
+                    {faq.a}
+                  </div>
+                )}
+              </div>
+            );
+          })}
         </div>
 
         <p className="mt-10 text-center text-sm text-gray-700">
