@@ -3,6 +3,11 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
+// Use env var if set; otherwise default to relative Netlify Functions base
+const FN_BASE =
+  (process.env.NEXT_PUBLIC_NETLIFY_FUNC_URL?.replace(/\/$/, "")) ||
+  "/.netlify/functions";
+
 export default function ContactPage() {
   const router = useRouter();
   const [submitting, setSubmitting] = useState(false);
@@ -14,7 +19,7 @@ export default function ContactPage() {
     setError(null);
 
     try {
-      const form = e.currentTarget as HTMLFormElement;
+      const form = e.currentTarget;
       const formData = new FormData(form);
 
       const payload = {
@@ -22,20 +27,29 @@ export default function ContactPage() {
         email: String(formData.get("email") || "").trim(),
         phone: String(formData.get("phone") || "").trim(),
         message: String(formData.get("message") || "").trim(),
-        source: "contact-page", // helpful context in the email
+        source: "contact-page",
       };
 
-      const res = await fetch("/.netlify/functions/contact-email", {
+      // basic client-side validation guard
+      if (!payload.name || !payload.email || !payload.message) {
+        throw new Error("Please complete all required fields.");
+      }
+
+      const res = await fetch(`${FN_BASE}/contact-email`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),
       });
 
-      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      if (!res.ok) {
+        const msg = await res.text().catch(() => "");
+        throw new Error(msg || `Request failed (HTTP ${res.status})`);
+      }
+
       router.push("/contact/thanks");
-    } catch (err) {
-      console.error(err);
-      setError("Sorry—something went wrong. Please try again.");
+    } catch (err: any) {
+      console.error("contact submit error:", err);
+      setError(err?.message || "Sorry—something went wrong. Please try again.");
       setSubmitting(false);
     }
   }
@@ -58,20 +72,45 @@ export default function ContactPage() {
           </p>
 
           <form name="contact" onSubmit={handleSubmit} className="mt-6 space-y-3">
-            {/* Fields */}
-            <input className="w-full rounded-md bg-transparent border border-white/70 px-3 py-3 placeholder-white/80 outline-none focus:ring-2 focus:ring-white"
-                   type="text" name="name" placeholder="Full name" required />
-            <input className="w-full rounded-md bg-transparent border border-white/70 px-3 py-3 placeholder-white/80 outline-none focus:ring-2 focus:ring-white"
-                   type="email" name="email" placeholder="Enter your email" required />
-            <input className="w-full rounded-md bg-transparent border border-white/70 px-3 py-3 placeholder-white/80 outline-none focus:ring-2 focus:ring-white"
-                   type="tel" name="phone" placeholder="Phone number (optional)" />
-            <textarea className="w-full rounded-md bg-transparent border border-white/70 px-3 py-3 placeholder-white/80 outline-none focus:ring-2 focus:ring-white min-h-[120px]"
-                      name="message" placeholder="How can we help?" required />
+            <input
+              className="w-full rounded-md bg-transparent border border-white/70 px-3 py-3 placeholder-white/80 outline-none focus:ring-2 focus:ring-white disabled:opacity-60"
+              type="text"
+              name="name"
+              placeholder="Full name"
+              required
+              disabled={submitting}
+            />
+            <input
+              className="w-full rounded-md bg-transparent border border-white/70 px-3 py-3 placeholder-white/80 outline-none focus:ring-2 focus:ring-white disabled:opacity-60"
+              type="email"
+              name="email"
+              placeholder="Enter your email"
+              required
+              disabled={submitting}
+            />
+            <input
+              className="w-full rounded-md bg-transparent border border-white/70 px-3 py-3 placeholder-white/80 outline-none focus:ring-2 focus:ring-white disabled:opacity-60"
+              type="tel"
+              name="phone"
+              placeholder="Phone number (optional)"
+              disabled={submitting}
+            />
+            <textarea
+              className="w-full rounded-md bg-transparent border border-white/70 px-3 py-3 placeholder-white/80 outline-none focus:ring-2 focus:ring-white min-h-[120px] disabled:opacity-60"
+              name="message"
+              placeholder="How can we help?"
+              required
+              disabled={submitting}
+            />
 
             {error && <p className="text-sm text-red-200">{error}</p>}
 
-            <button className="w-full rounded-md bg-white text-cucumber-900 font-semibold tracking-wide px-4 py-3 hover:bg-cucumber-50 transition disabled:opacity-70"
-                    type="submit" disabled={submitting}>
+            <button
+              className="w-full rounded-md bg-white text-cucumber-900 font-semibold tracking-wide px-4 py-3 hover:bg-cucumber-50 transition disabled:opacity-70"
+              type="submit"
+              disabled={submitting}
+              aria-busy={submitting}
+            >
               {submitting ? "Sending…" : "Send message"}
             </button>
 
@@ -82,7 +121,11 @@ export default function ContactPage() {
             </p>
           </form>
         </div>
-        {/* right column unchanged */}
+
+        {/* Right column (keep whatever you already had, or add store/FAQ info) */}
+        <div className="md:col-span-2">
+          {/* placeholder for map, hours, FAQ links, etc. */}
+        </div>
       </section>
     </main>
   );
