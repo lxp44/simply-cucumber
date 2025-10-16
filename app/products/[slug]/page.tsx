@@ -14,6 +14,9 @@ import {
   Sun,
 } from "lucide-react";
 
+// ⬇️ add this
+import AddToCartButton from "../../../components/AddToCartButton";
+
 const playfair = Playfair_Display({
   subsets: ["latin"],
   weight: ["400", "500", "600", "700"],
@@ -39,9 +42,7 @@ export default function ProductPage({ params }: PageProps) {
 
   return (
     // 🌤 Full-page gradient background (extends beyond footer)
-    <div
-  className="min-h-screen w-full bg-gradient-to-b from-[#f7f2e9] via-[#e3d3b3] to-[#d6b98c] animate-fadeIn pb-40"
->
+    <div className="min-h-screen w-full bg-gradient-to-b from-[#f7f2e9] via-[#e3d3b3] to-[#d6b98c] animate-fadeIn pb-40">
       <section className="mx-auto max-w-6xl px-4 py-12 animate-riseUp">
         <div className="grid gap-10 lg:grid-cols-2">
           {/* LEFT: Product image + highlights */}
@@ -131,17 +132,15 @@ export default function ProductPage({ params }: PageProps) {
               </ul>
             )}
 
-            <form action="/api/checkout" method="POST" className="mt-10">
-              <input type="hidden" name="sku" value={product.sku} />
-              <button
-                className="w-full rounded bg-cucumber-700 px-5 py-3 text-white font-semibold tracking-wide hover:bg-cucumber-800 transition"
-                style={{
-                  boxShadow: "0 4px 14px rgba(27,120,69,0.25)",
-                }}
-              >
-                Buy now
-              </button>
-            </form>
+            {/* CTA — replace the old form with Add to Cart */}
+            <div className="mt-10">
+              <AddToCartButton
+                sku={product.sku}
+                title={product.title}
+                price={product.price}
+                image={product.image}
+              />
+            </div>
           </div>
         </div>
       </section>
