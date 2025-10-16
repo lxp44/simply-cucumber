@@ -3,7 +3,9 @@ import type { NextRequest } from "next/server";
 import nodemailer from "nodemailer";
 
 export const runtime = "nodejs";
-export const dynamic = "force-dynamic"; // optional but safe
+export const dynamic = "force-dynamic";
+// optional lazy import (helps bundling)
+const nodemailer = await import("nodemailer");
 
 function required(name: string, v?: string | null) {
   if (!v) throw new Error(`Missing env: ${name}`);
