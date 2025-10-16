@@ -17,7 +17,7 @@ const {
   SMTP_PORT = "465",
   SMTP_USER,
   SMTP_PASS,
-  SUPPORT_TO,             // where owner notification goes (defaults to SMTP_USER)
+  SUPPORT_TO, // where owner notification goes (defaults to SMTP_USER)
   BRAND_NAME = "Simply Cucumber",
   BRAND_FROM_NAME = "Simply Cucumber Support",
   SITE_URL = "https://www.simplycucumber.com",
@@ -81,7 +81,7 @@ export const handler: Handler = async (event) => {
       return { statusCode: 400, body: "Missing required fields." };
     }
 
-    // 1) Send owner notification
+    // 1) Owner notification
     await transporter.sendMail({
       from: `"${BRAND_FROM_NAME}" <${SMTP_USER}>`,
       to: SUPPORT_TO || SMTP_USER,
@@ -91,7 +91,7 @@ export const handler: Handler = async (event) => {
       html: ownerEmailHtml({ name, email, phone, message, source }),
     });
 
-    // 2) Send customer auto-reply
+    // 2) Customer auto-reply
     await transporter.sendMail({
       from: `"${BRAND_FROM_NAME}" <${SMTP_USER}>`,
       to: email,
@@ -106,7 +106,7 @@ export const handler: Handler = async (event) => {
     });
 
     return { statusCode: 200, body: "OK" };
-  } catch (err: any) {
+  } catch (err) {
     console.error("contact-email error:", err);
     return { statusCode: 500, body: "Email send failed." };
   }
