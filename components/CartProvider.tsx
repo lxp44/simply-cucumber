@@ -13,7 +13,9 @@ export type CartItem = {
 type CartContextType = {
   items: CartItem[];
   count: number;
+  subtotal: number;
   addItem: (item: Omit<CartItem, "qty">, qty?: number) => void;
+  updateQty: (sku: string, qty: number) => void;
   removeItem: (sku: string) => void;
   clear: () => void;
 };
@@ -39,9 +41,13 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
   }, [items]);
 
   const api: CartContextType = useMemo(() => {
+    const count = items.reduce((sum, i) => sum + i.qty, 0);
+    const subtotal = items.reduce((sum, i) => sum + i.price * i.qty, 0);
+
     return {
       items,
-      count: items.reduce((sum, i) => sum + i.qty, 0),
+      count,
+      subtotal,
 
       addItem: (item, qty = 1) => {
         setItems((prev) => {
@@ -53,6 +59,13 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
             next.push({ ...item, qty });
           }
           return next;
+        });
+      },
+
+      updateQty: (sku, qty) => {
+        setItems((prev) => {
+          if (qty <= 0) return prev.filter((i) => i.sku !== sku);
+          return prev.map((i) => (i.sku === sku ? { ...i, qty } : i));
         });
       },
 
