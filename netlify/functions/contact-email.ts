@@ -1,4 +1,4 @@
-// Netlify Function: contact-email.ts
+// netlify/functions/contact-email.ts
 // Sends owner notification + customer auto-reply via Gmail SMTP
 
 import type { Handler } from "@netlify/functions";
@@ -15,9 +15,10 @@ type Payload = {
 const {
   SMTP_HOST = "smtp.gmail.com",
   SMTP_PORT = "465",
-  SMTP_USER,
-  SMTP_PASS,
-  SUPPORT_TO, // where owner notification goes (defaults to SMTP_USER)
+  // ✅ accept both SMTP_* and GMAIL_* names
+  SMTP_USER = process.env.GMAIL_USER,
+  SMTP_PASS = process.env.GMAIL_APP_PASS,
+  SUPPORT_TO, // owner notification (defaults to SMTP_USER)
   BRAND_NAME = "Simply Cucumber",
   BRAND_FROM_NAME = "Simply Cucumber Support",
   SITE_URL = "https://www.simplycucumber.com",
@@ -69,6 +70,15 @@ export const handler: Handler = async (event) => {
     return { statusCode: 405, body: "Method Not Allowed" };
   }
 
+  // ✅ quick env sanity check with human-friendly error
+  if (!SMTP_USER || !SMTP_PASS) {
+    console.error("Missing SMTP creds:", { SMTP_USER: !!SMTP_USER, SMTP_PASS: !!SMTP_PASS });
+    return {
+      statusCode: 500,
+      body: "Email is temporarily unavailable (missing SMTP credentials).",
+    };
+  }
+
   try {
     const data = JSON.parse(event.body || "{}") as Payload;
     const name = (data.name || "").trim();
@@ -106,8 +116,12 @@ export const handler: Handler = async (event) => {
     });
 
     return { statusCode: 200, body: "OK" };
-  } catch (err) {
-    console.error("contact-email error:", err);
-    return { statusCode: 500, body: "Email send failed." };
+  } catch (err: any) {
+    console.error("contact-email error:", err?.message || err);
+    // expose a safe, helpful message to the client
+    return {
+      statusCode: 500,
+      body: "Sending failed. Please confirm your email and try again.",
+    };
   }
 };
