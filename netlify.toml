@@ -10,3 +10,6 @@
 
 [dev]
   framework = "next"
+
+[functions]
+  external_node_modules = ["nodemailer"]
