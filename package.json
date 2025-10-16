@@ -9,17 +9,19 @@
     "lint": "next lint",
     "postinstall": "tailwindcss -i ./styles/globals.css -o ./public/tailwind.css --minify"
   },
+ {
   "dependencies": {
-    "lucide-react": "^0.545.0",
     "next": "14.2.5",
-    "nodemailer": "^6.9.14",
     "react": "18.3.1",
     "react-dom": "18.3.1",
-    "stripe": "16.9.0"
+    "stripe": "16.9.0",
+    "lucide-react": "^0.545.0",
+    "nodemailer": "^6.9.14",
+    "@netlify/functions": "^2.7.0"
   },
   "devDependencies": {
-    "@types/node": "20.11.30",
     "@types/nodemailer": "^6.4.14",
+    "@types/node": "20.11.30",
     "@types/react": "18.2.66",
     "@types/react-dom": "18.2.22",
     "autoprefixer": "10.4.18",
