@@ -2,7 +2,8 @@
 import type { NextRequest } from "next/server";
 import nodemailer from "nodemailer";
 
-export const runtime = "nodejs"; // ensure Node runtime on Netlify
+export const runtime = "nodejs";
+export const dynamic = "force-dynamic"; // optional but safe
 
 function required(name: string, v?: string | null) {
   if (!v) throw new Error(`Missing env: ${name}`);
