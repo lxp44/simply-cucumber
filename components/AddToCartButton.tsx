@@ -1,41 +1,39 @@
+// components/AddToCartButton.tsx
 "use client";
 
 import { useState } from "react";
 import { useCart } from "./CartProvider";
-
-type Props = {
-  sku: string;
-  title: string;
-  price: number;
-  image: string;
-  qty?: number;
-  className?: string;
-  children?: React.ReactNode;
-};
+import { PRODUCTS } from "../lib/products";
 
 export default function AddToCartButton({
   sku,
-  title,
-  price,
-  image,
   qty = 1,
-  className = "w-full rounded bg-cucumber-700 px-5 py-3 text-white font-semibold tracking-wide hover:bg-cucumber-800 transition",
+  className = "w-full rounded bg-cucumber-600 px-4 py-2 text-white hover:bg-cucumber-700",
   children,
-}: Props) {
-  const cart = useCart();
+}: {
+  sku: string;
+  qty?: number;
+  className?: string;
+  children?: React.ReactNode;
+}) {
+  const { addItem } = useCart();
   const [loading, setLoading] = useState(false);
 
-  const addItem =
-    (cart as any).addItem ??
-    (cart as any).add ?? // fallback if you rename later
-    (cart as any).addToCart;
-
-  if (!addItem) return null;
+  const product = PRODUCTS.find((p) => p.sku === sku);
+  if (!product) return null;
 
   const onClick = async () => {
     try {
       setLoading(true);
-      addItem({ sku, title, price, image }, qty);
+      addItem(
+        {
+          sku: product.sku,
+          title: product.title,
+          price: product.price,
+          image: product.image,
+        },
+        qty
+      );
     } finally {
       setLoading(false);
     }
