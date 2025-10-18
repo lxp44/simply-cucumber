@@ -33,7 +33,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               <div className="grid grid-cols-3 items-center py-3">
                 {/* Left nav */}
                 <nav className="flex items-center gap-6 text-sm relative justify-start">
-                  {/* ⬇️ changed 'group' → 'group/menu' */}
+                  {/* make the hover group name match MegaMenu */}
                   <div className="relative group/menu">
                     <Link
                       href="/shop"
@@ -45,14 +45,21 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                     </Link>
                     <MegaMenu />
                   </div>
-                  <Link href="/best-sellers"  className="text-gold-rich py-2 hover:drop-shadow-[0_0_8px_rgba(212,175,55,0.5)] transition-all duration-300">Best Sellers</Link>
-                 <Link
-  href="/skin-doctor"
-  className="text-gold-rich py-2 hover:drop-shadow-[0_0_8px_rgba(212,175,55,0.5)] transition-all duration-300"
->
-  skin-doctor
-</Link>
-</nav> 
+
+                  <Link
+                    href="/best-sellers"
+                    className="text-gold-rich py-2 hover:drop-shadow-[0_0_8px_rgba(212,175,55,0.5)] transition-all duration-300"
+                  >
+                    Best Sellers
+                  </Link>
+
+                  <Link
+                    href="/skin-doctor"
+                    className="text-gold-rich py-2 hover:drop-shadow-[0_0_8px_rgba(212,175,55,0.5)] transition-all duration-300"
+                  >
+                    Skin Doctor
+                  </Link>
+                </nav>
 
                 {/* Center logo */}
                 <div className="flex justify-center">
@@ -67,12 +74,24 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 
                 {/* Right nav */}
                 <nav className="flex items-center gap-6 text-sm justify-end">
-                  <Link href="/rewards" className="text-gold-rich py-2 hover:drop-shadow-[0_0_8px_rgba(212,175,55,0.5)] transition-all duration-300">Rewards</Link>
-                  <Link href="/salon" className="text-gold-rich py-2 hover:drop-shadow-[0_0_8px_rgba(212,175,55,0.5)] transition-all duration-300">Salon</Link>
-                    {/* 🔎 Product search */}
-  <div className="hidden sm:block">
-    <ProductSearch />
-  </div>
+                  <Link
+                    href="/rewards"
+                    className="text-gold-rich py-2 hover:drop-shadow-[0_0_8px_rgba(212,175,55,0.5)] transition-all duration-300"
+                  >
+                    Rewards
+                  </Link>
+                  <Link
+                    href="/salon"
+                    className="text-gold-rich py-2 hover:drop-shadow-[0_0_8px_rgba(212,175,55,0.5)] transition-all duration-300"
+                  >
+                    Salon
+                  </Link>
+
+                  {/* 🔎 Product search */}
+                  <div className="hidden sm:block">
+                    <ProductSearch />
+                  </div>
+
                   <CartLink />
                 </nav>
               </div>
@@ -90,6 +109,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               bg-[length:200%_200%] animate-shimmer-gold
             "
           >
+            {/* Top message */}
             <div className="text-center py-6">
               <h2
                 className="text-3xl md:text-4xl font-[var(--font-playfair)] font-bold"
@@ -103,15 +123,16 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               </h2>
             </div>
 
+            {/* Footer columns */}
             <div className="mx-auto max-w-6xl px-4 py-12 grid md:grid-cols-4 gap-8 text-gold-metallic">
-             import NewsletterForm from "../components/NewsletterForm";
-...
-{/* Newsletter */}
-<div>
-  <p className="font-semibold mb-3">Stay in touch.</p>
-  <p className="mb-4">Signup to get first access to product launches & exclusive offers.</p>
-  <NewsletterForm />
-</div>
+              {/* Newsletter */}
+              <div>
+                <p className="font-semibold mb-3">Stay in touch.</p>
+                <p className="mb-4">
+                  Signup to get first access to product launches &amp; exclusive offers.
+                </p>
+                <NewsletterForm />
+              </div>
 
               {/* Customer Care */}
               <div>
@@ -145,6 +166,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               </div>
             </div>
 
+            {/* Bottom bar */}
             <div className="text-center py-6 text-xs border-t border-white/20">
               © {new Date().getFullYear()} Simply Cucumber · All rights reserved.
             </div>
