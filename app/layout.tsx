@@ -104,18 +104,14 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             </div>
 
             <div className="mx-auto max-w-6xl px-4 py-12 grid md:grid-cols-4 gap-8 text-gold-metallic">
-              {/* Newsletter */}
-              <div>
-                <p className="font-semibold mb-3">Stay in touch.</p>
-                <p className="mb-4">Signup to get first access to product launches & exclusive offers.</p>
-                <form className="space-y-3">
-                  <input type="email" placeholder="Enter your email" className="w-full px-3 py-2 rounded border text-black" />
-                  <input type="text" placeholder="Phone Number (Optional)" className="w-full px-3 py-2 rounded border text-black" />
-                  <button type="submit" className="w-full bg-white text-cucumber-700 font-semibold py-2 rounded hover:bg-gray-100">
-                    SIGN UP
-                  </button>
-                </form>
-              </div>
+             import NewsletterForm from "../components/NewsletterForm";
+...
+{/* Newsletter */}
+<div>
+  <p className="font-semibold mb-3">Stay in touch.</p>
+  <p className="mb-4">Signup to get first access to product launches & exclusive offers.</p>
+  <NewsletterForm />
+</div>
 
               {/* Customer Care */}
               <div>
