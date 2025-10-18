@@ -7,7 +7,7 @@ import { Playfair_Display } from "next/font/google";
 import { CartProvider } from "../components/CartProvider";
 import CartLink from "../components/CartLink";
 import ProductSearch from "../components/ProductSearch";
-
+import NewsletterForm from "../components/NewsletterForm";
 
 const playfair = Playfair_Display({
   subsets: ["latin"],
