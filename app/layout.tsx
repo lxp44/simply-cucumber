@@ -3,7 +3,7 @@ import "../styles/globals.css";
 import Link from "next/link";
 import PromoBar from "../components/PromoBar";
 import MegaMenu from "../components/MegaMenu";
-import { Playfair_Display } from "next/font/google";
+import { Playfair_Display, Lato } from "next/font/google";
 import { CartProvider } from "../components/CartProvider";
 import CartLink from "../components/CartLink";
 import ProductSearch from "../components/ProductSearch";
@@ -15,6 +15,12 @@ const playfair = Playfair_Display({
   variable: "--font-playfair",
 });
 
+const lato = Lato({
+  subsets: ["latin"],
+  weight: ["300", "400", "700"],
+  variable: "--font-lato",
+});
+
 export const metadata = {
   title: "Simply Cucumber",
   description: "Clean, natural cucumber beauty & wellness.",
@@ -22,8 +28,9 @@ export const metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={playfair.variable}>
-      <body>
+    <html lang="en" className={`${playfair.variable} ${lato.variable}`}>
+      {/* Lato is the default font; Playfair is used via font-[var(--font-playfair)] on headings */}
+      <body className={`${lato.className} antialiased`}>
         <PromoBar />
 
         <CartProvider>
