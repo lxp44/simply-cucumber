@@ -13,7 +13,7 @@ export default function ProductGallery({ images }: { images: string[] }) {
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-[96px_1fr] gap-4 md:gap-6">
-      {/* Thumbnails: hidden on mobile, visible on md+ */}
+      {/* Thumbnails - only visible on desktop */}
       <div className="hidden md:block md:h-[520px] md:overflow-auto md:order-1">
         <ul className="grid md:grid-cols-1 gap-2">
           {safe.map((src, i) => (
@@ -28,7 +28,13 @@ export default function ProductGallery({ images }: { images: string[] }) {
                     : "hover:border-gray-400"
                 }`}
               >
-                <Image src={src} alt={`Thumbnail ${i + 1}`} fill sizes="96px" className="object-cover" />
+                <Image
+                  src={src}
+                  alt={`Thumbnail ${i + 1}`}
+                  fill
+                  sizes="96px"
+                  className="object-cover"
+                />
               </button>
             </li>
           ))}
@@ -37,7 +43,7 @@ export default function ProductGallery({ images }: { images: string[] }) {
 
       {/* Main image */}
       <div className="order-1 md:order-2">
-        <div className="relative w-full h-[380px] sm:h-[460px] md:h-[520px] overflow-hidden rounded-lg border bg-white">
+        <div className="relative w-full h-[520px] sm:h-[580px] md:h-[520px] overflow-hidden rounded-lg border bg-white">
           <Image
             key={safe[active]}
             src={safe[active]}
@@ -45,15 +51,15 @@ export default function ProductGallery({ images }: { images: string[] }) {
             fill
             priority
             sizes="(min-width: 768px) 700px, 100vw"
-            className="object-cover md:object-contain transition-transform duration-300"
+            className="object-contain transition-transform duration-300"
           />
 
-          {/* Mobile-only arrows */}
+          {/* Arrows for mobile */}
           <button
             type="button"
             onClick={prev}
             aria-label="Previous image"
-            className="md:hidden absolute left-2 top-1/2 -translate-y-1/2 rounded-full bg-white/85 backdrop-blur px-2.5 py-1.5 shadow"
+            className="md:hidden absolute left-3 top-1/2 -translate-y-1/2 rounded-full bg-white/85 backdrop-blur px-3 py-1.5 text-lg font-semibold shadow"
           >
             ‹
           </button>
@@ -61,23 +67,26 @@ export default function ProductGallery({ images }: { images: string[] }) {
             type="button"
             onClick={next}
             aria-label="Next image"
-            className="md:hidden absolute right-2 top-1/2 -translate-y-1/2 rounded-full bg-white/85 backdrop-blur px-2.5 py-1.5 shadow"
+            className="md:hidden absolute right-3 top-1/2 -translate-y-1/2 rounded-full bg-white/85 backdrop-blur px-3 py-1.5 text-lg font-semibold shadow"
           >
             ›
           </button>
         </div>
 
-        {/* (Optional) tiny position dots on mobile */}
-        <div className="md:hidden mt-2 flex justify-center gap-1.5">
-          {safe.map((_, i) => (
-            <span
-              key={i}
-              className={`h-1.5 w-1.5 rounded-full ${
-                i === active ? "bg-cucumber-700" : "bg-gray-300"
-              }`}
-            />
-          ))}
-        </div>
+        {/* Mobile slide dots */}
+        {safe.length > 1 && (
+          <div className="md:hidden mt-3 flex justify-center gap-2">
+            {safe.map((_, i) => (
+              <span
+                key={i}
+                onClick={() => setActive(i)}
+                className={`h-2 w-2 rounded-full cursor-pointer ${
+                  i === active ? "bg-cucumber-700" : "bg-gray-300"
+                }`}
+              />
+            ))}
+          </div>
+        )}
       </div>
     </div>
   );
