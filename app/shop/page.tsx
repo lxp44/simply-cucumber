@@ -1,10 +1,14 @@
-// app/shop/page.tsx
+"use client";
+
 import Link from "next/link";
 import Image from "next/image";
+import { useState } from "react";
+
 import { PRODUCTS } from "../../lib/products";
 import SortBy from "../../components/SortBy";
 import ProductCard from "../../components/ProductCard";
 import FilterSidebar from "../../components/FilterSidebar";
+import MobileFilters from "@/components/MobileFilters"; // ← new drawer component
 
 const GROUPS: Record<string, string[]> = {
   face: ["cleansers", "toners", "serums", "moisturizers", "masks"],
@@ -24,6 +28,8 @@ type PageProps = {
 };
 
 export default function ShopPage({ searchParams }: PageProps) {
+  const [filtersOpen, setFiltersOpen] = useState(false);
+
   const category = searchParams?.category ?? null;
   const sort = searchParams?.sort ?? null;
 
@@ -46,7 +52,6 @@ export default function ShopPage({ searchParams }: PageProps) {
   }
 
   // "Skin Type" → matches any tag in product.skin (string[]) against selectedSkin
-  // NOTE: add a `skin: string[]` field to products to use this filter effectively.
   if (selectedSkin.size > 0) {
     items = items.filter((p: any) => {
       const tags: string[] | undefined = (p as any).skin;
@@ -94,15 +99,33 @@ export default function ShopPage({ searchParams }: PageProps) {
           </h1>
         </div>
 
+        {/* --- MOBILE: sticky Filter/Sort bar --- */}
+        <div className="md:hidden sticky top-[112px] z-40 bg-[#e3d3b3] border-b shadow-sm -mx-4 px-4">
+          {/* adjust top value if your header+promo height differs */}
+          <div className="py-3 flex items-center gap-3">
+            <button
+              onClick={() => setFiltersOpen(true)}
+              className="flex-1 rounded-full border bg-white px-4 py-2 text-sm font-medium shadow-sm active:scale-[0.99]"
+            >
+              Filter
+            </button>
+            <SortBy category={category} sort={sort} />
+          </div>
+        </div>
+
         {/* Sidebar + content */}
         <div className="mt-8 grid grid-cols-1 lg:grid-cols-[240px_1fr] gap-8">
-          {/* Sidebar */}
-          <FilterSidebar />
+          {/* Desktop sidebar (hidden on mobile) */}
+          <aside className="hidden md:block sticky top-[120px] self-start z-10">
+            <div className="rounded-lg border bg-white/80 backdrop-blur p-4">
+              <FilterSidebar />
+            </div>
+          </aside>
 
           {/* Right column */}
           <div>
-            {/* Filter pills + Sort */}
-            <div className="flex flex-wrap items-center justify-between gap-3">
+            {/* Filter pills + Sort (desktop view for Sort) */}
+            <div className="hidden md:flex flex-wrap items-center justify-between gap-3">
               <div className="flex flex-wrap items-center gap-2">
                 <Pill label="ALL" href="/shop" active={!category} />
                 <Pill label="FACE" href="/shop?category=face" active={category === "face"} />
@@ -115,6 +138,16 @@ export default function ShopPage({ searchParams }: PageProps) {
                 <span className="text-sm text-gray-700">Results: {items.length}</span>
                 <SortBy category={category} sort={sort} />
               </div>
+            </div>
+
+            {/* Pills (mobile – results count will sit inside grid header below) */}
+            <div className="md:hidden mt-4 flex flex-wrap items-center gap-2">
+              <Pill label="ALL" href="/shop" active={!category} />
+              <Pill label="FACE" href="/shop?category=face" active={category === "face"} />
+              <Pill label="BODY" href="/shop?category=body" active={category === "body"} />
+              <Pill label="POWDERS" href="/shop?category=powders" active={category === "powders"} />
+              <Pill label="TOOTHPASTE" href="/shop?category=toothpaste" active={category === "toothpaste"} />
+              <Pill label="SPA PACKAGES" href="/shop?category=spa-packages" active={category === "spa-packages"} />
             </div>
 
             {/* Product grid OR empty state */}
@@ -132,16 +165,24 @@ export default function ShopPage({ searchParams }: PageProps) {
                   </div>
                 </div>
               ) : (
-                <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
-                  {items.map((p) => (
-                    <ProductCard key={p.sku} product={p} />
-                  ))}
-                </div>
+                <>
+                  <div className="md:hidden mb-2 text-sm text-gray-700">Results: {items.length}</div>
+                  <div className="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-8">
+                    {items.map((p) => (
+                      <ProductCard key={p.sku} product={p} />
+                    ))}
+                  </div>
+                </>
               )}
             </div>
           </div>
         </div>
       </div>
+
+      {/* Mobile filter drawer (reuses same sidebar UI) */}
+      <MobileFilters open={filtersOpen} onClose={() => setFiltersOpen(false)}>
+        <FilterSidebar />
+      </MobileFilters>
     </section>
   );
 }
