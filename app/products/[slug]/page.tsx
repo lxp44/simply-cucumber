@@ -2,8 +2,9 @@
 import { notFound } from "next/navigation";
 import { bySlug } from "../../../lib/products";
 import ProductGallery from "../../../components/ProductGallery";
-import { Playfair_Display } from "next/font/google";
 import ProductDetailMobile from "../../../components/ProductDetailMobile";
+import AddToCartButton from "../../../components/AddToCartButton";
+import { Playfair_Display } from "next/font/google";
 import {
   Leaf,
   Droplets,
@@ -13,7 +14,6 @@ import {
   Snowflake,
   Sun,
 } from "lucide-react";
-import AddToCartButton from "../../../components/AddToCartButton";
 
 const playfair = Playfair_Display({
   subsets: ["latin"],
@@ -36,23 +36,17 @@ export default function ProductPage({ params }: PageProps) {
   const product = bySlug(params.slug);
   if (!product) return notFound();
 
-  // Ensure we always have an array of images
+  // Always provide an images array for downstream components
   const images: string[] = product.images?.length ? product.images : [product.image];
 
-  // Pass a normalized product object to the mobile component (it’s fine if some keys are undefined)
-  const mobileProduct = {
-    ...product,
-    images,
-    // These optional fields are used by ProductDetailMobile if present:
-    // badges: product.badges,
-    // highlights: product.highlights,
-    // ingredients: product.ingredients,
-    // usage: product.usage,
-    // variants: product.variants,
-  };
+  // Pass a normalized product to the mobile component
+  const mobileProduct = { ...product, images };
 
   return (
-    <section id="top" className="min-h-screen w-full bg-gradient-to-b from-[#f7f2e9] via-[#e3d3b3] to-[#d6b98c] pb-40">
+    <section
+      id="top"
+      className="min-h-screen w-full bg-gradient-to-b from-[#f7f2e9] via-[#e3d3b3] to-[#d6b98c] pb-40"
+    >
       {/* Mobile layout */}
       <div className="md:hidden">
         <ProductDetailMobile product={mobileProduct as any} />
@@ -60,9 +54,9 @@ export default function ProductPage({ params }: PageProps) {
 
       {/* Desktop layout */}
       <div className="hidden md:block">
-        <section className="mx-auto max-w-6xl px-4 py-12 animate-riseUp">
+        <section className="mx-auto max-w-6xl px-4 py-12">
           <div className="grid gap-10 lg:grid-cols-2">
-            {/* LEFT: Product image + highlights */}
+            {/* LEFT: gallery + highlights */}
             <div className="flex flex-col items-center">
               <div className="w-full max-w-md">
                 <ProductGallery images={images} />
@@ -71,30 +65,17 @@ export default function ProductPage({ params }: PageProps) {
               {!!product.highlights?.length && (
                 <div className="mt-6 flex flex-wrap justify-center gap-6">
                   {product.highlights.map((h: string) => {
-                    const Icon = ICON_MAP[h] ?? <Sparkles className="w-5 h-5 text-[#b8860b]" />;
+                    const Icon = ICON_MAP[h] ?? (
+                      <Sparkles className="w-5 h-5 text-[#b8860b]" />
+                    );
                     return (
                       <div
                         key={h}
-                        className="
-                          group relative overflow-hidden
-                          flex items-center gap-2 rounded-full
-                          border border-[#d6c28a]/60 bg-white/80 px-3 py-1.5
-                          text-sm text-gray-800 shadow-sm
-                          transition
-                          hover:-translate-y-0.5 hover:shadow-md hover:bg-white
-                          hover:border-[#b8860b]/70
-                        "
+                        className="group relative overflow-hidden flex items-center gap-2 rounded-full border border-[#d6c28a]/60 bg-white/80 px-3 py-1.5 text-sm text-gray-800 shadow-sm transition hover:-translate-y-0.5 hover:shadow-md hover:bg-white hover:border-[#b8860b]/70"
                       >
                         <span className="shrink-0">{Icon}</span>
                         <span className="whitespace-nowrap">{h}</span>
-                        <span
-                          className="
-                            pointer-events-none absolute inset-0
-                            -translate-x-full
-                            bg-gradient-to-r from-transparent via-white/40 to-transparent
-                            group-hover:animate-shimmer
-                          "
-                        />
+                        <span className="pointer-events-none absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/40 to-transparent group-hover:animate-shimmer" />
                       </div>
                     );
                   })}
@@ -102,7 +83,7 @@ export default function ProductPage({ params }: PageProps) {
               )}
             </div>
 
-            {/* RIGHT: Product info */}
+            {/* RIGHT: details */}
             <div className="flex flex-col justify-center">
               <h1
                 className={`${playfair.className} text-4xl md:text-5xl font-bold tracking-tight text-gray-900`}
@@ -143,7 +124,6 @@ export default function ProductPage({ params }: PageProps) {
                 </ul>
               )}
 
-              {/* CTA — Add to Cart */}
               <div className="mt-10">
                 <AddToCartButton sku={product.sku} />
               </div>
