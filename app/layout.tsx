@@ -147,7 +147,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 
               {/* Get to Know Us */}
               <div>
-                <p p className="font-semibold mb-3 text-gold-metallic">Get to Know Us</p>
+                <p className="font-semibold mb-3 text-gold-metallic">Get to Know Us</p>
                 <ul className="space-y-2">
                   <li><Link href="/about" className="hover:underline">About Us</Link></li>
                   <li><Link href="/salon" className="hover:underline">Our Salon</Link></li>
