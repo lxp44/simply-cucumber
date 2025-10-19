@@ -23,23 +23,23 @@ type PageProps = {
   searchParams?: {
     category?: string;
     sort?: string;
-    type?: string; // comma-separated product categories to include (from checkboxes)
-    skin?: string; // comma-separated skin tags to include (from checkboxes)
+    type?: string;
+    skin?: string;
   };
 };
 
 export default function ShopPage({ searchParams }: PageProps) {
+  // ✅ only declare once
   const [filtersOpen, setFiltersOpen] = useState(false);
-const [filtersOpen, setFiltersOpen] = useState(false);
-const [sortOpen, setSortOpen] = useState(false); // <-- add this
+  const [sortOpen, setSortOpen] = useState(false);
+
   const category = searchParams?.category ?? null;
   const sort = searchParams?.sort ?? null;
 
-  // read filter params from URL (comma-separated lists)
   const selectedTypes = new Set((searchParams?.type ?? "").split(",").filter(Boolean));
   const selectedSkin = new Set((searchParams?.skin ?? "").split(",").filter(Boolean));
 
-  // Category filter first
+  // Category filter
   let items = (!category
     ? PRODUCTS
     : PRODUCTS.filter((p) => {
@@ -48,12 +48,10 @@ const [sortOpen, setSortOpen] = useState(false); // <-- add this
       })
   ).slice();
 
-  // "Filter by" → matches product.category against selectedTypes
+  // Filters
   if (selectedTypes.size > 0) {
     items = items.filter((p) => selectedTypes.has(p.category));
   }
-
-  // "Skin Type" → matches any tag in product.skin (string[]) against selectedSkin
   if (selectedSkin.size > 0) {
     items = items.filter((p: any) => {
       const tags: string[] | undefined = (p as any).skin;
@@ -101,27 +99,27 @@ const [sortOpen, setSortOpen] = useState(false); // <-- add this
           </h1>
         </div>
 
-       {/* --- MOBILE: sticky Filter/Sort bar --- */}
-<div className="md:hidden sticky top-[112px] z-40 bg-[#e3d3b3] border-b shadow-sm -mx-4 px-4">
-  <div className="py-3 flex items-center gap-3">
-    <button
-      onClick={() => setFiltersOpen(true)}
-      className="flex-1 rounded-full border bg-white px-4 py-2 text-sm font-medium shadow-sm active:scale-[0.99]"
-    >
-      Filter
-    </button>
-    <button
-      onClick={() => setSortOpen(true)}
-      className="flex-1 rounded-full border bg-white px-4 py-2 text-sm font-medium shadow-sm active:scale-[0.99]"
-    >
-      Sort
-    </button>
-  </div>
-</div>
+        {/* --- MOBILE: sticky Filter/Sort bar --- */}
+        <div className="md:hidden sticky top-[112px] z-40 bg-[#e3d3b3] border-b shadow-sm -mx-4 px-4">
+          <div className="py-3 flex items-center gap-3">
+            <button
+              onClick={() => setFiltersOpen(true)}
+              className="flex-1 rounded-full border bg-white px-4 py-2 text-sm font-medium shadow-sm active:scale-[0.99]"
+            >
+              Filter
+            </button>
+            <button
+              onClick={() => setSortOpen(true)}
+              className="flex-1 rounded-full border bg-white px-4 py-2 text-sm font-medium shadow-sm active:scale-[0.99]"
+            >
+              Sort
+            </button>
+          </div>
+        </div>
 
         {/* Sidebar + content */}
         <div className="mt-8 grid grid-cols-1 lg:grid-cols-[240px_1fr] gap-8">
-          {/* Desktop sidebar (hidden on mobile) */}
+          {/* Desktop sidebar */}
           <aside className="hidden md:block sticky top-[120px] self-start z-10">
             <div className="rounded-lg border bg-white/80 backdrop-blur p-4">
               <FilterSidebar />
@@ -130,7 +128,7 @@ const [sortOpen, setSortOpen] = useState(false); // <-- add this
 
           {/* Right column */}
           <div>
-            {/* Filter pills + Sort (desktop view for Sort) */}
+            {/* Desktop pills + sort */}
             <div className="hidden md:flex flex-wrap items-center justify-between gap-3">
               <div className="flex flex-wrap items-center gap-2">
                 <Pill label="ALL" href="/shop" active={!category} />
@@ -146,7 +144,7 @@ const [sortOpen, setSortOpen] = useState(false); // <-- add this
               </div>
             </div>
 
-            {/* Pills (mobile – results count will sit inside grid header below) */}
+            {/* Mobile pills */}
             <div className="md:hidden mt-4 flex flex-wrap items-center gap-2">
               <Pill label="ALL" href="/shop" active={!category} />
               <Pill label="FACE" href="/shop?category=face" active={category === "face"} />
@@ -156,7 +154,7 @@ const [sortOpen, setSortOpen] = useState(false); // <-- add this
               <Pill label="SPA PACKAGES" href="/shop?category=spa-packages" active={category === "spa-packages"} />
             </div>
 
-            {/* Product grid OR empty state */}
+            {/* Grid / empty */}
             <div className="mt-6">
               {items.length === 0 ? (
                 <div className="rounded-lg border bg-white/70 p-8 text-center">
@@ -172,7 +170,9 @@ const [sortOpen, setSortOpen] = useState(false); // <-- add this
                 </div>
               ) : (
                 <>
-                  <div className="md:hidden mb-2 text-sm text-gray-700">Results: {items.length}</div>
+                  <div className="md:hidden mb-2 text-sm text-gray-700">
+                    Results: {items.length}
+                  </div>
                   <div className="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-8">
                     {items.map((p) => (
                       <ProductCard key={p.sku} product={p} />
@@ -185,22 +185,22 @@ const [sortOpen, setSortOpen] = useState(false); // <-- add this
         </div>
       </div>
 
-      {/* Mobile filter drawer (reuses same sidebar UI) */}
-     <MobileFilters open={filtersOpen} onClose={() => setFiltersOpen(false)}>
-  <FilterSidebar />
-</MobileFilters>
+      {/* Mobile drawers */}
+      <MobileFilters open={filtersOpen} onClose={() => setFiltersOpen(false)}>
+        <FilterSidebar />
+      </MobileFilters>
 
-<MobileSortDrawer
-  open={sortOpen}
-  onClose={() => setSortOpen(false)}
-  current={sort}
-  onSelect={(value) => {
-    const url = new URL(window.location.href);
-    if (value) url.searchParams.set("sort", value);
-    else url.searchParams.delete("sort");
-    window.location.href = url.toString();
-  }}
-/>
+      <MobileSortDrawer
+        open={sortOpen}
+        onClose={() => setSortOpen(false)}
+        current={sort}
+        onSelect={(value) => {
+          const url = new URL(window.location.href);
+          if (value) url.searchParams.set("sort", value);
+          else url.searchParams.delete("sort");
+          window.location.href = url.toString();
+        }}
+      />
     </section>
   );
 }
@@ -210,9 +210,7 @@ function Pill({ label, href, active }: { label: string; href: string; active: bo
     <Link
       href={href}
       className={`px-3 py-1.5 rounded-full text-sm border ${
-        active
-          ? "bg-cucumber-600 text-white border-cucumber-600"
-          : "bg-white/70 hover:bg-white/90"
+        active ? "bg-cucumber-600 text-white border-cucumber-600" : "bg-white/70 hover:bg-white/90"
       }`}
     >
       {label}
