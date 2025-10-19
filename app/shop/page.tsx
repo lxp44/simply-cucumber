@@ -8,8 +8,8 @@ import { PRODUCTS } from "../../lib/products";
 import SortBy from "../../components/SortBy";
 import ProductCard from "../../components/ProductCard";
 import FilterSidebar from "../../components/FilterSidebar";
-import MobileFilters from "@/components/MobileFilters"; // ← new drawer component
-import MobileSortDrawer from "@/components/MobileSortDrawer";
+import MobileFilters from "../../components/MobileFilters";
+import MobileSortDrawer from "../../components/MobileSortDrawer";
 
 const GROUPS: Record<string, string[]> = {
   face: ["cleansers", "toners", "serums", "moisturizers", "masks"],
