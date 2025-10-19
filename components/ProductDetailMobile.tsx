@@ -5,20 +5,15 @@ import Image from "next/image";
 import { useMemo, useState } from "react";
 import { useCart } from "./CartProvider";
 
-type Variant = {
-  label: string;
-  price: number;
-  sku?: string;
-};
-
+type Variant = { label: string; price: number; sku?: string };
 type Product = {
   sku: string;
   title: string;
   price: number;
   images: string[];
-  badges?: string[];      // e.g. ["Vegan","Paraben-Free","Synthetic Fragrance-Free"]
-  highlights?: string[];  // unused here, badges render below the image
-  description?: string;   // shown inline as “Details”
+  badges?: string[];
+  highlights?: string[];
+  description?: string;
   ingredients?: string;
   usage?: string;
   variants?: Variant[];
@@ -58,6 +53,17 @@ export default function ProductDetailMobile({ product }: { product: Product }) {
     else if ("addToCart" in cart) (cart as any).addToCart(payload);
   }
 
+  // ---- swipe for gallery (simple) ----
+  let touchX = 0;
+  function onTouchStart(e: React.TouchEvent) {
+    touchX = e.touches[0].clientX;
+  }
+  function onTouchEnd(e: React.TouchEvent) {
+    const dx = e.changedTouches[0].clientX - touchX;
+    if (Math.abs(dx) < 30) return;
+    setActive((a) => (dx > 0 ? (a - 1 + imgs.length) % imgs.length : (a + 1) % imgs.length));
+  }
+
   // ---- UI ----
   return (
     <div className="md:hidden bg-[#e3d3b3]">
@@ -69,7 +75,11 @@ export default function ProductDetailMobile({ product }: { product: Product }) {
 
       {/* Gallery - single big image + arrows + dots */}
       <div className="px-4 mt-3">
-        <div className="relative w-full h-[72vw] max-h-[520px] overflow-hidden rounded-xl border bg-white">
+        <div
+          className="relative w-full h-[90vw] max-h-[620px] overflow-hidden rounded-xl border bg-white"
+          onTouchStart={onTouchStart}
+          onTouchEnd={onTouchEnd}
+        >
           <Image
             key={imgs[active]}
             src={imgs[active]}
@@ -77,8 +87,9 @@ export default function ProductDetailMobile({ product }: { product: Product }) {
             fill
             priority
             sizes="100vw"
-            className="object-cover"
+            className="object-contain"
           />
+
           {/* arrows */}
           {imgs.length > 1 && (
             <>
@@ -96,11 +107,15 @@ export default function ProductDetailMobile({ product }: { product: Product }) {
               >
                 ›
               </button>
+
+              {/* dots */}
               <div className="absolute bottom-2 inset-x-0 flex justify-center gap-2">
                 {imgs.map((_, i) => (
-                  <span
+                  <button
                     key={i}
-                    className={`h-2 w-2 rounded-full ${i === active ? "bg-white" : "bg-white/60"}`}
+                    aria-label={`Go to image ${i + 1}`}
+                    onClick={() => setActive(i)}
+                    className={`h-2 w-2 rounded-full ${i === active ? "bg-black/80" : "bg-black/30"}`}
                   />
                 ))}
               </div>
@@ -135,9 +150,7 @@ export default function ProductDetailMobile({ product }: { product: Product }) {
           {product.ingredients && (
             <div className="rounded-lg border bg-white p-4 mt-3">
               <h3 className="font-medium mb-1">Ingredients</h3>
-              <p className="text-sm whitespace-pre-line leading-relaxed">
-                {product.ingredients}
-              </p>
+              <p className="text-sm whitespace-pre-line leading-relaxed">{product.ingredients}</p>
             </div>
           )}
           {product.usage && (
@@ -159,9 +172,7 @@ export default function ProductDetailMobile({ product }: { product: Product }) {
                 key={v.label}
                 onClick={() => setVIdx(i)}
                 className={`rounded-lg px-4 py-2 text-sm border ${
-                  i === vIdx
-                    ? "bg-cucumber-700 text-white border-cucumber-700"
-                    : "bg-white"
+                  i === vIdx ? "bg-cucumber-700 text-white border-cucumber-700" : "bg-white"
                 }`}
               >
                 {v.label}
@@ -176,9 +187,7 @@ export default function ProductDetailMobile({ product }: { product: Product }) {
         <button
           onClick={() => setPurchase("onetime")}
           className={`w-full rounded-xl border px-4 py-3 text-left ${
-            purchase === "onetime"
-              ? "border-cucumber-700 ring-1 ring-cucumber-700 bg-white"
-              : "bg-white"
+            purchase === "onetime" ? "border-cucumber-700 ring-1 ring-cucumber-700 bg-white" : "bg-white"
           }`}
         >
           <div className="flex items-center justify-between">
@@ -190,20 +199,14 @@ export default function ProductDetailMobile({ product }: { product: Product }) {
         <button
           onClick={() => setPurchase("subscribe")}
           className={`w-full rounded-xl border px-4 py-3 text-left ${
-            purchase === "subscribe"
-              ? "border-cucumber-700 ring-1 ring-cucumber-700 bg-white"
-              : "bg-white"
+            purchase === "subscribe" ? "border-cucumber-700 ring-1 ring-cucumber-700 bg-white" : "bg-white"
           }`}
         >
           <div className="flex items-center justify-between">
             <span className="font-medium">Subscribe & save</span>
-            <span className="text-cucumber-700 text-sm font-semibold">
-              Save up to 15%
-            </span>
+            <span className="text-cucumber-700 text-sm font-semibold">Save up to 15%</span>
           </div>
-          <div className="mt-1 text-xs text-gray-600">
-            Deliver every 30 days · Cancel anytime
-          </div>
+          <div className="mt-1 text-xs text-gray-600">Deliver every 30 days · Cancel anytime</div>
         </button>
       </div>
 
@@ -211,7 +214,7 @@ export default function ProductDetailMobile({ product }: { product: Product }) {
       <div className="h-28" />
 
       {/* Sticky add-to-bag with qty at the side */}
-      <div className="fixed inset-x-0 bottom-0 z-[60] bg-white/95 backdrop-blur border-t p-3">
+      <div className="fixed inset-x-0 bottom-0 z-[60] bg-white/95 backdrop-blur border-t p-3 pb-[env(safe-area-inset-bottom)]">
         <div className="flex items-center gap-3">
           {/* qty stepper */}
           <div className="flex items-center rounded-full border bg-white">
