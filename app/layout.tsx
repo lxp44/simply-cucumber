@@ -30,9 +30,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           {/* Header */}
           <header className="sticky top-0 z-40 bg-white/80 backdrop-blur border-b overflow-visible">
             <div className="mx-auto max-w-6xl px-4">
-              <div className="grid grid-cols-3 items-center py-3">
+              {/* ↓ tighter on mobile, same on desktop */}
+              <div className="grid grid-cols-3 items-center py-2 md:py-3">
                 {/* Left nav */}
-                <nav className="flex items-center gap-6 text-sm relative justify-start">
+                {/* ↓ smaller gaps on mobile */}
+                <nav className="flex items-center gap-4 md:gap-6 text-sm relative justify-start">
                   {/* make the hover group name match MegaMenu */}
                   <div className="relative group/menu">
                     <Link
@@ -67,13 +69,13 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                     <img
                       src="/assets/products/simply-cucumber-profile-logo.png"
                       alt="Simply Cucumber"
-                      className="h-14 w-auto md:h-16"
+                      className="h-10 w-auto md:h-16"
                     />
                   </Link>
                 </div>
 
                 {/* Right nav */}
-                <nav className="flex items-center gap-6 text-sm justify-end">
+                <nav className="flex items-center gap-4 md:gap-6 text-sm justify-end">
                   <Link
                     href="/rewards"
                     className="text-gold-rich py-2 hover:drop-shadow-[0_0_8px_rgba(212,175,55,0.5)] transition-all duration-300"
@@ -87,7 +89,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                     Salon
                   </Link>
 
-                  {/* 🔎 Product search */}
+                  {/* 🔎 Product search (hidden on mobile) */}
                   <div className="hidden sm:block">
                     <ProductSearch />
                   </div>
