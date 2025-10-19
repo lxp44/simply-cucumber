@@ -78,7 +78,21 @@ export default function ProductGallery({ images }: { images: string[] }) {
             sizes="(min-width: 768px) 700px, 100vw"
             className="object-cover md:object-contain transition-transform duration-300"
           />
-
+{/* Mobile slide dots (keeps desktop thumbs) */}
+{safe.length > 1 && (
+  <div className="md:hidden mt-3 flex justify-center gap-2">
+    {safe.map((_, i) => (
+      <button
+        key={i}
+        aria-label={`Go to image ${i + 1}`}
+        onClick={() => setActive(i)}
+        className={`h-2.5 w-2.5 rounded-full ${
+          i === active ? "bg-cucumber-700" : "bg-gray-300"
+        }`}
+      />
+    ))}
+  </div>
+)}
           {/* Mobile-only arrows (Mario-style). Desktop keeps thumbs to navigate */}
           {safe.length > 1 && (
             <>
