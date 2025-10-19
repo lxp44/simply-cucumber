@@ -185,9 +185,21 @@ export default function ShopPage({ searchParams }: PageProps) {
       </div>
 
       {/* Mobile filter drawer (reuses same sidebar UI) */}
-      <MobileFilters open={filtersOpen} onClose={() => setFiltersOpen(false)}>
-        <FilterSidebar />
-      </MobileFilters>
+     <MobileFilters open={filtersOpen} onClose={() => setFiltersOpen(false)}>
+  <FilterSidebar />
+</MobileFilters>
+
+<MobileSortDrawer
+  open={sortOpen}
+  onClose={() => setSortOpen(false)}
+  current={sort}
+  onSelect={(value) => {
+    const url = new URL(window.location.href);
+    if (value) url.searchParams.set("sort", value);
+    else url.searchParams.delete("sort");
+    window.location.href = url.toString();
+  }}
+/>
     </section>
   );
 }
