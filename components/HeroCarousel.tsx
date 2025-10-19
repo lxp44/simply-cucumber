@@ -32,7 +32,7 @@ export default function HeroCarousel({
       </div>
 
       {/* Overlay text */}
-      <div className="absolute inset-0 flex items-center justify-center text-center px-4">
+      <div className="absolute inset-x-0 bottom-0 top-20 sm:top-24 md:top-0 flex items-center justify-center text-center px-4">
         <div className="max-w-3xl">
           <p className="inline-block rounded-full bg-white/80 px-3 py-1 text-xs tracking-wide">
             Friends & Family
