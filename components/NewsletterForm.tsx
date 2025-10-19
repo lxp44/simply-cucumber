@@ -96,7 +96,7 @@ export default function NewsletterForm() {
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           className="
-            w-full rounded-md bg-white/95 text-cucumber-900
+            w-full rounded-md bg-white/95 text-gray-900 caret-cucumber-700
             placeholder-gray-500 px-3 py-2 outline-none
             ring-1 ring-white/30 focus:ring-2 focus:ring-gold-metallic
             shadow-sm
