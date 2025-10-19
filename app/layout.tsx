@@ -157,7 +157,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 
               {/* Brand */}
               <div>
-                <p p className="font-semibold mb-3 text-gold-metallic">Simply Cucumber</p>
+                <p className="font-semibold mb-3 text-gold-metallic">Simply Cucumber</p>
                 <ul className="space-y-2">
                   <li><Link href="/rewards" className="hover:underline">Rewards</Link></li>
                   <li><Link href="/privacy" className="hover:underline">Privacy Policy</Link></li>
