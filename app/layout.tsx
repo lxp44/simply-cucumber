@@ -124,10 +124,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             </div>
 
             {/* Footer columns */}
-            <div className="mx-auto max-w-6xl px-4 py-12 grid md:grid-cols-4 gap-8 text-gold-metallic">
+            <div className="mx-auto max-w-6xl px-4 py-12 grid md:grid-cols-4 gap-8">
               {/* Newsletter */}
               <div>
-                <p className="font-semibold mb-3">Stay in touch.</p>
+                <p className="font-semibold mb-3 text-gold-metallic">Stay in touch.</p>
                 <p className="mb-4">
                   Signup to get first access to product launches &amp; exclusive offers.
                 </p>
@@ -136,7 +136,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 
               {/* Customer Care */}
               <div>
-                <p className="font-semibold mb-3">Customer Care</p>
+                <p className="font-semibold mb-3 text-gold-metallic">Customer Care</p>
                 <ul className="space-y-2">
                   <li><Link href="/contact" className="hover:underline">Contact Us</Link></li>
                   <li><Link href="/faqs" className="hover:underline">FAQs</Link></li>
@@ -147,7 +147,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 
               {/* Get to Know Us */}
               <div>
-                <p className="font-semibold mb-3">Get to Know Us</p>
+                <p p className="font-semibold mb-3 text-gold-metallic">Get to Know Us</p>
                 <ul className="space-y-2">
                   <li><Link href="/about" className="hover:underline">About Us</Link></li>
                   <li><Link href="/salon" className="hover:underline">Our Salon</Link></li>
@@ -157,7 +157,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 
               {/* Brand */}
               <div>
-                <p className="font-semibold mb-3">Simply Cucumber</p>
+                <p p className="font-semibold mb-3 text-gold-metallic">Simply Cucumber</p>
                 <ul className="space-y-2">
                   <li><Link href="/rewards" className="hover:underline">Rewards</Link></li>
                   <li><Link href="/privacy" className="hover:underline">Privacy Policy</Link></li>
