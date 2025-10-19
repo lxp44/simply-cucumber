@@ -1,26 +1,22 @@
+// components/ProductDetailMobile.tsx
 "use client";
 
 import Image from "next/image";
 import { useState, useMemo } from "react";
 import { useCart } from "./CartProvider";
 
-type Variant = {
-  label: string;          // e.g. "6 oz"
-  price: number;          // price for this variant
-  sku?: string;           // optional per-variant sku
-};
-
+type Variant = { label: string; price: number; sku?: string };
 type Product = {
   sku: string;
   title: string;
   price: number;
-  images: string[];       // paths under /public
-  badges?: string[];      // e.g. ["Vegan","Paraben-Free","Phthalate-Free"]
-  highlights?: string[];  // e.g. ["100% Natural","Hydration Boost"]
+  images: string[];
+  badges?: string[];
+  highlights?: string[];
   description?: string;
   ingredients?: string;
   usage?: string;
-  variants?: Variant[];   // optional
+  variants?: Variant[];
 };
 
 export default function ProductDetailMobile({ product }: { product: Product }) {
@@ -29,6 +25,8 @@ export default function ProductDetailMobile({ product }: { product: Product }) {
   const [qty, setQty] = useState(1);
   const [sub, setSub] = useState<"onetime" | "subscribe">("onetime");
   const [vIdx, setVIdx] = useState(0);
+
+  const safeImages = product.images?.length ? product.images : ["/placeholder.png"];
 
   const selectedVariant = useMemo(() => {
     if (product.variants?.length) return product.variants[vIdx];
@@ -44,43 +42,67 @@ export default function ProductDetailMobile({ product }: { product: Product }) {
       title: `${product.title}${selectedVariant.label ? ` — ${selectedVariant.label}` : ""}`,
       price,
       quantity: qty,
-      image: product.images?.[0],
+      image: safeImages[0],
       meta: { purchaseType: sub },
     } as any;
 
-    // Be resilient to CartProvider method name differences
     if ("addItem" in cart) (cart as any).addItem(item);
     else if ("add" in cart) (cart as any).add(item);
     else if ("addToCart" in cart) (cart as any).addToCart(item);
   }
 
+  const prev = () => setActiveImg((i) => (i - 1 + safeImages.length) % safeImages.length);
+  const next = () => setActiveImg((i) => (i + 1) % safeImages.length);
+
   return (
-    <div className="md:hidden">
-      {/* Gallery */}
+    <div id="top" className="md:hidden">
+      {/* Gallery (no thumbnails on mobile) */}
       <div className="px-4 pt-2">
-        <div className="relative w-full h-[54vw] rounded-lg overflow-hidden bg-white/70">
+        <div className="relative w-full h-[560px] sm:h-[600px] rounded-lg overflow-hidden border bg-white">
           <Image
-            src={product.images?.[activeImg] || "/placeholder.png"}
+            key={safeImages[activeImg]}
+            src={safeImages[activeImg]}
             alt={product.title}
             fill
-            className="object-cover"
+            className="object-contain"
             sizes="100vw"
             priority
           />
+
+          {/* Arrows (only show if multiple images) */}
+          {safeImages.length > 1 && (
+            <>
+              <button
+                type="button"
+                onClick={prev}
+                aria-label="Previous image"
+                className="absolute md:hidden left-3 top-1/2 -translate-y-1/2 rounded-full bg-white/90 backdrop-blur px-3 py-1.5 text-lg font-semibold shadow"
+              >
+                ‹
+              </button>
+              <button
+                type="button"
+                onClick={next}
+                aria-label="Next image"
+                className="absolute md:hidden right-3 top-1/2 -translate-y-1/2 rounded-full bg-white/90 backdrop-blur px-3 py-1.5 text-lg font-semibold shadow"
+              >
+                ›
+              </button>
+            </>
+          )}
         </div>
 
-        {/* Thumbs */}
-        {product.images?.length > 1 && (
-          <div className="mt-3 flex gap-2 overflow-x-auto no-scrollbar">
-            {product.images.map((src, i) => (
-              <button
-                key={src + i}
+        {/* Dots */}
+        {safeImages.length > 1 && (
+          <div className="mt-3 flex justify-center gap-2">
+            {safeImages.map((_, i) => (
+              <span
+                key={i}
                 onClick={() => setActiveImg(i)}
-                className={`relative h-16 w-16 shrink-0 rounded-md overflow-hidden border ${i===activeImg ? "border-cucumber-700" : "border-transparent"}`}
-                aria-label={`Image ${i+1}`}
-              >
-                <Image src={src} alt="" fill className="object-cover" />
-              </button>
+                className={`h-2 w-2 rounded-full cursor-pointer ${
+                  i === activeImg ? "bg-cucumber-700" : "bg-gray-300"
+                }`}
+              />
             ))}
           </div>
         )}
@@ -106,7 +128,7 @@ export default function ProductDetailMobile({ product }: { product: Product }) {
         <div className="mt-2 text-xl font-semibold text-cucumber-800">{displayPrice}</div>
       </div>
 
-      {/* Size selector (variants) */}
+      {/* Size selector */}
       {product.variants?.length ? (
         <div className="px-4 mt-4">
           <div className="text-sm font-medium mb-2">Size</div>
@@ -115,7 +137,9 @@ export default function ProductDetailMobile({ product }: { product: Product }) {
               <button
                 key={v.label}
                 onClick={() => setVIdx(i)}
-                className={`rounded-lg px-4 py-2 text-sm border ${i===vIdx ? "bg-cucumber-700 text-white border-cucumber-700" : "bg-white"}`}
+                className={`rounded-lg px-4 py-2 text-sm border ${
+                  i === vIdx ? "bg-cucumber-700 text-white border-cucumber-700" : "bg-white"
+                }`}
               >
                 {v.label}
               </button>
@@ -128,7 +152,9 @@ export default function ProductDetailMobile({ product }: { product: Product }) {
       <div className="px-4 mt-4 space-y-3">
         <button
           onClick={() => setSub("onetime")}
-          className={`w-full rounded-xl border px-4 py-3 text-left ${sub==="onetime" ? "border-cucumber-700 ring-1 ring-cucumber-700 bg-white" : "bg-white"}`}
+          className={`w-full rounded-xl border px-4 py-3 text-left ${
+            sub === "onetime" ? "border-cucumber-700 ring-1 ring-cucumber-700 bg-white" : "bg-white"
+          }`}
         >
           <div className="flex items-center justify-between">
             <span className="font-medium">One-time</span>
@@ -138,7 +164,9 @@ export default function ProductDetailMobile({ product }: { product: Product }) {
 
         <button
           onClick={() => setSub("subscribe")}
-          className={`w-full rounded-xl border px-4 py-3 text-left ${sub==="subscribe" ? "border-cucumber-700 ring-1 ring-cucumber-700 bg-white" : "bg-white"}`}
+          className={`w-full rounded-xl border px-4 py-3 text-left ${
+            sub === "subscribe" ? "border-cucumber-700 ring-1 ring-cucumber-700 bg-white" : "bg-white"
+          }`}
         >
           <div className="flex items-center justify-between">
             <span className="font-medium">Subscribe & save</span>
@@ -149,7 +177,7 @@ export default function ProductDetailMobile({ product }: { product: Product }) {
       </div>
 
       {/* Qty + Add */}
-      <div className="px-4 mt-4 pb-28"> {/* bottom padding for sticky bar */}
+      <div className="px-4 mt-4 pb-28">
         <div className="flex items-center gap-4">
           <div className="flex items-center rounded-full border bg-white">
             <button
@@ -180,7 +208,9 @@ export default function ProductDetailMobile({ product }: { product: Product }) {
           >
             ADD TO BAG • {displayPrice}
           </button>
-          <a href="#top" className="rounded-lg border px-3 py-3 text-xs">TOP</a>
+          <a href="#top" className="rounded-lg border px-3 py-3 text-xs">
+            TOP
+          </a>
         </div>
       </div>
 
@@ -188,12 +218,14 @@ export default function ProductDetailMobile({ product }: { product: Product }) {
       {!!product.highlights?.length && (
         <div className="px-4 mt-4 flex flex-wrap gap-2">
           {product.highlights.map((h) => (
-            <span key={h} className="rounded-full bg-white px-3 py-1 text-sm">{h}</span>
+            <span key={h} className="rounded-full bg-white px-3 py-1 text-sm">
+              {h}
+            </span>
           ))}
         </div>
       )}
 
-      {/* Collapsibles (details/ingredients/usage) */}
+      {/* Collapsibles */}
       <div className="px-4 mt-6 space-y-3">
         {product.description && (
           <details className="rounded-lg bg-white p-4 border">
@@ -204,7 +236,9 @@ export default function ProductDetailMobile({ product }: { product: Product }) {
         {product.ingredients && (
           <details className="rounded-lg bg-white p-4 border">
             <summary className="cursor-pointer font-medium">Ingredients</summary>
-            <p className="mt-2 text-sm whitespace-pre-line leading-relaxed">{product.ingredients}</p>
+            <p className="mt-2 text-sm whitespace-pre-line leading-relaxed">
+              {product.ingredients}
+            </p>
           </details>
         )}
         {product.usage && (
@@ -215,7 +249,6 @@ export default function ProductDetailMobile({ product }: { product: Product }) {
         )}
       </div>
 
-      {/* Shipping & returns quick blurb */}
       <div className="px-4 my-8 text-xs text-gray-700">
         Free shipping on orders $65+ • Easy returns within 30 days.
       </div>
