@@ -33,12 +33,12 @@ export default function MobileSortDrawer({
   if (!open) return null;
 
   return (
-    <div className="fixed inset-0 z-[70]">
-      {/* backdrop */}
+    <div className="fixed inset-0 z-[70] md:hidden">
+      {/* Backdrop */}
       <button aria-label="Close sort" onClick={onClose} className="absolute inset-0 bg-black/40" />
 
-      {/* sheet */}
-      <div className="absolute inset-x-0 bottom-0 top-24 rounded-t-2xl bg-[#e9dfc8] shadow-2xl md:hidden flex flex-col">
+      {/* Bottom sheet */}
+      <div className="absolute inset-x-0 bottom-0 top-24 rounded-t-2xl bg-[#e9dfc8] shadow-2xl flex flex-col">
         <div className="flex items-center justify-between px-4 py-3 border-b">
           <h3 className="font-semibold">Sort by</h3>
           <button
@@ -53,10 +53,7 @@ export default function MobileSortDrawer({
           {SORT_OPTIONS.map((opt) => (
             <button
               key={opt.value}
-              onClick={() => {
-                onSelect(opt.value);
-                onClose();
-              }}
+              onClick={() => { onSelect(opt.value); onClose(); }}
               className={`w-full text-left px-5 py-3 text-sm ${
                 opt.value === current
                   ? "text-cucumber-800 font-semibold bg-white/60"
