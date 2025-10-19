@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import { bySlug } from "../../../lib/products";
 import ProductGallery from "../../../components/ProductGallery";
 import { Playfair_Display } from "next/font/google";
+import ProductDetailMobile from "@/components/ProductDetailMobile";
 import {
   Leaf,
   Droplets,
@@ -33,6 +34,24 @@ const ICON_MAP: Record<string, JSX.Element> = {
 };
 
 type PageProps = { params: { slug: string } };
+
+export default async function ProductPage({ params }: { params: { slug: string } }) {
+  const product = /* fetch or look up from PRODUCTS by slug */;
+
+  return (
+    <section className="bg-[#e3d3b3]">
+      {/* Mobile layout */}
+      <div className="md:hidden">
+        <ProductDetailMobile product={product} />
+      </div>
+
+      {/* Desktop layout (your existing rich layout) */}
+      <div className="hidden md:block">
+        {/* ...your current desktop product detail content... */}
+      </div>
+    </section>
+  );
+}
 
 export default function ProductPage({ params }: PageProps) {
   const product = bySlug(params.slug);
