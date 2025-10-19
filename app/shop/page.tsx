@@ -30,7 +30,8 @@ type PageProps = {
 
 export default function ShopPage({ searchParams }: PageProps) {
   const [filtersOpen, setFiltersOpen] = useState(false);
-
+const [filtersOpen, setFiltersOpen] = useState(false);
+const [sortOpen, setSortOpen] = useState(false); // <-- add this
   const category = searchParams?.category ?? null;
   const sort = searchParams?.sort ?? null;
 
