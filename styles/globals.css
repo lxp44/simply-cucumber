@@ -22,6 +22,7 @@ body { @apply bg-white text-gray-900 antialiased; }
     animation: shimmer-sweep 1.2s ease-out 0.1s 1 forwards;
   }
 }
+
 @layer utilities {
   .text-gold-metallic {
     background: linear-gradient(90deg, #d4af37, #ffd700, #b8860b, #d4af37);
@@ -37,6 +38,7 @@ body { @apply bg-white text-gray-900 antialiased; }
     100% { background-position: 0% 50%; }
   }
 }
+
 @layer utilities {
   .text-gold-rich {
     background: linear-gradient(90deg, #d4af37, #ffd700, #b8860b);
@@ -49,4 +51,39 @@ body { @apply bg-white text-gray-900 antialiased; }
   .text-gold-rich:hover {
     background: linear-gradient(90deg, #ffd700, #fff6c2, #d4af37);
   }
+}
+
+/* ===============================
+   Typography (Playfair + Lato)
+   =============================== */
+
+/* Smooth rendering everywhere */
+html, body {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Body font: uses --font-lato if provided by next/font,
+   otherwise falls back cleanly to system sans */
+body {
+  font-family: var(--font-lato, ui-sans-serif), system-ui, -apple-system, Segoe UI,
+               Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+  line-height: 1.6;
+  letter-spacing: 0.01em;
+  color: #2a2a2a;
+}
+
+/* Headings: Playfair for that elegant vibe */
+h1, h2, h3, h4, h5, h6,
+.font-playfair {
+  font-family: var(--font-playfair, ui-serif), "Playfair Display", Georgia, serif;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: #1f1f1f;
+}
+
+/* Optional helper for gold hover glow */
+.hover-gold-glow:hover {
+  filter: drop-shadow(0 0 8px rgba(212,175,55,0.5));
+  transition: all 0.3s ease;
 }
