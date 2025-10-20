@@ -5,12 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useMemo, useState } from "react";
 import { useCart } from "./CartProvider";
-
-// If you want to compute related from your catalog, re-enable and use it;
-// otherwise leave it out to avoid "unused import" build errors.
-// import { PRODUCTS } from "../lib/products";
-// components/ProductDetailMobile.tsx
-import type { Product } from "../lib/products";
+import type { Product } from "../lib/products"; // ✅ single source of truth
 
 import {
   Leaf,
@@ -30,26 +25,6 @@ const BADGE_ICON: Record<string, JSX.Element> = {
   Cooling: <Snowflake className="w-5 h-5" />,
   Brightening: <Sun className="w-5 h-5" />,
   Antioxidant: <ShieldCheck className="w-5 h-5" />,
-};
-
-type Variant = { label: string; price: number; sku?: string };
-
-type Product = {
-  sku: string;
-  title: string;
-  price: number;
-  images: string[];
-  badges?: string[];
-  highlights?: string[];
-  description?: string;     // Product Details (full)
-  ingredients?: string;
-  usage?: string;           // How to Apply
-  shortDescription?: string; // brief blurb shown under badges
-  tagline?: string;          // optional backup for blurb
-  variants?: Variant[];
-  rating?: number;
-  reviewCount?: number;
-  category?: string;
 };
 
 export default function ProductDetailMobile({
