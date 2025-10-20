@@ -11,6 +11,7 @@ bio?: string;          // ← optional long-form “full bio”
     images?: string[]; 
   hoverImage?: string; // 👈 allow optional hover image
   benefits: string[];
+badges?: string[];
    highlights?: string[]; 
 bestSeller?: boolean;  // ← mark best sellers
   category: "face" | "body" | "powders" | "toothpaste" | "spa-packages";
