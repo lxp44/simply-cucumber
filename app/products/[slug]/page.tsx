@@ -1,18 +1,12 @@
 // app/products/[slug]/page.tsx
 import { notFound } from "next/navigation";
-import { bySlug, PRODUCTS } from "../../../lib/products"; // ⬅️ import PRODUCTS
+import { bySlug, PRODUCTS } from "../../../lib/products"; // ← add PRODUCTS
 import ProductGallery from "../../../components/ProductGallery";
 import ProductDetailMobile from "../../../components/ProductDetailMobile";
 import AddToCartButton from "../../../components/AddToCartButton";
 import { Playfair_Display } from "next/font/google";
 import {
-  Leaf,
-  Droplets,
-  FlaskConical,
-  Sparkles,
-  ShieldCheck,
-  Snowflake,
-  Sun,
+  Leaf, Droplets, FlaskConical, Sparkles, ShieldCheck, Snowflake, Sun,
 } from "lucide-react";
 
 const playfair = Playfair_Display({
@@ -36,28 +30,24 @@ export default function ProductPage({ params }: PageProps) {
   const product = bySlug(params.slug);
   if (!product) return notFound();
 
-  // Always provide an images array for downstream components
   const images: string[] = product.images?.length ? product.images : [product.image];
 
-  // 🔗 Build a simple related list: same category, exclude current product
-  const related = PRODUCTS
-    .filter((p) => p.category === product.category && p.sku !== product.sku)
-    .slice(0, 12);
+  // Compute related (defensive if PRODUCTS is missing)
+  const all = Array.isArray(PRODUCTS) ? PRODUCTS : [];
+  const related = all
+    .filter((p: any) => p?.sku !== product.sku && p?.category === product.category)
+    .slice(0, 8);
 
-  // Pass a normalized product to the mobile component
   const mobileProduct = { ...product, images };
 
   return (
-    <section
-      id="top"
-      className="min-h-screen w-full bg-gradient-to-b from-[#f7f2e9] via-[#e3d3b3] to-[#d6b98c] pb-40"
-    >
+    <section id="top" className="min-h-screen w-full bg-gradient-to-b from-[#f7f2e9] via-[#e3d3b3] to-[#d6b98c] pb-40">
       {/* Mobile layout */}
       <div className="md:hidden">
-        <ProductDetailMobile product={mobileProduct as any} related={related as any} />
+        <ProductDetailMobile product={mobileProduct as any} related={related as any[]} />
       </div>
 
-      {/* Desktop layout */}
+      {/* Desktop layout (unchanged) */}
       <div className="hidden md:block">
         <section className="mx-auto max-w-6xl px-4 py-12">
           <div className="grid gap-10 lg:grid-cols-2">
@@ -70,8 +60,7 @@ export default function ProductPage({ params }: PageProps) {
               {!!product.highlights?.length && (
                 <div className="mt-6 flex flex-wrap justify-center gap-6">
                   {product.highlights.map((h: string) => {
-                    const Icon =
-                      ICON_MAP[h] ?? <Sparkles className="w-5 h-5 text-[#b8860b]" />;
+                    const Icon = ICON_MAP[h] ?? <Sparkles className="w-5 h-5 text-[#b8860b]" />;
                     return (
                       <div
                         key={h}
@@ -89,21 +78,14 @@ export default function ProductPage({ params }: PageProps) {
 
             {/* RIGHT: details */}
             <div className="flex flex-col justify-center">
-              <h1
-                className={`${playfair.className} text-4xl md:text-5xl font-bold tracking-tight text-gray-900`}
-              >
+              <h1 className={`${playfair.className} text-4xl md:text-5xl font-bold tracking-tight text-gray-900`}>
                 {product.title}
               </h1>
 
-              {product.tagline && (
-                <p className="mt-2 text-lg italic text-gray-700">{product.tagline}</p>
-              )}
+              {product.tagline && <p className="mt-2 text-lg italic text-gray-700">{product.tagline}</p>}
 
               <div className="mt-4 flex items-center gap-2">
-                <span
-                  className="text-sm tracking-widest uppercase text-gray-600"
-                  style={{ letterSpacing: "0.2em" }}
-                >
+                <span className="text-sm tracking-widest uppercase text-gray-600" style={{ letterSpacing: "0.2em" }}>
                   USD
                 </span>
                 <span className="text-2xl font-semibold" style={{ color: "#b8860b" }}>
@@ -118,10 +100,7 @@ export default function ProductPage({ params }: PageProps) {
               {!!product.benefits?.length && (
                 <ul className="mt-6 flex flex-wrap gap-2 text-sm">
                   {product.benefits.map((b: string) => (
-                    <li
-                      key={b}
-                      className="rounded-full border px-3 py-1 bg-white/70 shadow-sm hover:bg-cucumber-50 transition"
-                    >
+                    <li key={b} className="rounded-full border px-3 py-1 bg-white/70 shadow-sm hover:bg-cucumber-50 transition">
                       {b}
                     </li>
                   ))}
