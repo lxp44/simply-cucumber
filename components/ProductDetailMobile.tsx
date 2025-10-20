@@ -5,6 +5,18 @@ import Image from "next/image";
 import Link from "next/link";
 import { useMemo, useState } from "react";
 import { useCart } from "./CartProvider";
+// …top of file (keep your other imports)
+const ICON_MAP: Record<string, string> = {
+  Vegan: "🥬",
+  "Paraben-Free": "🧪",
+  "Phthalate-Free": "🧪",
+  "Synthetic Fragrance-Free": "✨",
+  "Alcohol-Free": "🚫🍷",
+  "Gluten-Free": "🌾🚫",
+  Cooling: "❄️",
+  Brightening: "☀️",
+  Antioxidant: "🛡️",
+};
 
 type Variant = { label: string; price: number; sku?: string };
 type Product = {
@@ -171,6 +183,25 @@ export default function ProductDetailMobile({
         </div>
       ) : null}
 
+{/* Badges — icon + label under the photo (Mario style) */}
+{!!product.badges?.length && (
+  <div className="px-4 mt-5">
+    <ul className="grid grid-cols-3 gap-4 text-center">
+      {product.badges.map((b) => (
+        <li key={b} className="flex flex-col items-center">
+          <span className="grid place-items-center w-12 h-12 rounded-full border border-cucumber-700/30 bg-white shadow-sm">
+            <span className="text-xl leading-none">
+              {ICON_MAP[b] ?? "✨"}
+            </span>
+          </span>
+          <span className="mt-2 text-[13px] font-medium text-cucumber-900">
+            {b}
+          </span>
+        </li>
+      ))}
+    </ul>
+  </div>
+)}
       {/* Purchase type */}
       <div className="px-4 mt-5 space-y-3">
         <button
