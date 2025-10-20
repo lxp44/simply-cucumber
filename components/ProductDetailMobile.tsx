@@ -17,6 +17,8 @@ type Product = {
   ingredients?: string;
   usage?: string;
   variants?: Variant[];
+  rating?: number;        // 0–5 (optional; defaults to 0)
+  reviewCount?: number;   // total reviews (optional; defaults to 0)
 };
 
 export default function ProductDetailMobile({ product }: { product: Product }) {
@@ -37,7 +39,9 @@ export default function ProductDetailMobile({ product }: { product: Product }) {
   const unitPrice = selectedVariant.price ?? product.price;
   const priceLabel = `$${unitPrice.toFixed(2)}`;
 
-  // ---- cart ----
+  const rating = Math.max(0, Math.min(5, product.rating ?? 0));
+  const reviewCount = product.reviewCount ?? 0;
+
   function addToCart() {
     const payload = {
       sku: selectedVariant.sku || product.sku,
@@ -53,33 +57,40 @@ export default function ProductDetailMobile({ product }: { product: Product }) {
     else if ("addToCart" in cart) (cart as any).addToCart(payload);
   }
 
-  // ---- swipe for gallery (simple) ----
-  let touchX = 0;
-  function onTouchStart(e: React.TouchEvent) {
-    touchX = e.touches[0].clientX;
-  }
-  function onTouchEnd(e: React.TouchEvent) {
-    const dx = e.changedTouches[0].clientX - touchX;
-    if (Math.abs(dx) < 30) return;
-    setActive((a) => (dx > 0 ? (a - 1 + imgs.length) % imgs.length : (a + 1) % imgs.length));
+  function scrollToReviews() {
+    const el = document.getElementById("reviews");
+    if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
   }
 
-  // ---- UI ----
   return (
     <div className="md:hidden bg-[#e3d3b3]">
-      {/* Title & price (on top) */}
+      {/* Title */}
       <div className="px-4 pt-3">
-        <h1 className="text-3xl font-[var(--font-playfair)] leading-tight">{product.title}</h1>
-        <div className="mt-2 text-2xl font-semibold text-cucumber-800">{priceLabel}</div>
+        <h1 className="text-3xl font-[var(--font-playfair)] leading-tight">
+          {product.title}
+        </h1>
+
+        {/* Stars + “Reviews” link (scrolls down) */}
+        <button
+          onClick={scrollToReviews}
+          className="mt-2 inline-flex items-center gap-2 text-sm text-cucumber-800/90"
+          aria-label="Jump to reviews"
+        >
+          <Stars value={rating} />
+          <span className="underline">
+            {reviewCount > 0 ? `${reviewCount} Reviews` : "Reviews"}
+          </span>
+        </button>
+
+        {/* Small price like Mario */}
+        <div className="mt-2 text-base font-semibold text-cucumber-800">
+          {priceLabel}
+        </div>
       </div>
 
       {/* Gallery - single big image + arrows + dots */}
       <div className="px-4 mt-3">
-        <div
-          className="relative w-full h-[90vw] max-h-[620px] overflow-hidden rounded-xl border bg-white"
-          onTouchStart={onTouchStart}
-          onTouchEnd={onTouchEnd}
-        >
+        <div className="relative w-full h-[78vw] max-h-[560px] overflow-hidden rounded-xl border bg-white">
           <Image
             key={imgs[active]}
             src={imgs[active]}
@@ -87,10 +98,8 @@ export default function ProductDetailMobile({ product }: { product: Product }) {
             fill
             priority
             sizes="100vw"
-            className="object-contain"
+            className="object-cover"
           />
-
-          {/* arrows */}
           {imgs.length > 1 && (
             <>
               <button
@@ -107,15 +116,11 @@ export default function ProductDetailMobile({ product }: { product: Product }) {
               >
                 ›
               </button>
-
-              {/* dots */}
               <div className="absolute bottom-2 inset-x-0 flex justify-center gap-2">
                 {imgs.map((_, i) => (
-                  <button
+                  <span
                     key={i}
-                    aria-label={`Go to image ${i + 1}`}
-                    onClick={() => setActive(i)}
-                    className={`h-2 w-2 rounded-full ${i === active ? "bg-black/80" : "bg-black/30"}`}
+                    className={`h-2 w-2 rounded-full ${i === active ? "bg-white" : "bg-white/60"}`}
                   />
                 ))}
               </div>
@@ -150,7 +155,9 @@ export default function ProductDetailMobile({ product }: { product: Product }) {
           {product.ingredients && (
             <div className="rounded-lg border bg-white p-4 mt-3">
               <h3 className="font-medium mb-1">Ingredients</h3>
-              <p className="text-sm whitespace-pre-line leading-relaxed">{product.ingredients}</p>
+              <p className="text-sm whitespace-pre-line leading-relaxed">
+                {product.ingredients}
+              </p>
             </div>
           )}
           {product.usage && (
@@ -172,7 +179,9 @@ export default function ProductDetailMobile({ product }: { product: Product }) {
                 key={v.label}
                 onClick={() => setVIdx(i)}
                 className={`rounded-lg px-4 py-2 text-sm border ${
-                  i === vIdx ? "bg-cucumber-700 text-white border-cucumber-700" : "bg-white"
+                  i === vIdx
+                    ? "bg-cucumber-700 text-white border-cucumber-700"
+                    : "bg-white"
                 }`}
               >
                 {v.label}
@@ -187,7 +196,9 @@ export default function ProductDetailMobile({ product }: { product: Product }) {
         <button
           onClick={() => setPurchase("onetime")}
           className={`w-full rounded-xl border px-4 py-3 text-left ${
-            purchase === "onetime" ? "border-cucumber-700 ring-1 ring-cucumber-700 bg-white" : "bg-white"
+            purchase === "onetime"
+              ? "border-cucumber-700 ring-1 ring-cucumber-700 bg-white"
+              : "bg-white"
           }`}
         >
           <div className="flex items-center justify-between">
@@ -199,14 +210,20 @@ export default function ProductDetailMobile({ product }: { product: Product }) {
         <button
           onClick={() => setPurchase("subscribe")}
           className={`w-full rounded-xl border px-4 py-3 text-left ${
-            purchase === "subscribe" ? "border-cucumber-700 ring-1 ring-cucumber-700 bg-white" : "bg-white"
+            purchase === "subscribe"
+              ? "border-cucumber-700 ring-1 ring-cucumber-700 bg-white"
+              : "bg-white"
           }`}
         >
           <div className="flex items-center justify-between">
             <span className="font-medium">Subscribe & save</span>
-            <span className="text-cucumber-700 text-sm font-semibold">Save up to 15%</span>
+            <span className="text-cucumber-700 text-sm font-semibold">
+              Save up to 15%
+            </span>
           </div>
-          <div className="mt-1 text-xs text-gray-600">Deliver every 30 days · Cancel anytime</div>
+          <div className="mt-1 text-xs text-gray-600">
+            Deliver every 30 days · Cancel anytime
+          </div>
         </button>
       </div>
 
@@ -214,7 +231,7 @@ export default function ProductDetailMobile({ product }: { product: Product }) {
       <div className="h-28" />
 
       {/* Sticky add-to-bag with qty at the side */}
-      <div className="fixed inset-x-0 bottom-0 z-[60] bg-white/95 backdrop-blur border-t p-3 pb-[env(safe-area-inset-bottom)]">
+      <div className="fixed inset-x-0 bottom-0 z-[60] bg-white/95 backdrop-blur border-t p-3">
         <div className="flex items-center gap-3">
           {/* qty stepper */}
           <div className="flex items-center rounded-full border bg-white">
@@ -253,6 +270,66 @@ export default function ProductDetailMobile({ product }: { product: Product }) {
       <div className="px-4 my-6 text-xs text-gray-700">
         Free shipping on orders $65+ • Easy returns within 30 days.
       </div>
+
+      {/* ---- Reviews target (for the scroll) ---- */}
+      <div id="reviews" className="px-4 pb-40">
+        <h2 className="font-[var(--font-playfair)] text-2xl">Reviews</h2>
+        <p className="mt-2 text-sm text-gray-700">
+          No reviews yet — be the first!
+        </p>
+
+        {/* lightweight, non-wired form placeholder */}
+        <form className="mt-4 grid gap-3">
+          <input
+            type="text"
+            placeholder="Your name"
+            className="rounded-lg border bg-white px-3 py-2 text-sm"
+          />
+          <select className="rounded-lg border bg-white px-3 py-2 text-sm">
+            <option value="">Rating (0–5)</option>
+            {[0,1,2,3,4,5].map((n)=>(
+              <option key={n} value={n}>{n}</option>
+            ))}
+          </select>
+          <textarea
+            placeholder="Write your review..."
+            rows={4}
+            className="rounded-lg border bg-white px-3 py-2 text-sm"
+          />
+          <button
+            type="button"
+            className="rounded-lg bg-cucumber-700 text-white px-4 py-2 text-sm font-medium"
+            onClick={() => alert("Hook this up to your reviews backend.")}
+          >
+            Submit review
+          </button>
+        </form>
+      </div>
     </div>
+  );
+}
+
+/* ——— tiny star renderer ——— */
+function Stars({ value }: { value: number }) {
+  const full = Math.floor(value);
+  const items = Array.from({ length: 5 }, (_, i) => i < full);
+  return (
+    <span className="inline-flex" aria-hidden>
+      {items.map((isFull, i) => (
+        <svg
+          key={i}
+          viewBox="0 0 20 20"
+          className={`h-4 w-4 ${isFull ? "fill-cucumber-700" : "fill-none"} stroke-cucumber-700`}
+        >
+          <path
+            strokeWidth="1.5"
+            d="M10 2.5l2.47 5.02 5.54.81-4 3.9.94 5.5L10 15.9 5.05 17.73l.94-5.5-4-3.9 5.54-.81L10 2.5z"
+          />
+          {isFull && (
+            <path d="M10 2.5l2.47 5.02 5.54.81-4 3.9.94 5.5L10 15.9V2.5z" />
+          )}
+        </svg>
+      ))}
+    </span>
   );
 }
