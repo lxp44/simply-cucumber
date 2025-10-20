@@ -1,131 +1,117 @@
 // components/MobileMenu.tsx
 "use client";
 
-import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
-
-type Section = {
-  title: string;
-  items?: { label: string; href: string }[];
-};
-
-const SECTIONS: Section[] = [
-  {
-    title: "Shop",
-    items: [
-      { label: "Face", href: "/shop?category=face" },
-      { label: "Body", href: "/shop?category=body" },
-      { label: "By Concern", href: "/skin-doctor" },
-      { label: "Featured", href: "/best-sellers" },
-    ],
-  },
-  { title: "Best Sellers", items: [{ label: "View all", href: "/best-sellers" }] },
-  { title: "Gifts", items: [{ label: "Discover gifts", href: "/shop?category=spa-packages" }] },
-  { title: "Rewards", items: [{ label: "Join Rewards", href: "/rewards" }] },
-  { title: "Salon", items: [{ label: "Our Salon", href: "/salon" }] },
-];
+import { useEffect, useState, useRef } from "react";
 
 export default function MobileMenu() {
   const [open, setOpen] = useState(false);
-  const [expanded, setExpanded] = useState<string | null>(null);
-  const panelRef = useRef<HTMLDivElement>(null);
+  const panelRef = useRef<HTMLDivElement | null>(null);
 
-  // close on ESC
+  // lock body scroll while open
   useEffect(() => {
-    const onKey = (e: KeyboardEvent) => {
+    if (open) {
+      const prev = document.body.style.overflow;
+      document.body.style.overflow = "hidden";
+      return () => {
+        document.body.style.overflow = prev;
+      };
+    }
+  }, [open]);
+
+  // close on Escape
+  useEffect(() => {
+    function onKey(e: KeyboardEvent) {
       if (e.key === "Escape") setOpen(false);
-    };
+    }
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
   }, []);
 
-  // close if you click outside panel
-  useEffect(() => {
-    function onClick(e: MouseEvent) {
-      if (!open) return;
-      if (panelRef.current && !panelRef.current.contains(e.target as Node)) {
-        setOpen(false);
-      }
-    }
-    document.addEventListener("mousedown", onClick);
-    return () => document.removeEventListener("mousedown", onClick);
-  }, [open]);
-
   return (
     <>
-      {/* Trigger (hamburger) – visible on mobile only */}
+      {/* Trigger (mobile only) */}
       <button
-        aria-label="Open menu"
+        type="button"
+        className="md:hidden rounded-full border px-3 py-1.5 text-sm bg-white/90 shadow-sm"
         onClick={() => setOpen(true)}
-        className="md:hidden inline-flex items-center justify-center rounded-md border px-3 py-2"
+        aria-label="Open menu"
       >
-        <span className="sr-only">Open menu</span>
-        {/* simple hamburger icon */}
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" className="text-gray-900">
-          <path d="M3 6h18M3 12h18M3 18h18" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
-        </svg>
+        Menu
       </button>
 
-      {/* Overlay */}
       {open && (
-  <div className="fixed inset-0 z-[10000] md:hidden">
-          <div className="absolute inset-0 bg-black/40" />
-          {/* Drawer panel */}
+        <div className="fixed inset-0 z-[10000] md:hidden">
+          {/* dim */}
           <div
+            className="absolute inset-0 bg-black/40 backdrop-blur-[1px]"
+            onClick={() => setOpen(false)}
+          />
+          {/* drawer */}
+          <aside
             ref={panelRef}
-            className="absolute left-0 top-0 h-full w-[90%] max-w-[420px] bg-white shadow-[0_0_40px_rgba(0,0,0,0.2)] overflow-y-auto transition-transform duration-300 translate-x-0"
+            className="
+              absolute left-0 top-0 h-full w-[90%] max-w-[420px]
+              bg-white shadow-[0_0_40px_rgba(0,0,0,0.25)]
+              overflow-y-auto will-change-transform
+              translate-x-0 animate-[slideIn_.3s_ease-out]
+            "
           >
-            {/* Header inside drawer */}
-            <div className="flex items-center justify-between px-4 py-3 border-b">
-              <span className="font-semibold">Menu</span>
+            {/* header row in drawer */}
+            <div className="sticky top-0 z-10 bg-white border-b px-4 py-3 flex items-center justify-between">
+              <span className="font-medium">Menu</span>
               <button
-                aria-label="Close menu"
+                className="h-9 w-9 grid place-items-center rounded-full border"
                 onClick={() => setOpen(false)}
-                className="rounded-md border px-2.5 py-1.5"
+                aria-label="Close menu"
               >
-                ✕
+                ×
               </button>
             </div>
 
-            {/* Sections */}
-            <nav className="px-2 py-2">
-              {SECTIONS.map((sec) => {
-                const isOpen = expanded === sec.title;
-                const hasChildren = !!sec.items?.length;
+            {/* sections */}
+            <nav className="px-4 py-4 space-y-6 text-base">
+              <div>
+                <p className="text-xs uppercase tracking-wide text-gray-500 mb-2">Shop</p>
+                <ul className="[&>li]:py-2">
+                  <li><Link href="/shop?category=face" onClick={() => setOpen(false)}>Face</Link></li>
+                  <li><Link href="/shop?category=body" onClick={() => setOpen(false)}>Body</Link></li>
+                  <li><Link href="/shop?category=powders" onClick={() => setOpen(false)}>Powders</Link></li>
+                  <li><Link href="/shop?category=toothpaste" onClick={() => setOpen(false)}>Toothpaste</Link></li>
+                  <li><Link href="/shop?category=spa-packages" onClick={() => setOpen(false)}>Spa Packages</Link></li>
+                  <li><Link href="/best-sellers" onClick={() => setOpen(false)}>Best Sellers</Link></li>
+                </ul>
+              </div>
 
-                return (
-                  <div key={sec.title} className="border-b last:border-b-0">
-                    <button
-                      className="w-full flex items-center justify-between px-2 py-3 text-left font-semibold"
-                      onClick={() => setExpanded(isOpen ? null : sec.title)}
-                      aria-expanded={isOpen}
-                    >
-                      <span>{sec.title}</span>
-                      <span className="ml-2 text-xl leading-none select-none">{isOpen ? "–" : "+"}</span>
-                    </button>
+              <div>
+                <p className="text-xs uppercase tracking-wide text-gray-500 mb-2">Brand</p>
+                <ul className="[&>li]:py-2">
+                  <li><Link href="/rewards" onClick={() => setOpen(false)}>Rewards</Link></li>
+                  <li><Link href="/salon" onClick={() => setOpen(false)}>Salon</Link></li>
+                  <li><Link href="/about" onClick={() => setOpen(false)}>About</Link></li>
+                  <li><Link href="/blog" onClick={() => setOpen(false)}>Blog</Link></li>
+                  <li><Link href="/contact" onClick={() => setOpen(false)}>Contact</Link></li>
+                </ul>
+              </div>
 
-                    {hasChildren && isOpen && (
-                      <ul className="pb-3 pl-4 space-y-2">
-                        {sec.items!.map((it) => (
-                          <li key={it.href}>
-                            <Link
-                              href={it.href}
-                              onClick={() => setOpen(false)}
-                              className="block py-1.5 text-gray-700 hover:text-cucumber-700"
-                            >
-                              {it.label}
-                            </Link>
-                          </li>
-                        ))}
-                      </ul>
-                    )}
-                  </div>
-                );
-              })}
+              <div className="pt-2 border-t text-sm text-gray-600">
+                <ul className="[&>li]:py-2">
+                  <li><Link href="/faqs" onClick={() => setOpen(false)}>FAQs</Link></li>
+                  <li><Link href="/shipping" onClick={() => setOpen(false)}>Shipping Policy</Link></li>
+                  <li><Link href="/returns" onClick={() => setOpen(false)}>Return Policy</Link></li>
+                  <li><Link href="/privacy" onClick={() => setOpen(false)}>Privacy Policy</Link></li>
+                  <li><Link href="/terms" onClick={() => setOpen(false)}>Terms of Service</Link></li>
+                </ul>
+              </div>
             </nav>
-          </div>
+          </aside>
         </div>
       )}
+
+      {/* keyframes for the slide-in */}
+      <style jsx global>{`
+        @keyframes slideIn { from { transform: translateX(-100%); } to { transform: translateX(0); } }
+      `}</style>
     </>
   );
 }
