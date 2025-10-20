@@ -9,6 +9,8 @@ import { useCart } from "./CartProvider";
 // If you want to compute related from your catalog, re-enable and use it;
 // otherwise leave it out to avoid "unused import" build errors.
 // import { PRODUCTS } from "../lib/products";
+// components/ProductDetailMobile.tsx
+import type { Product } from "../lib/products";
 
 import {
   Leaf,
