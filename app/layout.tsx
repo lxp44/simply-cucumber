@@ -35,7 +35,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 
         <CartProvider>
           {/* Header */}
-          <header className="sticky top-0 z-40 bg-white/80 backdrop-blur border-b overflow-visible">
+          <header className="sticky top-0 z-[9999] bg-white/80 backdrop-blur border-b overflow-visible">
             <div className="mx-auto max-w-6xl px-4">
               <div className="grid grid-cols-3 items-center py-2 md:py-3">
                 {/* Left: hamburger on mobile, full nav on desktop */}
