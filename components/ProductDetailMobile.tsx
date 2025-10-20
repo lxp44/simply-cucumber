@@ -185,37 +185,37 @@ function Empty() {
       </div>
 
       {/* Badges + Short blurb */}
-      {(product.badges?.length || blurb) && (
-        <div className="px-4 mt-4">
-          {!!product.badges?.length && (
-            <div className="grid grid-cols-3 gap-6 text-center">
-              {product.badges.map((b) => (
-                <div key={b} className="flex flex-col items-center gap-2">
-                  <span className="inline-grid place-items-center rounded-full border border-cucumber-700/30 text-cucumber-700 bg-white w-10 h-10">
-                    {BADGE_ICON[b] ?? <Sparkles className="w-5 h-5" />}
-                  </span>
-                  <span className="text-[13px] font-medium text-cucumber-900">{b}</span>
-                </div>
-              ))}
-            </div>
-          )}
+{(badges.length > 0 || blurb) && (
+  <div className="px-4 mt-4">
+    {badges.length > 0 && (
+      <div className="grid grid-cols-3 gap-6 text-center" data-testid="badge-row">
+        {badges.map((b) => (
+          <div key={b} className="flex flex-col items-center gap-2">
+            <span className="inline-grid place-items-center rounded-full border border-cucumber-700/30 text-cucumber-700 bg-white w-10 h-10">
+              {BADGE_ICON[b] ?? <Sparkles className="w-5 h-5" />}
+            </span>
+            <span className="text-[13px] font-medium text-cucumber-900">{b}</span>
+          </div>
+        ))}
+      </div>
+    )}
 
-          {blurb && (
-            <p className="mt-4 text-[15px] leading-6 text-gray-800">
-              {blurb}{" "}
-              {product.description && (
-                <button
-                  type="button"
-                  onClick={openDetails}
-                  className="font-medium text-cucumber-800 underline"
-                >
-                  Read more
-                </button>
-              )}
-            </p>
-          )}
-        </div>
-      )}
+    {blurb && (
+      <p className="mt-4 text-[15px] leading-6 text-gray-800">
+        {blurb}{" "}
+        {product.description && (
+          <button
+            type="button"
+            onClick={openDetails}
+            className="font-medium text-cucumber-800 underline"
+          >
+            Read more
+          </button>
+        )}
+      </p>
+    )}
+  </div>
+)}
 
       {/* Size / variants */}
       {product.variants?.length ? (
