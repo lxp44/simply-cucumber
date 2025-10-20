@@ -428,27 +428,33 @@ export default function ProductDetailMobile({
   );
 }
 
-/* ——— accordions ——— */
+/* ---- AccordionRow: allow id prop so we can open/scroll to it ---- */
 function AccordionRow({
   title,
   children,
+  openByDefault = false,
+  id,
 }: {
   title: string;
   children: React.ReactNode;
+  openByDefault?: boolean;
+  id?: string;
 }) {
   return (
-    <details className="rounded-lg border bg-[#edf7f1]/40 open:bg-white">
+    <details
+      id={id}
+      className="rounded-lg border bg-[#edf7f1]/40 open:bg-white"
+      {...(openByDefault ? { open: true } : {})}
+    >
       <summary className="cursor-pointer list-none px-4 py-3 flex items-center justify-between text-[15px] font-medium">
         <span>{title}</span>
-        <span className="ml-3 inline-block rounded-full border w-6 h-6 grid place-items-center">+</span>
+        <span className="ml-3 inline-block rounded-full border w-6 h-6 grid place-items-center">
+          +
+        </span>
       </summary>
       <div className="px-4 pb-4">{children}</div>
     </details>
   );
-}
-
-function Empty() {
-  return <p className="text-sm text-gray-500">Info coming soon.</p>;
 }
 
 /* ——— tiny star renderer ——— */
