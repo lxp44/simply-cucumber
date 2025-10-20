@@ -73,7 +73,7 @@ export default function MobileMenu() {
           {/* Drawer panel */}
           <div
             ref={panelRef}
-            className="absolute left-0 top-0 h-full w-[86%] max-w-[420px] bg-white shadow-xl overflow-y-auto"
+            className="absolute left-0 top-0 h-full w-[90%] max-w-[420px] bg-white shadow-[0_0_40px_rgba(0,0,0,0.2)] overflow-y-auto transition-transform duration-300 translate-x-0"
           >
             {/* Header inside drawer */}
             <div className="flex items-center justify-between px-4 py-3 border-b">
