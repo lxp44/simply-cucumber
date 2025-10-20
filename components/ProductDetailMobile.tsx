@@ -5,17 +5,28 @@ import Image from "next/image";
 import Link from "next/link";
 import { useMemo, useState } from "react";
 import { useCart } from "./CartProvider";
-// …top of file (keep your other imports)
-const ICON_MAP: Record<string, string> = {
-  Vegan: "🥬",
-  "Paraben-Free": "🧪",
-  "Phthalate-Free": "🧪",
-  "Synthetic Fragrance-Free": "✨",
-  "Alcohol-Free": "🚫🍷",
-  "Gluten-Free": "🌾🚫",
-  Cooling: "❄️",
-  Brightening: "☀️",
-  Antioxidant: "🛡️",
+// import { PRODUCTS } from "@/lib/products";   // ← if this alias breaks on Netlify, switch to:  import { PRODUCTS } from "../lib/products";
+import { PRODUCTS } from "../lib/products";     // ✅ safer import for Netlify
+
+// NEW: icons for the badge row
+import {
+  Leaf,
+  FlaskConical,
+  Sparkles,
+  Droplets,
+  Snowflake,
+  Sun,
+  ShieldCheck,
+} from "lucide-react";
+
+const BADGE_ICON: Record<string, JSX.Element> = {
+  Vegan: <Leaf className="w-5 h-5" />,
+  "Paraben-Free": <FlaskConical className="w-5 h-5" />,
+  "Synthetic Fragrance-Free": <Sparkles className="w-5 h-5" />,
+  "Alcohol-Free": <Droplets className="w-5 h-5" />,
+  Cooling: <Snowflake className="w-5 h-5" />,
+  Brightening: <Sun className="w-5 h-5" />,
+  Antioxidant: <ShieldCheck className="w-5 h-5" />,
 };
 
 type Variant = { label: string; price: number; sku?: string };
@@ -26,12 +37,14 @@ type Product = {
   images: string[];
   badges?: string[];
   highlights?: string[];
-  description?: string;   // “Product Details”
-  ingredients?: string;   // “Ingredients”
-  usage?: string;         // “How to Apply”
+  description?: string;     // Product Details (full)
+  ingredients?: string;
+  usage?: string;           // How to Apply
+  shortDescription?: string; // NEW: brief blurb shown under badges
+  tagline?: string;          // optional backup for blurb
   variants?: Variant[];
-  rating?: number;        // 0–5
-  reviewCount?: number;   // total reviews
+  rating?: number;
+  reviewCount?: number;
   category?: string;
 };
 
@@ -42,6 +55,7 @@ export default function ProductDetailMobile({
   product: Product;
   related?: Array<Partial<Product> & { slug?: string; image?: string }>;
 }) {
+
   const cart = useCart();
 
   // ---- state ----
