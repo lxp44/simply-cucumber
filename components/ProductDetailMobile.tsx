@@ -24,7 +24,13 @@ type Product = {
   category?: string;
 };
 
-export default function ProductDetailMobile({ product }: { product: Product }) {
+export default function ProductDetailMobile({
+  product,
+  related = [],
+}: {
+  product: Product;
+  related?: Array<Partial<Product> & { slug?: string; image?: string }>;
+}) {
   const cart = useCart();
 
   // ---- state ----
