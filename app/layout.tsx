@@ -8,6 +8,7 @@ import { CartProvider } from "../components/CartProvider";
 import CartLink from "../components/CartLink";
 import ProductSearch from "../components/ProductSearch";
 import NewsletterForm from "../components/NewsletterForm";
+import MobileMenu from "../components/MobileMenu";
 
 const playfair = Playfair_Display({
   subsets: ["latin"],
@@ -33,16 +34,19 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <PromoBar />
 
         <CartProvider>
-          {/* Header (set a stable height on mobile) */}
-          <header
-            className="sticky top-0 z-40 bg-white/80 backdrop-blur border-b overflow-visible"
-            style={{ height: "56px" }} // <- stable mobile header height
-          >
+          {/* Header */}
+          <header className="sticky top-0 z-40 bg-white/80 backdrop-blur border-b overflow-visible">
             <div className="mx-auto max-w-6xl px-4">
               <div className="grid grid-cols-3 items-center py-2 md:py-3">
-                {/* Left nav — slightly tighter tracking for that Mario feel */}
-                <nav className="flex items-center gap-4 md:gap-6 text-sm tracking-normal md:tracking-wide relative justify-start">
-                  <div className="relative group/menu">
+                {/* Left: hamburger on mobile, full nav on desktop */}
+                <nav className="flex items-center gap-3 md:gap-6 text-sm relative justify-start">
+                  {/* Mobile */}
+                  <div className="md:hidden">
+                    <MobileMenu />
+                  </div>
+
+                  {/* Desktop links (hover mega menu) */}
+                  <div className="hidden md:block relative group/menu">
                     <Link
                       href="/shop"
                       className="text-gold-rich inline-block py-2 hover:drop-shadow-[0_0_8px_rgba(212,175,55,0.5)] transition-all duration-300"
@@ -53,15 +57,23 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                     </Link>
                     <MegaMenu />
                   </div>
-                  <Link href="/best-sellers" className="text-gold-rich py-2 hover:drop-shadow-[0_0_8px_rgba(212,175,55,0.5)] transition-all duration-300">
+
+                  <Link
+                    href="/best-sellers"
+                    className="hidden md:inline-block text-gold-rich py-2 hover:drop-shadow-[0_0_8px_rgba(212,175,55,0.5)] transition-all duration-300"
+                  >
                     Best Sellers
                   </Link>
-                  <Link href="/skin-doctor" className="text-gold-rich py-2 hover:drop-shadow-[0_0_8px_rgba(212,175,55,0.5)] transition-all duration-300">
+
+                  <Link
+                    href="/skin-doctor"
+                    className="hidden md:inline-block text-gold-rich py-2 hover:drop-shadow-[0_0_8px_rgba(212,175,55,0.5)] transition-all duration-300"
+                  >
                     Skin Doctor
                   </Link>
                 </nav>
 
-                {/* Center logo (match header height) */}
+                {/* Center logo */}
                 <div className="flex justify-center">
                   <Link href="/" className="flex items-center gap-2">
                     <img
@@ -72,26 +84,36 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                   </Link>
                 </div>
 
-                {/* Right nav */}
-                <nav className="flex items-center gap-4 md:gap-6 text-sm tracking-normal md:tracking-wide justify-end">
-                  <Link href="/rewards" className="text-gold-rich py-2 hover:drop-shadow-[0_0_8px_rgba(212,175,55,0.5)] transition-all duration-300">
+                {/* Right: keep cart on mobile; other links only on desktop */}
+                <nav className="flex items-center gap-4 md:gap-6 text-sm justify-end">
+                  <Link
+                    href="/rewards"
+                    className="hidden md:inline-block text-gold-rich py-2 hover:drop-shadow-[0_0_8px_rgba(212,175,55,0.5)] transition-all duration-300"
+                  >
                     Rewards
                   </Link>
-                  <Link href="/salon" className="text-gold-rich py-2 hover:drop-shadow-[0_0_8px_rgba(212,175,55,0.5)] transition-all duration-300">
+                  <Link
+                    href="/salon"
+                    className="hidden md:inline-block text-gold-rich py-2 hover:drop-shadow-[0_0_8px_rgba(212,175,55,0.5)] transition-all duration-300"
+                  >
                     Salon
                   </Link>
+
+                  {/* 🔎 Product search (hidden on mobile) */}
                   <div className="hidden sm:block">
                     <ProductSearch />
                   </div>
+
                   <CartLink />
                 </nav>
               </div>
             </div>
           </header>
 
+          {/* Page content */}
           <main>{children}</main>
 
-          {/* Footer */}
+          {/* Footer (unchanged) */}
           <footer
             className="
               mt-0 text-white
@@ -99,7 +121,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               bg-[length:200%_200%] animate-shimmer-gold
             "
           >
-            {/* Top message */}
             <div className="text-center py-6">
               <h2
                 className="text-3xl md:text-4xl font-[var(--font-playfair)] font-bold"
@@ -113,9 +134,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               </h2>
             </div>
 
-            {/* Footer columns */}
             <div className="mx-auto max-w-6xl px-4 py-12 grid md:grid-cols-4 gap-8">
-              {/* Newsletter */}
               <div>
                 <p className="font-semibold mb-3 text-gold-metallic">Stay in touch.</p>
                 <p className="mb-4">
@@ -124,7 +143,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                 <NewsletterForm />
               </div>
 
-              {/* Customer Care */}
               <div>
                 <p className="font-semibold mb-3 text-gold-metallic">Customer Care</p>
                 <ul className="space-y-2">
@@ -135,7 +153,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                 </ul>
               </div>
 
-              {/* Get to Know Us */}
               <div>
                 <p className="font-semibold mb-3 text-gold-metallic">Get to Know Us</p>
                 <ul className="space-y-2">
@@ -145,7 +162,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                 </ul>
               </div>
 
-              {/* Brand */}
               <div>
                 <p className="font-semibold mb-3 text-gold-metallic">Simply Cucumber</p>
                 <ul className="space-y-2">
@@ -156,7 +172,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               </div>
             </div>
 
-            {/* Bottom bar */}
             <div className="text-center py-6 text-xs border-t border-white/20">
               © {new Date().getFullYear()} Simply Cucumber · All rights reserved.
             </div>
