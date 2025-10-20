@@ -1,6 +1,6 @@
 // app/products/[slug]/page.tsx
 import { notFound } from "next/navigation";
-import { bySlug } from "../../../lib/products";
+import { bySlug, PRODUCTS } from "../../../lib/products"; // ⬅️ import PRODUCTS
 import ProductGallery from "../../../components/ProductGallery";
 import ProductDetailMobile from "../../../components/ProductDetailMobile";
 import AddToCartButton from "../../../components/AddToCartButton";
@@ -39,6 +39,11 @@ export default function ProductPage({ params }: PageProps) {
   // Always provide an images array for downstream components
   const images: string[] = product.images?.length ? product.images : [product.image];
 
+  // 🔗 Build a simple related list: same category, exclude current product
+  const related = PRODUCTS
+    .filter((p) => p.category === product.category && p.sku !== product.sku)
+    .slice(0, 12);
+
   // Pass a normalized product to the mobile component
   const mobileProduct = { ...product, images };
 
@@ -49,7 +54,7 @@ export default function ProductPage({ params }: PageProps) {
     >
       {/* Mobile layout */}
       <div className="md:hidden">
-        <ProductDetailMobile product={mobileProduct as any} />
+        <ProductDetailMobile product={mobileProduct as any} related={related as any} />
       </div>
 
       {/* Desktop layout */}
@@ -65,9 +70,8 @@ export default function ProductPage({ params }: PageProps) {
               {!!product.highlights?.length && (
                 <div className="mt-6 flex flex-wrap justify-center gap-6">
                   {product.highlights.map((h: string) => {
-                    const Icon = ICON_MAP[h] ?? (
-                      <Sparkles className="w-5 h-5 text-[#b8860b]" />
-                    );
+                    const Icon =
+                      ICON_MAP[h] ?? <Sparkles className="w-5 h-5 text-[#b8860b]" />;
                     return (
                       <div
                         key={h}
