@@ -68,7 +68,7 @@ export default function MobileMenu() {
 
       {/* Overlay */}
       {open && (
-        <div className="fixed inset-0 z-[70] md:hidden">
+  <div className="fixed inset-0 z-[10000] md:hidden">
           <div className="absolute inset-0 bg-black/40" />
           {/* Drawer panel */}
           <div
