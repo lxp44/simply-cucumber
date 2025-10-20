@@ -5,7 +5,6 @@ import Image from "next/image";
 import Link from "next/link";
 import { useMemo, useState } from "react";
 import { useCart } from "./CartProvider";
-import { PRODUCTS } from "@/lib/products"; // for related products
 
 type Variant = { label: string; price: number; sku?: string };
 type Product = {
@@ -15,9 +14,9 @@ type Product = {
   images: string[];
   badges?: string[];
   highlights?: string[];
-  description?: string;   // ← “Product Details”
-  ingredients?: string;   // ← “Ingredients”
-  usage?: string;         // ← “How to Apply”
+  description?: string;   // “Product Details”
+  ingredients?: string;   // “Ingredients”
+  usage?: string;         // “How to Apply”
   variants?: Variant[];
   rating?: number;        // 0–5
   reviewCount?: number;   // total reviews
@@ -70,11 +69,6 @@ export default function ProductDetailMobile({
     const el = document.getElementById("reviews");
     if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
   }
-
-  // Simple “related” rule: same category, not the same SKU
-  const related = (PRODUCTS || [])
-    .filter((p: any) => p.sku !== product.sku && p.category === product.category)
-    .slice(0, 8);
 
   return (
     <div className="md:hidden bg-[#e3d3b3]">
@@ -252,7 +246,7 @@ export default function ProductDetailMobile({
       {/* Accordion: Ingredients / Product Details / How to Apply */}
       {(product.ingredients || product.description || product.usage) && (
         <section className="px-4 mt-4 space-y-2">
-          <AccordionRow title="Ingredients" openByDefault={false}>
+          <AccordionRow title="Ingredients">
             {product.ingredients ? (
               <p className="text-sm whitespace-pre-line leading-relaxed">
                 {product.ingredients}
@@ -262,7 +256,7 @@ export default function ProductDetailMobile({
             )}
           </AccordionRow>
 
-          <AccordionRow title="Product Details" openByDefault={false}>
+          <AccordionRow title="Product Details">
             {product.description ? (
               <p className="text-sm leading-relaxed">{product.description}</p>
             ) : (
@@ -270,7 +264,7 @@ export default function ProductDetailMobile({
             )}
           </AccordionRow>
 
-          <AccordionRow title="How to Apply" openByDefault={false}>
+          <AccordionRow title="How to Apply">
             {product.usage ? (
               <p className="text-sm leading-relaxed">{product.usage}</p>
             ) : (
@@ -325,29 +319,15 @@ export default function ProductDetailMobile({
       {/* Reviews target (for the scroll) */}
       <div id="reviews" className="px-4 pb-40">
         <h2 className="font-[var(--font-playfair)] text-2xl">Reviews</h2>
-        <p className="mt-2 text-sm text-gray-700">
-          No reviews yet — be the first!
-        </p>
+        <p className="mt-2 text-sm text-gray-700">No reviews yet — be the first!</p>
 
         <form className="mt-4 grid gap-3">
-          <input
-            type="text"
-            placeholder="Your name"
-            className="rounded-lg border bg-white px-3 py-2 text-sm"
-          />
+          <input type="text" placeholder="Your name" className="rounded-lg border bg-white px-3 py-2 text-sm" />
           <select className="rounded-lg border bg-white px-3 py-2 text-sm">
             <option value="">Rating (0–5)</option>
-            {[0, 1, 2, 3, 4, 5].map((n) => (
-              <option key={n} value={n}>
-                {n}
-              </option>
-            ))}
+            {[0,1,2,3,4,5].map(n => <option key={n} value={n}>{n}</option>)}
           </select>
-          <textarea
-            placeholder="Write your review..."
-            rows={4}
-            className="rounded-lg border bg-white px-3 py-2 text-sm"
-          />
+          <textarea rows={4} placeholder="Write your review..." className="rounded-lg border bg-white px-3 py-2 text-sm" />
           <button
             type="button"
             className="rounded-lg bg-cucumber-700 text-white px-4 py-2 text-sm font-medium"
@@ -365,22 +345,15 @@ export default function ProductDetailMobile({
 function AccordionRow({
   title,
   children,
-  openByDefault = false,
 }: {
   title: string;
   children: React.ReactNode;
-  openByDefault?: boolean;
 }) {
   return (
-    <details
-      className="rounded-lg border bg-[#edf7f1]/40 open:bg-white"
-      {...(openByDefault ? { open: true } : {})}
-    >
+    <details className="rounded-lg border bg-[#edf7f1]/40 open:bg-white">
       <summary className="cursor-pointer list-none px-4 py-3 flex items-center justify-between text-[15px] font-medium">
         <span>{title}</span>
-        <span className="ml-3 inline-block rounded-full border w-6 h-6 grid place-items-center">
-          +
-        </span>
+        <span className="ml-3 inline-block rounded-full border w-6 h-6 grid place-items-center">+</span>
       </summary>
       <div className="px-4 pb-4">{children}</div>
     </details>
@@ -403,13 +376,8 @@ function Stars({ value }: { value: number }) {
           viewBox="0 0 20 20"
           className={`h-4 w-4 ${isFull ? "fill-cucumber-700" : "fill-none"} stroke-cucumber-700`}
         >
-          <path
-            strokeWidth="1.5"
-            d="M10 2.5l2.47 5.02 5.54.81-4 3.9.94 5.5L10 15.9 5.05 17.73l.94-5.5-4-3.9 5.54-.81L10 2.5z"
-          />
-          {isFull && (
-            <path d="M10 2.5l2.47 5.02 5.54.81-4 3.9.94 5.5L10 15.9V2.5z" />
-          )}
+          <path strokeWidth="1.5" d="M10 2.5l2.47 5.02 5.54.81-4 3.9.94 5.5L10 15.9 5.05 17.73l.94-5.5-4-3.9 5.54-.81L10 2.5z" />
+          {isFull && <path d="M10 2.5l2.47 5.02 5.54.81-4 3.9.94 5.5L10 15.9V2.5z" />}
         </svg>
       ))}
     </span>
