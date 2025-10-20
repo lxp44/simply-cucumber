@@ -1,19 +1,38 @@
 // lib/products.ts
+
+export type Variant = {
+  label: string;
+  price: number;
+  sku?: string;
+};
+
 export type Product = {
   sku: string;
   slug: string;
   title: string;
   tagline?: string;
+
   price: number;
   description: string;
-bio?: string;          // ← optional long-form “full bio”
-  image: string;
-    images?: string[]; 
-  hoverImage?: string; // 👈 allow optional hover image
+  bio?: string;                 // optional long-form
+
+  image: string;                // primary
+  images?: string[];            // gallery
+  hoverImage?: string;
+
   benefits: string[];
-badges?: string[];
-   highlights?: string[]; 
-bestSeller?: boolean;  // ← mark best sellers
+  badges?: string[];            // e.g. ["Vegan","Paraben-Free","Alcohol-Free"]
+  highlights?: string[];        // fallback if badges missing
+
+  // NEW optional fields used by ProductDetailMobile:
+  shortDescription?: string;    // brief blurb under badges
+  ingredients?: string;         // shows in accordion
+  usage?: string;               // shows in accordion
+  variants?: Variant[];         // sizes/prices
+  rating?: number;              // 0–5
+  reviewCount?: number;         // total # reviews
+
+  bestSeller?: boolean;
   category: "face" | "body" | "powders" | "toothpaste" | "spa-packages";
 };
 
@@ -537,4 +556,13 @@ bestSeller: true,
   },
 ];
 
-export const bySlug = (slug: string) => PRODUCTS.find((p) => p.slug === slug);
+// Helper: always return a product with an images[] for components that expect it
+export const bySlug = (slug: string) => {
+  const p = PRODUCTS.find((p) => p.slug === slug);
+  if (!p) return undefined;
+  if (!p.images || p.images.length === 0) {
+    // don’t mutate original; return a shallow clone with images fallback
+    return { ...p, images: [p.image] } as Product;
+  }
+  return p;
+};
