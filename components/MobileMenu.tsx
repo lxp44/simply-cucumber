@@ -1,32 +1,18 @@
-// components/MobileMenu.tsx
 "use client";
 
 import Link from "next/link";
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState } from "react";
 
 export default function MobileMenu() {
   const [open, setOpen] = useState(false);
-  const panelRef = useRef<HTMLDivElement | null>(null);
 
-  // lock body scroll while open
+  // Lock body scroll while the drawer is open
   useEffect(() => {
-    if (open) {
-      const prev = document.body.style.overflow;
-      document.body.style.overflow = "hidden";
-      return () => {
-        document.body.style.overflow = prev;
-      };
-    }
+    if (!open) return;
+    const prev = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => { document.body.style.overflow = prev; };
   }, [open]);
-
-  // close on Escape
-  useEffect(() => {
-    function onKey(e: KeyboardEvent) {
-      if (e.key === "Escape") setOpen(false);
-    }
-    window.addEventListener("keydown", onKey);
-    return () => window.removeEventListener("keydown", onKey);
-  }, []);
 
   return (
     <>
@@ -40,24 +26,24 @@ export default function MobileMenu() {
         Menu
       </button>
 
+      {/* Drawer */}
       {open && (
         <div className="fixed inset-0 z-[10000] md:hidden">
-          {/* dim */}
-          <div
-            className="absolute inset-0 bg-black/40 backdrop-blur-[1px]"
+          {/* Backdrop */}
+          <button
+            aria-label="Close menu"
             onClick={() => setOpen(false)}
+            className="absolute inset-0 bg-black/40 backdrop-blur-[1px]"
           />
-          {/* drawer */}
+          {/* Panel */}
           <aside
-            ref={panelRef}
             className="
               absolute left-0 top-0 h-full w-[90%] max-w-[420px]
               bg-white shadow-[0_0_40px_rgba(0,0,0,0.25)]
               overflow-y-auto will-change-transform
-              translate-x-0 animate-[slideIn_.3s_ease-out]
+              animate-[slideIn_.28s_ease-out]
             "
           >
-            {/* header row in drawer */}
             <div className="sticky top-0 z-10 bg-white border-b px-4 py-3 flex items-center justify-between">
               <span className="font-medium">Menu</span>
               <button
@@ -69,7 +55,6 @@ export default function MobileMenu() {
               </button>
             </div>
 
-            {/* sections */}
             <nav className="px-4 py-4 space-y-6 text-base">
               <div>
                 <p className="text-xs uppercase tracking-wide text-gray-500 mb-2">Shop</p>
@@ -108,7 +93,7 @@ export default function MobileMenu() {
         </div>
       )}
 
-      {/* keyframes for the slide-in */}
+      {/* slide-in keyframes (scoped) */}
       <style jsx global>{`
         @keyframes slideIn { from { transform: translateX(-100%); } to { transform: translateX(0); } }
       `}</style>
