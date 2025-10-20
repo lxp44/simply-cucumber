@@ -29,20 +29,19 @@ export const metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className={`${playfair.variable} ${lato.variable}`}>
-      {/* Lato is the default font; Playfair is used via font-[var(--font-playfair)] on headings */}
       <body className={`${lato.className} antialiased`}>
         <PromoBar />
 
         <CartProvider>
-          {/* Header */}
-          <header className="sticky top-0 z-40 bg-white/80 backdrop-blur border-b overflow-visible">
+          {/* Header (set a stable height on mobile) */}
+          <header
+            className="sticky top-0 z-40 bg-white/80 backdrop-blur border-b overflow-visible"
+            style={{ height: "56px" }} // <- stable mobile header height
+          >
             <div className="mx-auto max-w-6xl px-4">
-              {/* ↓ tighter on mobile, same on desktop */}
               <div className="grid grid-cols-3 items-center py-2 md:py-3">
-                {/* Left nav */}
-                {/* ↓ smaller gaps on mobile */}
-                <nav className="flex items-center gap-4 md:gap-6 text-sm relative justify-start">
-                  {/* make the hover group name match MegaMenu */}
+                {/* Left nav — slightly tighter tracking for that Mario feel */}
+                <nav className="flex items-center gap-4 md:gap-6 text-sm tracking-normal md:tracking-wide relative justify-start">
                   <div className="relative group/menu">
                     <Link
                       href="/shop"
@@ -54,23 +53,15 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                     </Link>
                     <MegaMenu />
                   </div>
-
-                  <Link
-                    href="/best-sellers"
-                    className="text-gold-rich py-2 hover:drop-shadow-[0_0_8px_rgba(212,175,55,0.5)] transition-all duration-300"
-                  >
+                  <Link href="/best-sellers" className="text-gold-rich py-2 hover:drop-shadow-[0_0_8px_rgba(212,175,55,0.5)] transition-all duration-300">
                     Best Sellers
                   </Link>
-
-                  <Link
-                    href="/skin-doctor"
-                    className="text-gold-rich py-2 hover:drop-shadow-[0_0_8px_rgba(212,175,55,0.5)] transition-all duration-300"
-                  >
+                  <Link href="/skin-doctor" className="text-gold-rich py-2 hover:drop-shadow-[0_0_8px_rgba(212,175,55,0.5)] transition-all duration-300">
                     Skin Doctor
                   </Link>
                 </nav>
 
-                {/* Center logo */}
+                {/* Center logo (match header height) */}
                 <div className="flex justify-center">
                   <Link href="/" className="flex items-center gap-2">
                     <img
@@ -82,32 +73,22 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                 </div>
 
                 {/* Right nav */}
-                <nav className="flex items-center gap-4 md:gap-6 text-sm justify-end">
-                  <Link
-                    href="/rewards"
-                    className="text-gold-rich py-2 hover:drop-shadow-[0_0_8px_rgba(212,175,55,0.5)] transition-all duration-300"
-                  >
+                <nav className="flex items-center gap-4 md:gap-6 text-sm tracking-normal md:tracking-wide justify-end">
+                  <Link href="/rewards" className="text-gold-rich py-2 hover:drop-shadow-[0_0_8px_rgba(212,175,55,0.5)] transition-all duration-300">
                     Rewards
                   </Link>
-                  <Link
-                    href="/salon"
-                    className="text-gold-rich py-2 hover:drop-shadow-[0_0_8px_rgba(212,175,55,0.5)] transition-all duration-300"
-                  >
+                  <Link href="/salon" className="text-gold-rich py-2 hover:drop-shadow-[0_0_8px_rgba(212,175,55,0.5)] transition-all duration-300">
                     Salon
                   </Link>
-
-                  {/* 🔎 Product search (hidden on mobile) */}
                   <div className="hidden sm:block">
                     <ProductSearch />
                   </div>
-
                   <CartLink />
                 </nav>
               </div>
             </div>
           </header>
 
-          {/* Page content */}
           <main>{children}</main>
 
           {/* Footer */}
