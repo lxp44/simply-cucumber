@@ -5,10 +5,11 @@ import Image from "next/image";
 import Link from "next/link";
 import { useMemo, useState } from "react";
 import { useCart } from "./CartProvider";
-// import { PRODUCTS } from "@/lib/products";   // ← if this alias breaks on Netlify, switch to:  import { PRODUCTS } from "../lib/products";
-import { PRODUCTS } from "../lib/products";     // ✅ safer import for Netlify
 
-// NEW: icons for the badge row
+// If you want to compute related from your catalog, re-enable and use it;
+// otherwise leave it out to avoid "unused import" build errors.
+// import { PRODUCTS } from "../lib/products";
+
 import {
   Leaf,
   FlaskConical,
@@ -30,6 +31,7 @@ const BADGE_ICON: Record<string, JSX.Element> = {
 };
 
 type Variant = { label: string; price: number; sku?: string };
+
 type Product = {
   sku: string;
   title: string;
@@ -40,7 +42,7 @@ type Product = {
   description?: string;     // Product Details (full)
   ingredients?: string;
   usage?: string;           // How to Apply
-  shortDescription?: string; // NEW: brief blurb shown under badges
+  shortDescription?: string; // brief blurb shown under badges
   tagline?: string;          // optional backup for blurb
   variants?: Variant[];
   rating?: number;
@@ -55,7 +57,6 @@ export default function ProductDetailMobile({
   product: Product;
   related?: Array<Partial<Product> & { slug?: string; image?: string }>;
 }) {
-
   const cart = useCart();
 
   // ---- state ----
@@ -76,6 +77,24 @@ export default function ProductDetailMobile({
   const rating = Math.max(0, Math.min(5, product.rating ?? 0));
   const reviewCount = product.reviewCount ?? 0;
 
+  // ------- short blurb under badges -------
+  const blurb =
+    product.shortDescription ||
+    product.tagline ||
+    (product.description
+      ? product.description.split(". ")[0] +
+        (product.description.includes(".") ? "." : "")
+      : "");
+
+  // open the "Product Details" accordion and scroll to it
+  function openDetails() {
+    const el = document.getElementById("acc-details") as HTMLDetailsElement | null;
+    if (el) {
+      el.open = true;
+      el.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  }
+
   function addToCart() {
     const payload = {
       sku: selectedVariant.sku || product.sku,
@@ -94,25 +113,6 @@ export default function ProductDetailMobile({
   function scrollToReviews() {
     const el = document.getElementById("reviews");
     if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
-  }
-
-  return (
-    <div className="md:hidden bg-[#e3d3b3]">
- // ------- NEW: compute blurb (short copy) -------
-  const blurb =
-    product.shortDescription ||
-    product.tagline ||
-    (product.description
-      ? product.description.split(". ")[0] + (product.description.includes(".") ? "." : "")
-      : "");
-
-  // helper to open details accordion
-  function openDetails() {
-    const el = document.getElementById("acc-details") as HTMLDetailsElement | null;
-    if (el) {
-      el.open = true;
-      el.scrollIntoView({ behavior: "smooth", block: "start" });
-    }
   }
 
   return (
@@ -139,7 +139,7 @@ export default function ProductDetailMobile({
         </div>
       </div>
 
-      {/* Gallery: single image + arrows + dots */}
+      {/* Gallery */}
       <div className="px-4 mt-3">
         <div className="relative w-full h-[78vw] max-h-[560px] overflow-hidden rounded-xl border bg-white">
           <Image
@@ -180,9 +180,7 @@ export default function ProductDetailMobile({
         </div>
       </div>
 
-      */}
-
-      {/* ==== Badges + Short blurb (Mario-style) ==== */}
+      {/* Badges + Short blurb */}
       {(product.badges?.length || blurb) && (
         <div className="px-4 mt-4">
           {!!product.badges?.length && (
@@ -200,18 +198,15 @@ export default function ProductDetailMobile({
 
           {blurb && (
             <p className="mt-4 text-[15px] leading-6 text-gray-800">
-              {blurb}
+              {blurb}{" "}
               {product.description && (
-                <>
-                  {" "}
-                  <button
-                    type="button"
-                    onClick={openDetails}
-                    className="font-medium text-cucumber-800 underline"
-                  >
-                    Read more
-                  </button>
-                </>
+                <button
+                  type="button"
+                  onClick={openDetails}
+                  className="font-medium text-cucumber-800 underline"
+                >
+                  Read more
+                </button>
               )}
             </p>
           )}
@@ -240,25 +235,6 @@ export default function ProductDetailMobile({
         </div>
       ) : null}
 
-{/* Badges — icon + label under the photo (Mario style) */}
-{!!product.badges?.length && (
-  <div className="px-4 mt-5">
-    <ul className="grid grid-cols-3 gap-4 text-center">
-      {product.badges.map((b) => (
-        <li key={b} className="flex flex-col items-center">
-          <span className="grid place-items-center w-12 h-12 rounded-full border border-cucumber-700/30 bg-white shadow-sm">
-            <span className="text-xl leading-none">
-              {ICON_MAP[b] ?? "✨"}
-            </span>
-          </span>
-          <span className="mt-2 text-[13px] font-medium text-cucumber-900">
-            {b}
-          </span>
-        </li>
-      ))}
-    </ul>
-  </div>
-)}
       {/* Purchase type */}
       <div className="px-4 mt-5 space-y-3">
         <button
@@ -285,22 +261,16 @@ export default function ProductDetailMobile({
         >
           <div className="flex items-center justify-between">
             <span className="font-medium">Subscribe & save</span>
-            <span className="text-cucumber-700 text-sm font-semibold">
-              Save up to 15%
-            </span>
+            <span className="text-cucumber-700 text-sm font-semibold">Save up to 15%</span>
           </div>
-          <div className="mt-1 text-xs text-gray-600">
-            Deliver every 30 days · Cancel anytime
-          </div>
+          <div className="mt-1 text-xs text-gray-600">Deliver every 30 days · Cancel anytime</div>
         </button>
       </div>
 
       {/* Related products carousel */}
       {related.length > 0 && (
         <section className="mt-8">
-          <h2 className="px-4 font-[var(--font-playfair)] text-2xl">
-            People also bought
-          </h2>
+          <h2 className="px-4 font-[var(--font-playfair)] text-2xl">People also bought</h2>
           <div className="mt-3 overflow-x-auto no-scrollbar">
             <ul className="flex gap-3 px-4 pb-2">
               {related.map((p: any) => (
@@ -311,16 +281,16 @@ export default function ProductDetailMobile({
                   <Link href={`/products/${p.slug}`} className="block">
                     <div className="relative w-full h-40">
                       <Image
-                        src={p.image || p.images?.[0]}
-                        alt={p.title}
+                        src={(p as any).image || (p as any).images?.[0]}
+                        alt={(p as any).title}
                         fill
                         className="object-cover"
                       />
                     </div>
                     <div className="p-3">
-                      <div className="text-sm line-clamp-2">{p.title}</div>
+                      <div className="text-sm line-clamp-2">{(p as any).title}</div>
                       <div className="mt-1 text-cucumber-800 font-semibold">
-                        ${p.price.toFixed(2)}
+                        ${(p as any).price.toFixed(2)}
                       </div>
                     </div>
                   </Link>
@@ -331,7 +301,7 @@ export default function ProductDetailMobile({
         </section>
       )}
 
-         {/* ==== Accordion: add id for 'Product Details' so Read more can open it ==== */}
+      {/* Accordion */}
       {(product.ingredients || product.description || product.usage) && (
         <section className="px-4 mt-4 space-y-2">
           <AccordionRow title="Ingredients" openByDefault={false}>
@@ -342,7 +312,6 @@ export default function ProductDetailMobile({
             )}
           </AccordionRow>
 
-          {/* NOTE the id="acc-details" */}
           <AccordionRow id="acc-details" title="Product Details" openByDefault={false}>
             {product.description ? (
               <p className="text-sm leading-relaxed">{product.description}</p>
@@ -403,18 +372,30 @@ export default function ProductDetailMobile({
         Free shipping on orders $65+ • Easy returns within 30 days.
       </div>
 
-      {/* Reviews target (for the scroll) */}
+      {/* Reviews */}
       <div id="reviews" className="px-4 pb-40">
         <h2 className="font-[var(--font-playfair)] text-2xl">Reviews</h2>
         <p className="mt-2 text-sm text-gray-700">No reviews yet — be the first!</p>
 
         <form className="mt-4 grid gap-3">
-          <input type="text" placeholder="Your name" className="rounded-lg border bg-white px-3 py-2 text-sm" />
+          <input
+            type="text"
+            placeholder="Your name"
+            className="rounded-lg border bg-white px-3 py-2 text-sm"
+          />
           <select className="rounded-lg border bg-white px-3 py-2 text-sm">
             <option value="">Rating (0–5)</option>
-            {[0,1,2,3,4,5].map(n => <option key={n} value={n}>{n}</option>)}
+            {[0, 1, 2, 3, 4, 5].map((n) => (
+              <option key={n} value={n}>
+                {n}
+              </option>
+            ))}
           </select>
-          <textarea rows={4} placeholder="Write your review..." className="rounded-lg border bg-white px-3 py-2 text-sm" />
+          <textarea
+            rows={4}
+            placeholder="Write your review..."
+            className="rounded-lg border bg-white px-3 py-2 text-sm"
+          />
           <button
             type="button"
             className="rounded-lg bg-cucumber-700 text-white px-4 py-2 text-sm font-medium"
@@ -469,7 +450,10 @@ function Stars({ value }: { value: number }) {
           viewBox="0 0 20 20"
           className={`h-4 w-4 ${isFull ? "fill-cucumber-700" : "fill-none"} stroke-cucumber-700`}
         >
-          <path strokeWidth="1.5" d="M10 2.5l2.47 5.02 5.54.81-4 3.9.94 5.5L10 15.9 5.05 17.73l.94-5.5-4-3.9 5.54-.81L10 2.5z" />
+          <path
+            strokeWidth="1.5"
+            d="M10 2.5l2.47 5.02 5.54.81-4 3.9.94 5.5L10 15.9 5.05 17.73l.94-5.5-4-3.9 5.54-.81L10 2.5z"
+          />
           {isFull && <path d="M10 2.5l2.47 5.02 5.54.81-4 3.9.94 5.5L10 15.9V2.5z" />}
         </svg>
       ))}
