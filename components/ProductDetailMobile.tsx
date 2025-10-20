@@ -2,10 +2,21 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { useMemo, useState } from "react";
 import { useCart } from "./CartProvider";
 
 type Variant = { label: string; price: number; sku?: string };
+
+type Related = {
+  slug: string;
+  title: string;
+  price: number;
+  image?: string;
+  images?: string[];
+  rating?: number;
+};
+
 type Product = {
   sku: string;
   title: string;
@@ -17,11 +28,17 @@ type Product = {
   ingredients?: string;
   usage?: string;
   variants?: Variant[];
-  rating?: number;        // 0–5 (optional; defaults to 0)
-  reviewCount?: number;   // total reviews (optional; defaults to 0)
+  rating?: number;        // 0–5
+  reviewCount?: number;   // total reviews
 };
 
-export default function ProductDetailMobile({ product }: { product: Product }) {
+export default function ProductDetailMobile({
+  product,
+  related = [],
+}: {
+  product: Product;
+  related?: Related[];
+}) {
   const cart = useCart();
 
   // ---- state ----
@@ -29,7 +46,7 @@ export default function ProductDetailMobile({ product }: { product: Product }) {
   const [qty, setQty] = useState(1);
   const [purchase, setPurchase] = useState<"onetime" | "subscribe">("onetime");
   const [vIdx, setVIdx] = useState(0);
-  const imgs = product.images?.length ? product.images : ["/placeholder.png"];
+  const imgs = product.images?.length ? product.images : ["/placeholder.png"] as string[];
 
   const selectedVariant = useMemo(() => {
     if (product.variants?.length) return product.variants[vIdx];
@@ -227,6 +244,52 @@ export default function ProductDetailMobile({ product }: { product: Product }) {
         </button>
       </div>
 
+      {/* People also bought — directly under Subscribe */}
+      {related.length > 0 && (
+        <div className="px-4 mt-6">
+          <h3 className="font-[var(--font-playfair)] text-xl mb-3">
+            People also bought
+          </h3>
+
+          <div className="-mx-4 px-4 overflow-x-auto no-scrollbar">
+            <ul className="flex gap-3 snap-x snap-mandatory">
+              {related.map((r) => {
+                const src = r.image || r.images?.[0] || "/assets/fallback.jpg";
+                return (
+                  <li
+                    key={r.slug}
+                    className="w-[180px] shrink-0 snap-start rounded-lg border bg-white overflow-hidden"
+                  >
+                    <Link href={`/products/${r.slug}`} className="block">
+                      <div className="relative h-40 w-full">
+                        <Image
+                          src={src}
+                          alt={r.title}
+                          fill
+                          sizes="180px"
+                          className="object-cover"
+                        />
+                      </div>
+                      <div className="p-3">
+                        <div className="text-sm font-medium line-clamp-2">{r.title}</div>
+                        <div className="mt-1 text-sm text-cucumber-800 font-semibold">
+                          ${r.price.toFixed(2)}
+                        </div>
+                        {typeof r.rating === "number" && (
+                          <div className="mt-1">
+                            <Stars value={Math.max(0, Math.min(5, r.rating))} />
+                          </div>
+                        )}
+                      </div>
+                    </Link>
+                  </li>
+                );
+              })}
+            </ul>
+          </div>
+        </div>
+      )}
+
       {/* Spacer for sticky bar */}
       <div className="h-28" />
 
@@ -274,9 +337,7 @@ export default function ProductDetailMobile({ product }: { product: Product }) {
       {/* ---- Reviews target (for the scroll) ---- */}
       <div id="reviews" className="px-4 pb-40">
         <h2 className="font-[var(--font-playfair)] text-2xl">Reviews</h2>
-        <p className="mt-2 text-sm text-gray-700">
-          No reviews yet — be the first!
-        </p>
+        <p className="mt-2 text-sm text-gray-700">No reviews yet — be the first!</p>
 
         {/* lightweight, non-wired form placeholder */}
         <form className="mt-4 grid gap-3">
@@ -287,8 +348,10 @@ export default function ProductDetailMobile({ product }: { product: Product }) {
           />
           <select className="rounded-lg border bg-white px-3 py-2 text-sm">
             <option value="">Rating (0–5)</option>
-            {[0,1,2,3,4,5].map((n)=>(
-              <option key={n} value={n}>{n}</option>
+            {[0, 1, 2, 3, 4, 5].map((n) => (
+              <option key={n} value={n}>
+                {n}
+              </option>
             ))}
           </select>
           <textarea
