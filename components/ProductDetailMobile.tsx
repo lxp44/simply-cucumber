@@ -98,6 +98,25 @@ export default function ProductDetailMobile({
 
   return (
     <div className="md:hidden bg-[#e3d3b3]">
+ // ------- NEW: compute blurb (short copy) -------
+  const blurb =
+    product.shortDescription ||
+    product.tagline ||
+    (product.description
+      ? product.description.split(". ")[0] + (product.description.includes(".") ? "." : "")
+      : "");
+
+  // helper to open details accordion
+  function openDetails() {
+    const el = document.getElementById("acc-details") as HTMLDetailsElement | null;
+    if (el) {
+      el.open = true;
+      el.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  }
+
+  return (
+    <div className="md:hidden bg-[#e3d3b3]">
       {/* Title / stars / small price */}
       <div className="px-4 pt-3">
         <h1 className="text-3xl font-[var(--font-playfair)] leading-tight">
@@ -161,17 +180,41 @@ export default function ProductDetailMobile({
         </div>
       </div>
 
-      {/* Badges */}
-      {!!product.badges?.length && (
-        <div className="px-4 mt-4 flex flex-wrap gap-2">
-          {product.badges.map((b) => (
-            <span
-              key={b}
-              className="inline-flex items-center rounded-full border px-3 py-1 text-sm bg-white"
-            >
-              {b}
-            </span>
-          ))}
+      */}
+
+      {/* ==== Badges + Short blurb (Mario-style) ==== */}
+      {(product.badges?.length || blurb) && (
+        <div className="px-4 mt-4">
+          {!!product.badges?.length && (
+            <div className="grid grid-cols-3 gap-6 text-center">
+              {product.badges.map((b) => (
+                <div key={b} className="flex flex-col items-center gap-2">
+                  <span className="inline-grid place-items-center rounded-full border border-cucumber-700/30 text-cucumber-700 bg-white w-10 h-10">
+                    {BADGE_ICON[b] ?? <Sparkles className="w-5 h-5" />}
+                  </span>
+                  <span className="text-[13px] font-medium text-cucumber-900">{b}</span>
+                </div>
+              ))}
+            </div>
+          )}
+
+          {blurb && (
+            <p className="mt-4 text-[15px] leading-6 text-gray-800">
+              {blurb}
+              {product.description && (
+                <>
+                  {" "}
+                  <button
+                    type="button"
+                    onClick={openDetails}
+                    className="font-medium text-cucumber-800 underline"
+                  >
+                    Read more
+                  </button>
+                </>
+              )}
+            </p>
+          )}
         </div>
       )}
 
@@ -288,20 +331,19 @@ export default function ProductDetailMobile({
         </section>
       )}
 
-      {/* Accordion: Ingredients / Product Details / How to Apply */}
+         {/* ==== Accordion: add id for 'Product Details' so Read more can open it ==== */}
       {(product.ingredients || product.description || product.usage) && (
         <section className="px-4 mt-4 space-y-2">
-          <AccordionRow title="Ingredients">
+          <AccordionRow title="Ingredients" openByDefault={false}>
             {product.ingredients ? (
-              <p className="text-sm whitespace-pre-line leading-relaxed">
-                {product.ingredients}
-              </p>
+              <p className="text-sm whitespace-pre-line leading-relaxed">{product.ingredients}</p>
             ) : (
               <Empty />
             )}
           </AccordionRow>
 
-          <AccordionRow title="Product Details">
+          {/* NOTE the id="acc-details" */}
+          <AccordionRow id="acc-details" title="Product Details" openByDefault={false}>
             {product.description ? (
               <p className="text-sm leading-relaxed">{product.description}</p>
             ) : (
@@ -309,7 +351,7 @@ export default function ProductDetailMobile({
             )}
           </AccordionRow>
 
-          <AccordionRow title="How to Apply">
+          <AccordionRow title="How to Apply" openByDefault={false}>
             {product.usage ? (
               <p className="text-sm leading-relaxed">{product.usage}</p>
             ) : (
