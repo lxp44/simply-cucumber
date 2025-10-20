@@ -81,6 +81,17 @@ function Empty() {
   const rating = Math.max(0, Math.min(5, product.rating ?? 0));
   const reviewCount = product.reviewCount ?? 0;
 
+// ---- safe badges (falls back to highlights if badges missing) ----
+const badges = Array.isArray(product.badges) && product.badges.length
+  ? product.badges
+  : Array.isArray(product.highlights) ? product.highlights.slice(0, 3) : [];
+
+// dev sanity check (won’t ship minified builds)
+if (process.env.NODE_ENV !== "production") {
+  // eslint-disable-next-line no-console
+  console.log("[ProductDetailMobile] badges:", badges, "from product:", product.title);
+}
+
   // ------- short blurb under badges -------
   const blurb =
     product.shortDescription ||
