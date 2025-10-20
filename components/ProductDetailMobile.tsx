@@ -59,6 +59,10 @@ export default function ProductDetailMobile({
 }) {
   const cart = useCart();
 
+function Empty() {
+  return <p className="text-sm text-gray-500">Info coming soon.</p>;
+}
+
   // ---- state ----
   const [active, setActive] = useState(0);
   const [qty, setQty] = useState(1);
