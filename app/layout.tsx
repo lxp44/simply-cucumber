@@ -135,9 +135,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               </h2>
             </div>
 
-import SocialRow from "@/components/SocialRow";
 
-// ...inside the footer/newsletter section:
 <SocialRow
   links={{
     x: "https://x.com/simplycucumber",
