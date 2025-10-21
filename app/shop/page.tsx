@@ -99,23 +99,23 @@ export default function ShopPage({ searchParams }: PageProps) {
           </h1>
         </div>
 
-        {/* --- MOBILE: sticky Filter/Sort bar --- */}
-        <div className="md:hidden sticky top-[112px] z-40 bg-[#e3d3b3] border-b shadow-sm -mx-4 px-4">
-          <div className="py-3 flex items-center gap-3">
-            <button
-              onClick={() => setFiltersOpen(true)}
-              className="flex-1 rounded-full border bg-white px-4 py-2 text-sm font-medium shadow-sm active:scale-[0.99]"
-            >
-              Filter
-            </button>
-            <button
-              onClick={() => setSortOpen(true)}
-              className="flex-1 rounded-full border bg-white px-4 py-2 text-sm font-medium shadow-sm active:scale-[0.99]"
-            >
-              Sort
-            </button>
-          </div>
-        </div>
+        {/* --- MOBILE: Filter/Sort bar (static under hero) --- */}
+<div className="md:hidden bg-[#e3d3b3] border-b -mx-4 px-4">
+  <div className="py-3 flex items-center gap-3">
+    <button
+      onClick={() => setFiltersOpen(true)}
+      className="flex-1 rounded-full border bg-white px-4 py-2 text-sm font-medium shadow-sm active:scale-[0.99]"
+    >
+      Filter
+    </button>
+    <button
+      onClick={() => setSortOpen(true)}
+      className="flex-1 rounded-full border bg-white px-4 py-2 text-sm font-medium shadow-sm active:scale-[0.99]"
+    >
+      Sort
+    </button>
+  </div>
+</div>
 
         {/* Sidebar + content */}
         <div className="mt-8 grid grid-cols-1 lg:grid-cols-[240px_1fr] gap-8">
