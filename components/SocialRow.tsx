@@ -1,70 +1,48 @@
 "use client";
 
-import {
-  FaXTwitter,
-  FaFacebookF,
-  FaInstagram,
-  FaTiktok,
-  FaLinkedinIn,
-} from "react-icons/fa6";
+import { FaInstagram, FaTiktok, FaFacebook, FaLinkedin, FaXTwitter } from "react-icons/fa6";
 
-type Props = {
-  // if you ever want to override the default links from outside
-  links?: Partial<{
-    x: string;
-    facebook: string;
-    instagram: string;
-    tiktok: string;
-    linkedin: string;
-  }>;
-};
-
-export default function SocialRow({ links = {} }: Props) {
-  const L = {
-    x:        "https://x.com/your-handle",
-    facebook: "https://facebook.com/your-handle",
-    instagram:"https://instagram.com/your-handle",
-    tiktok:   "https://www.tiktok.com/@your-handle",
-    linkedin: "https://www.linkedin.com/company/your-handle",
-    ...links,
+export default function SocialRow({
+  links,
+}: {
+  links: {
+    x?: string;
+    facebook?: string;
+    instagram?: string;
+    tiktok?: string;
+    linkedin?: string;
   };
-
-  const base =
-    "inline-flex h-10 w-10 items-center justify-center rounded-full border border-white/25 bg-white/10 text-white hover:bg-white/20 hover:border-white/40 transition";
+}) {
+  const iconClass =
+    "w-6 h-6 hover:scale-110 transition-transform duration-200 text-white hover:text-[#d4af37]";
 
   return (
-    <div className="mt-8">
-      <h3 className="text-sm font-semibold tracking-wide text-white/90">
-        FOLLOW US
-      </h3>
-
-      <ul className="mt-3 flex items-center gap-4">
-        <li>
-          <a className={base} href={L.x} aria-label="Follow us on X (Twitter)" target="_blank" rel="noopener noreferrer">
-            <FaXTwitter className="h-4 w-4" />
-          </a>
-        </li>
-        <li>
-          <a className={base} href={L.facebook} aria-label="Follow us on Facebook" target="_blank" rel="noopener noreferrer">
-            <FaFacebookF className="h-4 w-4" />
-          </a>
-        </li>
-        <li>
-          <a className={base} href={L.instagram} aria-label="Follow us on Instagram" target="_blank" rel="noopener noreferrer">
-            <FaInstagram className="h-4 w-4" />
-          </a>
-        </li>
-        <li>
-          <a className={base} href={L.tiktok} aria-label="Follow us on TikTok" target="_blank" rel="noopener noreferrer">
-            <FaTiktok className="h-4 w-4" />
-          </a>
-        </li>
-        <li>
-          <a className={base} href={L.linkedin} aria-label="Follow us on LinkedIn" target="_blank" rel="noopener noreferrer">
-            <FaLinkedinIn className="h-4 w-4" />
-          </a>
-        </li>
-      </ul>
+    <div className="flex justify-center gap-5 mt-3 mb-6">
+      {links.x && (
+        <a href={links.x} target="_blank" rel="noopener noreferrer" aria-label="X (Twitter)">
+          <FaXTwitter className={iconClass} />
+        </a>
+      )}
+      {links.facebook && (
+        <a href={links.facebook} target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+          <FaFacebook className={iconClass} />
+        </a>
+      )}
+      {links.instagram && (
+        <a href={links.instagram} target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+          <FaInstagram className={iconClass} />
+        </a>
+      )}
+      {links.tiktok && (
+        <a href={links.tiktok} target="_blank" rel="noopener noreferrer" aria-label="TikTok">
+          <FaTiktok className={iconClass} />
+        </a>
+      )}
+      {links.linkedin && (
+        <a href={links.linkedin} target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+          <FaLinkedin className={iconClass} />
+        </a>
+      )}
     </div>
   );
 }
