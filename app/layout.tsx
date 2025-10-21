@@ -124,18 +124,23 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           >
             <div className="text-center py-6">
               <h2
-                className="text-3xl md:text-4xl font-[var(--font-playfair)] font-bold"
-                style={{
-                  background: "linear-gradient(90deg,#d4af37,#ffd700,#b8860b)",
-                  WebkitBackgroundClip: "text",
-                  WebkitTextFillColor: "transparent",
-                }}
-              >
-                HEALTH IS WEALTH
-              </h2>
+  className="
+    font-[var(--font-playfair)] font-extrabold
+    leading-[0.9] tracking-[0.25em] text-center
+    text-[9vw] md:text-6xl lg:text-7xl
+  "
+  style={{
+    background: "linear-gradient(90deg,#d4af37,#ffd700,#b8860b)",
+    WebkitBackgroundClip: "text",
+    WebkitTextFillColor: "transparent",
+  }}
+>
+  <span className="block">HEALTH&nbsp;IS</span>
+  <span className="block mt-1">WEALTH</span>
+</h2>
             </div>
 
-
+<div className="mt-2">
 <SocialRow
   links={{
     x: "https://x.com/simplycucumber",
