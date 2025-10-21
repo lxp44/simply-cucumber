@@ -156,52 +156,91 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 
             {/* Footer grid */}
             <div className="mx-auto max-w-6xl px-4 py-12 grid md:grid-cols-4 gap-8">
-              {/* 1) Newsletter */}
-              <div>
-                <div className="text-left">
-                  <h3 className="text-lg md:text-xl font-semibold text-gold-metallic tracking-wide mb-2">
-                    STAY IN TOUCH.
-                  </h3>
-                  <p className="text-sm md:text-base text-white/90 mb-6 max-w-md">
-                    Signup to get first access to product launches &amp; exclusive offers. Receive 15% Off Your First Order.
-                  </p>
+              {/* Newsletter Section */}
+<div className="text-center py-12 px-6 md:px-0">
+  <h3 className="text-lg md:text-xl font-semibold text-gold-metallic tracking-wide mb-2">
+    STAY IN TOUCH.
+  </h3>
+  <p className="max-w-md mx-auto text-sm md:text-base text-white/90 mb-6">
+    Signup to get first access to product launches & exclusive offers. Receive 15% Off Your First Order.
+  </p>
 
-                  <form className="max-w-sm grid gap-3">
-                    {/* Email */}
-                    <input
-                      type="email"
-                      placeholder="Enter your email"
-                      className="w-full rounded-full border border-white/40 bg-transparent text-white placeholder-white/60 px-4 py-2.5 text-sm focus:outline-none focus:border-gold-metallic transition-all"
-                      required
-                    />
+  <form
+    className="max-w-sm mx-auto grid gap-3"
+    onInput={(e) => {
+      const form = e.currentTarget;
+      const email = form.querySelector('input[type="email"]');
+      const phone = form.querySelector('input[type="tel"]');
+      const button = form.querySelector('button');
+      if (email && phone && button) {
+        const filled = email.value.trim() !== "" || phone.value.trim() !== "";
+        if (filled) {
+          button.disabled = false;
+          button.style.opacity = "1";
+          button.style.cursor = "pointer";
+          button.style.boxShadow =
+            "0 0 10px rgba(212,175,55,0.6), 0 0 25px rgba(255,215,0,0.3)";
+          button.style.filter = "none";
+        } else {
+          button.disabled = true;
+          button.style.opacity = "0.5";
+          button.style.cursor = "not-allowed";
+          button.style.boxShadow = "none";
+          button.style.filter = "grayscale(0.4)";
+        }
+      }
+    }}
+  >
+    {/* Email */}
+    <input
+      type="email"
+      placeholder="Enter your email"
+      className="w-full rounded-full border border-white/40 bg-transparent text-white placeholder-white/60 px-4 py-2.5 text-sm focus:outline-none focus:border-gold-metallic transition-all"
+    />
 
-                    {/* Phone (optional) */}
-                    <div className="relative">
-                      <div className="absolute left-3 top-1/2 -translate-y-1/2 text-white/70 text-sm select-none" aria-hidden>
-                        🇺🇸
-                      </div>
-                      <input
-                        type="tel"
-                        placeholder="Phone Number (Optional)"
-                        className="w-full rounded-full border border-white/40 bg-transparent text-white placeholder-white/60 pl-10 pr-4 py-2.5 text-sm focus:outline-none focus:border-gold-metallic transition-all"
-                      />
-                    </div>
+    {/* Phone (optional) */}
+    <div className="relative">
+      <div className="absolute left-3 top-1/2 -translate-y-1/2 text-white/70 text-sm select-none">
+        🇺🇸
+      </div>
+      <input
+        type="tel"
+        placeholder="Phone Number (Optional)"
+        className="w-full rounded-full border border-white/40 bg-transparent text-white placeholder-white/60 pl-10 pr-4 py-2.5 text-sm focus:outline-none focus:border-gold-metallic transition-all"
+      />
+    </div>
 
-                    {/* Submit */}
-                    <button
-                      type="submit"
-                      className="w-full rounded-full bg-gold-metallic text-cucumber-800 font-semibold text-sm py-2.5 tracking-wide hover:opacity-90 transition-all"
-                    >
-                      SIGN UP
-                    </button>
-                  </form>
+    {/* Submit Button */}
+    <button
+      type="submit"
+      disabled
+      className="w-full rounded-full bg-gold-metallic text-cucumber-800 font-semibold text-sm py-2.5 tracking-wide opacity-50 transition-all duration-300"
+      style={{
+        transition:
+          "opacity 0.3s ease, box-shadow 0.4s ease, filter 0.4s ease, transform 0.3s ease",
+      }}
+      onMouseEnter={(e) => {
+        if (!e.currentTarget.disabled) {
+          e.currentTarget.style.transform = "scale(1.03)";
+        }
+      }}
+      onMouseLeave={(e) => {
+        e.currentTarget.style.transform = "scale(1)";
+      }}
+    >
+      SIGN UP
+    </button>
+  </form>
 
-                  <p className="text-xs text-white/70 mt-4 max-w-sm">
-                    By submitting this form, you consent to receive marketing emails or text messages from Simply Cucumber.{" "}
-                    See our <Link href="/privacy" className="underline hover:text-gold-metallic">Privacy Policy</Link>.
-                  </p>
-                </div>
-              </div>
+  <p className="text-xs text-white/70 mt-4 max-w-sm mx-auto">
+    By submitting this form, you consent to receive marketing emails or text messages from Simply Cucumber.{" "}
+    See our{" "}
+    <a href="/privacy" className="underline hover:text-gold-metallic">
+      Privacy Policy
+    </a>
+    .
+  </p>
+</div>
 
               {/* 2) Customer Care */}
               <div>
