@@ -345,7 +345,7 @@ if (process.env.NODE_ENV !== "production") {
 </AccordionRow>
 
       {/* Spacer for sticky bar */}
-      <div className="h-28" />
+      <div className="h-20" />
 
       {/* Sticky add-to-bag with qty at the side */}
       <div className="fixed inset-x-0 bottom-0 z-[60] bg-white/95 backdrop-blur border-t p-3">
@@ -387,7 +387,7 @@ if (process.env.NODE_ENV !== "production") {
       </div>
 
       {/* Reviews */}
-      <div id="reviews" className="px-4 pb-40">
+      <div id="reviews" className="px-4 pb-12">
         <h2 className="font-[var(--font-playfair)] text-2xl">Reviews</h2>
         <p className="mt-2 text-sm text-gray-700">No reviews yet — be the first!</p>
 
