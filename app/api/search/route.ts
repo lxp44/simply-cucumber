@@ -1,6 +1,6 @@
 // app/api/search/route.ts
 import { NextResponse } from "next/server";
-import { products } from "@/lib/products"; // ← uses your existing product data
+import { products } from "../../../lib/products";
 
 export async function GET(req: Request) {
   const { searchParams } = new URL(req.url);
