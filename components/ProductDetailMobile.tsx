@@ -46,8 +46,13 @@ function Empty() {
   const [qty, setQty] = useState(1);
   const [purchase, setPurchase] = useState<"onetime" | "subscribe">("onetime");
   const [vIdx, setVIdx] = useState(0);
-  const imgs = product.images?.length ? product.images : ["/placeholder.png"];
-
+ const imgs = useMemo(() => {
+  // if a variant is selected and has its own image, show that first
+  if (product.variants?.length && product.variants[vIdx]?.image) {
+    return [product.variants[vIdx].image, ...(product.images ?? [])];
+  }
+  return product.images?.length ? product.images : ["/placeholder.png"];
+}, [product, vIdx]);
   const selectedVariant = useMemo(() => {
     if (product.variants?.length) return product.variants[vIdx];
     return { label: "", price: product.price, sku: product.sku };
