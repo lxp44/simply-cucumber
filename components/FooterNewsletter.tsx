@@ -12,8 +12,7 @@ export default function FooterNewsletter() {
   function handleSubmit(e: FormEvent) {
     e.preventDefault();
     if (!filled) return;
-    // TODO: wire to your subscribe endpoint (Mailchimp, etc.)
-    // e.g. fetch("/api/subscribe", { method:"POST", body: JSON.stringify({ email, phone }) })
+    // TODO: hook to your subscribe endpoint (Mailchimp/etc.)
     alert("Thanks! You’re on the list 🥒");
   }
 
@@ -28,7 +27,6 @@ export default function FooterNewsletter() {
       </p>
 
       <form onSubmit={handleSubmit} className="max-w-sm mx-auto grid gap-3">
-        {/* Email */}
         <input
           type="email"
           placeholder="Enter your email"
@@ -37,21 +35,17 @@ export default function FooterNewsletter() {
           className="w-full rounded-full border border-white/40 bg-transparent text-white placeholder-white/60 px-4 py-2.5 text-sm focus:outline-none focus:border-gold-metallic transition-all"
         />
 
-        {/* Phone (optional) */}
         <div className="relative">
-          <div className="absolute left-3 top-1/2 -translate-y-1/2 text-white/70 text-sm select-none">
-            🇺🇸
-          </div>
+          <div className="absolute left-3 top-1/2 -translate-y-1/2 text-white/70 text-sm select-none">🇺🇸</div>
           <input
             type="tel"
             placeholder="Phone Number (Optional)"
             value={phone}
             onChange={(e) => setPhone(e.target.value)}
             className="w-full rounded-full border border-white/40 bg-transparent text-white placeholder-white/60 pl-10 pr-4 py-2.5 text-sm focus:outline-none focus:border-gold-metallic transition-all"
-          </input>
+          />
         </div>
 
-        {/* Submit */}
         <button
           type="submit"
           disabled={!filled}
