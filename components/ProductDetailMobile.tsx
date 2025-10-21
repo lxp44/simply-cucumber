@@ -6,6 +6,7 @@ import Link from "next/link";
 import { useMemo, useState } from "react";
 import { useCart } from "./CartProvider";
 import type { Product } from "../lib/products"; // ✅ single source of truth
+import { CheckCircle2 } from "lucide-react"; // add this next to your other lucide-react imports
 
 import {
   Leaf,
@@ -321,6 +322,22 @@ if (process.env.NODE_ENV !== "production") {
           </AccordionRow>
         </section>
       )}
+
+{/* Benefits */}
+<AccordionRow title="Benefits" openByDefault={false}>
+  {Array.isArray(product.benefits) && product.benefits.length > 0 ? (
+    <ul className="space-y-2 text-sm leading-relaxed">
+      {product.benefits.map((b, i) => (
+        <li key={i} className="flex items-start gap-2">
+          <CheckCircle2 className="mt-0.5 h-4 w-4 text-cucumber-700" />
+          <span>{b}</span>
+        </li>
+      ))}
+    </ul>
+  ) : (
+    <Empty />
+  )}
+</AccordionRow>
 
       {/* Spacer for sticky bar */}
       <div className="h-28" />
