@@ -10,7 +10,7 @@ import ProductSearch from "../components/ProductSearch";
 import MobileMenu from "../components/MobileMenu";
 import SocialRow from "../components/SocialRow";
 import FooterNewsletter from "../components/FooterNewsletter"; // ✅ client newsletter
-import MobileSearchBar from "../components/MobileSearchBar"; // ✅ NEW
+import MobileSearchBar from "../components/MobileSearchBar"; // ✅ mobile search
 
 const playfair = Playfair_Display({
   subsets: ["latin"],
@@ -38,35 +38,70 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <header className="sticky top-0 z-[9999] bg-white/80 backdrop-blur border-b overflow-visible">
             <div className="mx-auto max-w-6xl px-4">
               <div className="grid grid-cols-3 items-center py-2 md:py-3">
-<header className="sticky top-0 z-[9999] bg-white/80 backdrop-blur border-b overflow-visible">
-  <div className="mx-auto max-w-6xl px-4">
-    <div className="grid grid-cols-3 items-center py-2 md:py-3">
+                {/* Left */}
                 <nav className="flex items-center gap-3 md:gap-6 text-sm relative justify-start">
-                  <div className="md:hidden"><MobileMenu /></div>
+                  <div className="md:hidden">
+                    <MobileMenu />
+                  </div>
                   <div className="hidden md:block relative group/menu">
-                    <Link href="/shop" className="text-gold-rich inline-block py-2 hover:drop-shadow-[0_0_8px_rgba(212,175,55,0.5)] transition-all duration-300">Shop</Link>
+                    <Link
+                      href="/shop"
+                      className="text-gold-rich inline-block py-2 hover:drop-shadow-[0_0_8px_rgba(212,175,55,0.5)] transition-all duration-300"
+                    >
+                      Shop
+                    </Link>
                     <MegaMenu />
                   </div>
-                  <Link href="/best-sellers" className="hidden md:inline-block text-gold-rich py-2 hover:drop-shadow-[0_0_8px_rgba(212,175,55,0.5)] transition-all duration-300">Best Sellers</Link>
-                  <Link href="/skin-doctor" className="hidden md:inline-block text-gold-rich py-2 hover:drop-shadow-[0_0_8px_rgba(212,175,55,0.5)] transition-all duration-300">Skin Doctor</Link>
+                  <Link
+                    href="/best-sellers"
+                    className="hidden md:inline-block text-gold-rich py-2 hover:drop-shadow-[0_0_8px_rgba(212,175,55,0.5)] transition-all duration-300"
+                  >
+                    Best Sellers
+                  </Link>
+                  <Link
+                    href="/skin-doctor"
+                    className="hidden md:inline-block text-gold-rich py-2 hover:drop-shadow-[0_0_8px_rgba(212,175,55,0.5)] transition-all duration-300"
+                  >
+                    Skin Doctor
+                  </Link>
                 </nav>
+
+                {/* Center */}
                 <div className="flex justify-center">
                   <Link href="/" className="flex items-center gap-2">
-                    <img src="/assets/products/simply-cucumber-profile-logo.png" alt="Simply Cucumber" className="h-10 w-auto md:h-16" />
+                    <img
+                      src="/assets/products/simply-cucumber-profile-logo.png"
+                      alt="Simply Cucumber"
+                      className="h-10 w-auto md:h-16"
+                    />
                   </Link>
                 </div>
+
+                {/* Right */}
                 <nav className="flex items-center gap-4 md:gap-6 text-sm justify-end">
-                  <Link href="/rewards" className="hidden md:inline-block text-gold-rich py-2 hover:drop-shadow-[0_0_8px_rgba(212,175,55,0.5)] transition-all duration-300">Rewards</Link>
-                  <Link href="/salon" className="hidden md:inline-block text-gold-rich py-2 hover:drop-shadow-[0_0_8px_rgba(212,175,55,0.5)] transition-all duration-300">Salon</Link>
-                  <div className="hidden sm:block"><ProductSearch /></div>
+                  <Link
+                    href="/rewards"
+                    className="hidden md:inline-block text-gold-rich py-2 hover:drop-shadow-[0_0_8px_rgba(212,175,55,0.5)] transition-all duration-300"
+                  >
+                    Rewards
+                  </Link>
+                  <Link
+                    href="/salon"
+                    className="hidden md:inline-block text-gold-rich py-2 hover:drop-shadow-[0_0_8px_rgba(212,175,55,0.5)] transition-all duration-300"
+                  >
+                    Salon
+                  </Link>
+                  <div className="hidden sm:block">
+                    <ProductSearch />
+                  </div>
                   <CartLink />
                 </nav>
               </div>
             </div>
-{/* ✅ Clean, rich mobile search (desktop unaffected) */}
-  <MobileSearchBar />
-          </header>
 
+            {/* ✅ Clean, rich mobile search (desktop unaffected) */}
+            <MobileSearchBar />
+          </header>
 
           {/* Page content */}
           <main>{children}</main>
@@ -110,10 +145,26 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               <div>
                 <p className="font-semibold mb-3 text-gold-metallic">Customer Care</p>
                 <ul className="space-y-2">
-                  <li><Link href="/contact" className="hover:underline">Contact Us</Link></li>
-                  <li><Link href="/faqs" className="hover:underline">FAQs</Link></li>
-                  <li><Link href="/shipping" className="hover:underline">Shipping Policy</Link></li>
-                  <li><Link href="/returns" className="hover:underline">Return Policy</Link></li>
+                  <li>
+                    <Link href="/contact" className="hover:underline">
+                      Contact Us
+                    </Link>
+                  </li>
+                  <li>
+                    <Link href="/faqs" className="hover:underline">
+                      FAQs
+                    </Link>
+                  </li>
+                  <li>
+                    <Link href="/shipping" className="hover:underline">
+                      Shipping Policy
+                    </Link>
+                  </li>
+                  <li>
+                    <Link href="/returns" className="hover:underline">
+                      Return Policy
+                    </Link>
+                  </li>
                 </ul>
               </div>
 
@@ -121,9 +172,21 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               <div>
                 <p className="font-semibold mb-3 text-gold-metallic">Get to Know Us</p>
                 <ul className="space-y-2">
-                  <li><Link href="/about" className="hover:underline">About Us</Link></li>
-                  <li><Link href="/salon" className="hover:underline">Our Salon</Link></li>
-                  <li><Link href="/blog" className="hover:underline">Blog</Link></li>
+                  <li>
+                    <Link href="/about" className="hover:underline">
+                      About Us
+                    </Link>
+                  </li>
+                  <li>
+                    <Link href="/salon" className="hover:underline">
+                      Our Salon
+                    </Link>
+                  </li>
+                  <li>
+                    <Link href="/blog" className="hover:underline">
+                      Blog
+                    </Link>
+                  </li>
                 </ul>
               </div>
 
@@ -131,9 +194,21 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               <div>
                 <p className="font-semibold mb-3 text-gold-metallic">Simply Cucumber</p>
                 <ul className="space-y-2">
-                  <li><Link href="/rewards" className="hover:underline">Rewards</Link></li>
-                  <li><Link href="/privacy" className="hover:underline">Privacy Policy</Link></li>
-                  <li><Link href="/terms" className="hover:underline">Terms of Service</Link></li>
+                  <li>
+                    <Link href="/rewards" className="hover:underline">
+                      Rewards
+                    </Link>
+                  </li>
+                  <li>
+                    <Link href="/privacy" className="hover:underline">
+                      Privacy Policy
+                    </Link>
+                  </li>
+                  <li>
+                    <Link href="/terms" className="hover:underline">
+                      Terms of Service
+                    </Link>
+                  </li>
                 </ul>
               </div>
             </div>
