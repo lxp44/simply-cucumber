@@ -100,6 +100,26 @@ bestSeller: true,
       "Balances oil & pH — keeps skin dewy, not greasy",
       "Soothes sensitive skin — cucumber and aloe calm irritation",
     ],
+  variants: [
+    {
+      label: "2 oz",
+      price: 18,
+      sku: "face-mist-2oz",
+      image: "/assets/products/face-mist-2oz.jpg", // 👈 new
+    },
+    {
+      label: "4 oz",
+      price: 27,
+      sku: "face-mist-4oz",
+      image: "/assets/products/face-mist-4oz.jpg",
+    },
+    {
+      label: "8 oz",
+      price: 42,
+      sku: "face-mist-8oz",
+      image: "/assets/products/face-mist-8oz.jpg",
+    },
+  ],
     category: "face",
   },
   {
