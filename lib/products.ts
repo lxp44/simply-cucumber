@@ -112,7 +112,7 @@ bestSeller: true,
       label: "4 oz",
       price: 27,
       sku: "face-mist-4oz",
-      image: "/assets/products/face-mist-4oz.jpg",
+      image: "/assets/products/face-mist-product-1.jpg",
     },
     {
       label: "8 oz",
