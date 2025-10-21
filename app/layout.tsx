@@ -158,18 +158,51 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                 <p className="mb-4">
                   Signup to get first access to product launches &amp; exclusive offers.
                 </p>
-                <NewsletterForm />
-              </div>
+          
+      {/* Newsletter Section */}
+<div className="text-center py-12 px-6 md:px-0">
+  <h3 className="text-lg md:text-xl font-semibold text-gold-metallic tracking-wide mb-2">
+    STAY IN TOUCH.
+  </h3>
+  <p className="max-w-md mx-auto text-sm md:text-base text-white/90 mb-6">
+    Signup to get first access to product launches & exclusive offers. Receive 15% Off Your First Order.
+  </p>
 
-              <div>
-                <p className="font-semibold mb-3 text-gold-metallic">Customer Care</p>
-                <ul className="space-y-2">
-                  <li><Link href="/contact" className="hover:underline">Contact Us</Link></li>
-                  <li><Link href="/faqs" className="hover:underline">FAQs</Link></li>
-                  <li><Link href="/shipping" className="hover:underline">Shipping Policy</Link></li>
-                  <li><Link href="/returns" className="hover:underline">Return Policy</Link></li>
-                </ul>
-              </div>
+  <form className="max-w-sm mx-auto grid gap-3">
+    {/* Email */}
+    <input
+      type="email"
+      placeholder="Enter your email"
+      className="w-full rounded-full border border-white/40 bg-transparent text-white placeholder-white/60 px-4 py-2.5 text-sm focus:outline-none focus:border-gold-metallic transition-all"
+      required
+    />
+
+    {/* Phone (optional) */}
+    <div className="relative">
+      <div className="absolute left-3 top-1/2 -translate-y-1/2 text-white/70 text-sm select-none">
+        🇺🇸
+      </div>
+      <input
+        type="tel"
+        placeholder="Phone Number (Optional)"
+        className="w-full rounded-full border border-white/40 bg-transparent text-white placeholder-white/60 pl-10 pr-4 py-2.5 text-sm focus:outline-none focus:border-gold-metallic transition-all"
+      />
+    </div>
+
+    {/* Submit Button */}
+    <button
+      type="submit"
+      className="w-full rounded-full bg-gold-metallic text-cucumber-800 font-semibold text-sm py-2.5 tracking-wide hover:opacity-90 transition-all"
+    >
+      SIGN UP
+    </button>
+  </form>
+
+  <p className="text-xs text-white/70 mt-4 max-w-sm mx-auto">
+    By submitting this form, you consent to receive marketing emails or text messages from Simply Cucumber. 
+    See our <a href="/privacy" className="underline hover:text-gold-metallic">Privacy Policy</a>.
+  </p>
+</div>
 
               <div>
                 <p className="font-semibold mb-3 text-gold-metallic">Get to Know Us</p>
