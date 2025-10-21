@@ -4,6 +4,7 @@ export type Variant = {
   label: string;
   price: number;
   sku?: string;
+image?: string; // 👈 add this
 };
 
 export type Product = {
