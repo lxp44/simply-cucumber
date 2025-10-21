@@ -10,6 +10,7 @@ import ProductSearch from "../components/ProductSearch";
 import MobileMenu from "../components/MobileMenu";
 import SocialRow from "../components/SocialRow";
 import FooterNewsletter from "../components/FooterNewsletter"; // ✅ client newsletter
+import MobileSearchBar from "../components/MobileSearchBar"; // ✅ NEW
 
 const playfair = Playfair_Display({
   subsets: ["latin"],
@@ -37,6 +38,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <header className="sticky top-0 z-[9999] bg-white/80 backdrop-blur border-b overflow-visible">
             <div className="mx-auto max-w-6xl px-4">
               <div className="grid grid-cols-3 items-center py-2 md:py-3">
+<header className="sticky top-0 z-[9999] bg-white/80 backdrop-blur border-b overflow-visible">
+  <div className="mx-auto max-w-6xl px-4">
+    <div className="grid grid-cols-3 items-center py-2 md:py-3">
                 <nav className="flex items-center gap-3 md:gap-6 text-sm relative justify-start">
                   <div className="md:hidden"><MobileMenu /></div>
                   <div className="hidden md:block relative group/menu">
@@ -59,7 +63,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                 </nav>
               </div>
             </div>
+{/* ✅ Clean, rich mobile search (desktop unaffected) */}
+  <MobileSearchBar />
           </header>
+
 
           {/* Page content */}
           <main>{children}</main>
