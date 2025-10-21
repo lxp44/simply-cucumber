@@ -28,19 +28,22 @@ export default function HeroCarousel({
     <section className="relative overflow-hidden">
       {/* Image */}
       <div className="relative h-[64vh] md:h-[72vh]">
-        <Image
-          src={s.image}
-          alt={s.headline}
-          fill
-          priority
-          className="
-            object-cover object-center
-            scale-[0.95]              /* slight zoom out on mobile */
-            md:scale-100              /* normal scale on desktop */
-            transition-transform duration-500 ease-out
-          "
-        />
-      </div>
+        {/* Image */}
+<div className="relative h-[68vh] md:h-[72vh] overflow-hidden">
+  <Image
+    src={s.image}
+    alt={s.headline}
+    fill
+    priority
+    // Slight zoom-out on mobile only
+    className="
+      object-cover md:object-cover
+      scale-[1.05] md:scale-100
+      object-center
+      transition-transform duration-500 ease-out
+    "
+  />
+</div>
 
       {/* Overlay text */}
       <div className="absolute inset-x-0 bottom-0 top-20 sm:top-24 md:top-0 flex items-center justify-center text-center px-4">
