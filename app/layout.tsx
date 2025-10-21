@@ -134,6 +134,19 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               </h2>
             </div>
 
+import SocialRow from "@/components/SocialRow";
+
+// ...inside the footer/newsletter section:
+<SocialRow
+  links={{
+    x: "https://x.com/simplycucumber",
+    facebook: "https://facebook.com/simplycucumber",
+    instagram: "https://instagram.com/simplycucumber",
+    tiktok: "https://www.tiktok.com/@simplycucumber",
+    linkedin: "https://www.linkedin.com/company/simplycucumber",
+  }}
+/>
+
             <div className="mx-auto max-w-6xl px-4 py-12 grid md:grid-cols-4 gap-8">
               <div>
                 <p className="font-semibold mb-3 text-gold-metallic">Stay in touch.</p>
