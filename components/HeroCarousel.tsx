@@ -28,7 +28,14 @@ export default function HeroCarousel({
     <section className="relative overflow-hidden">
       {/* Image */}
       <div className="relative h-[64vh] md:h-[72vh]">
-        <Image src={s.image} alt={s.headline} fill priority className="object-cover" />
+        {/* Mobile: show full image; Desktop: immersive crop */}
+        <Image
+          src={s.image}
+          alt={s.headline}
+          fill
+          priority
+          className="object-contain md:object-cover md:object-center"
+        />
       </div>
 
       {/* Overlay text */}
