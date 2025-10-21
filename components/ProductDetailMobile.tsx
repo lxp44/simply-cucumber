@@ -47,9 +47,9 @@ function Empty() {
   const [purchase, setPurchase] = useState<"onetime" | "subscribe">("onetime");
   const [vIdx, setVIdx] = useState(0);
  const imgs = useMemo(() => {
-  // if a variant is selected and has its own image, show that first
   if (product.variants?.length && product.variants[vIdx]?.image) {
-    return [product.variants[vIdx].image, ...(product.images ?? [])];
+    // put the chosen variant image first, then the rest of the gallery
+    return [product.variants[vIdx].image!, ...(product.images ?? [])];
   }
   return product.images?.length ? product.images : ["/placeholder.png"];
 }, [product, vIdx]);
