@@ -1,10 +1,11 @@
+// components/HeroCarousel.tsx
 "use client";
 
 import Image from "next/image";
 import { useEffect, useState } from "react";
 
 type Slide = {
-  image: string;      // path under /public
+  image: string;     // path under /public
   headline: string;
   sub: string;
   ctaHref: string;
@@ -14,11 +15,18 @@ type Slide = {
 export default function HeroCarousel({
   slides,
   interval = 6000,
-}: { slides: Slide[]; interval?: number }) {
+}: {
+  slides: Slide[];
+  interval?: number;
+}) {
   const [idx, setIdx] = useState(0);
 
   useEffect(() => {
-    const id = setInterval(() => setIdx((i) => (i + 1) % slides.length), interval);
+    if (slides.length <= 1) return;
+    const id = setInterval(
+      () => setIdx((i) => (i + 1) % slides.length),
+      interval
+    );
     return () => clearInterval(id);
   }, [slides.length, interval]);
 
@@ -26,27 +34,25 @@ export default function HeroCarousel({
 
   return (
     <section className="relative overflow-hidden">
-      {/* Image */}
-      <div className="relative h-[64vh] md:h-[72vh]">
-        {/* Image */}
-<div className="relative h-[68vh] md:h-[72vh] overflow-hidden">
-  <Image
-    src={s.image}
-    alt={s.headline}
-    fill
-    priority
-    // Slight zoom-out on mobile only
-    className="
-      object-cover md:object-cover
-      scale-[1.05] md:scale-100
-      object-center
-      transition-transform duration-500 ease-out
-    "
-  />
-</div>
+      {/* Image wrapper:
+         - a little shorter on mobile (56vh) so we don’t create big gaps
+         - desktop unchanged */}
+      <div className="relative h-[56vh] sm:h-[64vh] md:h-[72vh]">
+        <Image
+          src={s.image}
+          alt={s.headline}
+          fill
+          priority
+          sizes="100vw"
+          className="
+            object-cover
+            md:object-cover
+          "
+        />
+      </div>
 
       {/* Overlay text */}
-      <div className="absolute inset-x-0 bottom-0 top-20 sm:top-24 md:top-0 flex items-center justify-center text-center px-4">
+      <div className="absolute inset-x-0 bottom-0 top-16 sm:top-24 md:top-0 flex items-center justify-center text-center px-4">
         <div className="max-w-3xl">
           <p className="inline-block rounded-full bg-white/80 px-3 py-1 text-xs tracking-wide">
             Friends & Family
@@ -71,7 +77,9 @@ export default function HeroCarousel({
             key={i}
             aria-label={`Go to slide ${i + 1}`}
             onClick={() => setIdx(i)}
-            className={`h-2.5 w-2.5 rounded-full ${i === idx ? "bg-white" : "bg-white/60"}`}
+            className={`h-2.5 w-2.5 rounded-full ${
+              i === idx ? "bg-white" : "bg-white/60"
+            }`}
           />
         ))}
       </div>
