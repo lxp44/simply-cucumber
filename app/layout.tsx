@@ -9,7 +9,7 @@ import CartLink from "../components/CartLink";
 import ProductSearch from "../components/ProductSearch";
 import NewsletterForm from "../components/NewsletterForm";
 import MobileMenu from "../components/MobileMenu";
-import SocialRow from "@/components/SocialRow"; // or "../components/SocialRow"
+import SocialRow from "../components/SocialRow";
 
 const playfair = Playfair_Display({
   subsets: ["latin"],
