@@ -46,10 +46,6 @@ export const PRODUCTS: Product[] = [
     description:
       "Freeze-dried cucumber powder packed with vitamins and antioxidants. Blend it into your favorate drink or water for a daily boost of clarity and hydration.",
     image: "/assets/products/cucumber-powder.jpg",
-     images: [ "/assets/products/powder-product-1.jpg",          
-       "/assets/products/powder-product-2.jpg",
-              "/assets/products/powder-product-3.jpg",
-             ],
    hoverImage: "/assets/products/cucumber-powder-hover.jpg",
     benefits: ["100% Natural", "Rich in Vitamins", "Hydration Boost"],
 variants: [
@@ -63,7 +59,9 @@ variants: [
       label: "30",
       price: 50,
       sku: "powder-30ct",
-      image: "/assets/products/cucumber-powder.jpg",
+      images: "/assets/products/powder-product-1.jpg",          
+       "/assets/products/powder-product-2.jpg",
+              "/assets/products/powder-product-3.jpg",
     },
 ],
 badges: ["Vegan", "Paraben-Free", "Alcohol-Free"], // ← REQUIRED
