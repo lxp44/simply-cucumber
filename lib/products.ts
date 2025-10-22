@@ -51,7 +51,10 @@ export const PRODUCTS: Product[] = [
     image: "/assets/products/cucumber-powder.jpg",
     hoverImage: "/assets/products/cucumber-powder-hover.jpg",
     benefits: ["100% Natural", "Rich in Vitamins", "Hydration Boost"],
-
+badges: ["Vegan", "Paraben-Free", "Alcohol-Free"], // ← REQUIRED
+    highlights: ["Vegan", "Paraben-Free", "Synthetic Fragrance-Free"],
+    category: "powders",
+bestSeller: true, 
     // ✅ sizes with images
     variants: [
       {
