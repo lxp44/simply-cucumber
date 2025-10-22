@@ -41,7 +41,6 @@ export type Product = {
 };
 
 export const PRODUCTS: Product[] = [
- export const PRODUCTS: Product[] = [
   {
     sku: "powder",
     slug: "powder",
@@ -76,13 +75,13 @@ export const PRODUCTS: Product[] = [
 
     // optional product-level gallery (shown after variant media)
     images: [
-      // add any general images you want after the variant images
       // "/assets/products/powder-hero-1.jpg",
       // "/assets/products/powder-hero-2.jpg",
     ],
 
     category: "powders",
-  }, // 👈 IMPORTANT: comma between product objects
+  }, // 👈 comma between product objects
+
   {
     sku: "soap",
     slug: "soap",
@@ -91,10 +90,11 @@ export const PRODUCTS: Product[] = [
     description:
       "Indulge your skin in the refreshing simplicity of cucumber. Our Simply Cucumber Soap cleanses deeply without stripping away natural oils, leaving your skin feeling soft, balanced, and hydrated. Each bar is crafted with real cucumber extract—rich in antioxidants and natural antibacterial properties—to help calm irritation, fight body acne, and reduce dryness. The fresh cucumber scent awakens your senses while providing a cooling, spa-like experience every time you bathe. Perfect for daily use on face and body, this bar transforms your shower into a moment of clean, natural clarity.",
     image: "/assets/products/cucumber-soap.jpg",
-     images: [ "/assets/products/soap-product-1.jpg",          
-       "/assets/products/soap-product-2.jpg",
-              "/assets/products/soap-product-3.jpg",
-             ],
+    images: [
+      "/assets/products/soap-product-1.jpg",
+      "/assets/products/soap-product-2.jpg",
+      "/assets/products/soap-product-3.jpg",
+    ],
     hoverImage: "/assets/products/cucumber-soap-hover.jpg",
     benefits: [
       "100% Natural",
@@ -105,6 +105,7 @@ export const PRODUCTS: Product[] = [
     ],
     category: "body",
   },
+
   {
     sku: "face-mist",
     slug: "face-mist",
@@ -114,10 +115,11 @@ export const PRODUCTS: Product[] = [
     description:
       "Hydration. Balance. Glow — Anywhere, Anytime. Give your skin a refreshing reset with our Simply Cucumber Face Mist, your instant dose of hydration and calm. Infused with cucumber extract, aloe, and natural antioxidants, this fine mist delivers cooling relief, deep moisture, and a healthy, dewy glow—whether you’re fresh out of the gym, setting your makeup, or winding down after a long day. Each spray feels like a cool breeze in a bottle, instantly soothing redness, reviving dull skin, and rebalancing oil without disrupting your routine. It’s skincare that travels with you—light, pure, and powerful.",
     image: "/assets/products/cucumber-face-mist.jpg",
-     images: [ "/assets/products/face-mist-product-1.jpg",          
-       "/assets/products/face-mist-product-2.jpg",
-              "/assets/products/face-mist-product-3.jpg",
-             ],
+    images: [
+      "/assets/products/face-mist-product-1.jpg",
+      "/assets/products/face-mist-product-2.jpg",
+      "/assets/products/face-mist-product-3.jpg",
+    ],
     hoverImage: "/assets/products/cucumber-face-mist-hover.jpg",
     benefits: [
       "Instant hydration — replenishes moisture anytime",
@@ -127,28 +129,29 @@ export const PRODUCTS: Product[] = [
       "Balances oil & pH — keeps skin dewy, not greasy",
       "Soothes sensitive skin — cucumber and aloe calm irritation",
     ],
-  variants: [
-    {
-      label: "2 oz",
-      price: 18,
-      sku: "face-mist-2oz",
-      image: "/assets/products/face-mist-2oz.jpg", // 👈 new
-    },
-    {
-      label: "4 oz",
-      price: 27,
-      sku: "face-mist-4oz",
-      image: "/assets/products/face-mist-product-1.jpg",
-    },
-    {
-      label: "8 oz",
-      price: 42,
-      sku: "face-mist-8oz",
-      image: "/assets/products/face-mist-8oz.jpg",
-    },
-  ],
+    variants: [
+      {
+        label: "2 oz",
+        price: 18,
+        sku: "face-mist-2oz",
+        image: "/assets/products/face-mist-2oz.jpg",
+      },
+      {
+        label: "4 oz",
+        price: 27,
+        sku: "face-mist-4oz",
+        image: "/assets/products/face-mist-product-1.jpg",
+      },
+      {
+        label: "8 oz",
+        price: 42,
+        sku: "face-mist-8oz",
+        image: "/assets/products/face-mist-8oz.jpg",
+      },
+    ],
     category: "face",
   },
+
   {
     sku: "toothpaste",
     slug: "cucumber-toothpaste",
