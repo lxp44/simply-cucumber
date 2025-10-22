@@ -59,7 +59,7 @@ export const PRODUCTS: Product[] = [
         label: "14 ct",
         price: 27,
         sku: "powder-14ct",
-        image: "/assets/products/face-mist-2oz.jpg",
+        image: "/assets/products/powder-14-ct.jpg",
       },
       {
         label: "30 ct",
