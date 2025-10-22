@@ -70,11 +70,11 @@ export const PRODUCTS: Product[] = [
         images: [
           "/assets/products/powder-product-1.jpg",
           "/assets/products/powder-product-2.jpg",
+           "/assets/products/powder-30-ct-model",
         ],
       },
     ],
     images: [
-      "/assets/products/powder-30-ct.jpg",
       // "/assets/products/powder-hero-1.jpg",
       // "/assets/products/powder-hero-2.jpg",
     ],
@@ -135,7 +135,7 @@ export const PRODUCTS: Product[] = [
         label: "2 oz",
         price: 18,
         sku: "face-mist-2oz",
-        image: "/assets/products/face-mist-2oz.jpg",
+        image: "/assets/products/face-mist-2-oz.jpg",
       },
       {
         label: "4 oz",
@@ -147,7 +147,7 @@ export const PRODUCTS: Product[] = [
         label: "8 oz",
         price: 42,
         sku: "face-mist-8oz",
-        image: "/assets/products/face-mist-8oz.jpg",
+        image: "/assets/products/face-mist-8-oz-model.jpg",
       },
     ],
     badges: ["Vegan", "Paraben-Free", "Alcohol-Free"],
