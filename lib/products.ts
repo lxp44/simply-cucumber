@@ -4,7 +4,10 @@ export type Variant = {
   label: string;
   price: number;
   sku?: string;
-image?: string; // 👈 add this
+  /** New: allow multiple images per variant (preferred) */
+  images?: string[];
+  /** Back-compat: single image still supported */
+  image?: string;
 };
 
 export type Product = {
