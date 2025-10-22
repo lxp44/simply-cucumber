@@ -119,7 +119,6 @@ export const PRODUCTS: Product[] = [
     images: [
       "/assets/products/face-mist-product-1.jpg",
       "/assets/products/face-mist-product-2.jpg",
-      "/assets/products/face-mist-product-3.jpg",
     ],
     hoverImage: "/assets/products/cucumber-face-mist-hover.jpg",
     benefits: [
@@ -260,6 +259,26 @@ export const PRODUCTS: Product[] = [
       "Supports gum health with zinc and cucumber extract",
       "Soothes irritation and dryness",
       "Clean, cooling cucumber-mint finish",
+    ],
+     variants: [
+      {
+        label: "2 oz",
+        price: 18,
+        sku: "face-mist-2oz",
+        image: "/assets/products/face-mist-2-oz.jpg",
+      },
+      {
+        label: "4 oz",
+        price: 27,
+        sku: "face-mist-4oz",
+        image: "/assets/products/face-mist-product-1.jpg",
+      },
+      {
+        label: "8 oz",
+        price: 42,
+        sku: "face-mist-8oz",
+        image: "/assets/products/face-mist-8-oz-model.jpg",
+      },
     ],
     badges: ["Fluoride-Free", "Alcohol-Free", "Paraben-Free"],
     highlights: ["Alcohol-Free", "Fluoride-Free", "Freshens Breath"],
