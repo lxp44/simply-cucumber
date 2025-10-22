@@ -41,43 +41,49 @@ export type Product = {
 };
 
 export const PRODUCTS: Product[] = [
+ export const PRODUCTS: Product[] = [
   {
-  sku: "powder",
-  slug: "powder",
-  title: "Powder",
-  price: 50,
-  description:
-    "Freeze-dried cucumber powder packed with vitamins and antioxidants. Blend it into your favorite drink or water for a daily boost of clarity and hydration.",
-  // Optional default gallery for the product (shown when first landing)
-  images: [
-    "/assets/products/powder-hero-1.jpg",
-    "/assets/products/powder-hero-2.jpg"
-  ],
-  hoverImage: "/assets/products/cucumber-powder-hover.jpg",
-  benefits: ["100% Natural", "Rich in Vitamins", "Hydration Boost"],
-  variants: [
-    {
-      label: "14 ct",
-      price: 27,
-      sku: "powder-14ct",
-      images: [
-        "/assets/products/powder-14ct-1.jpg",
-        "/assets/products/powder-14ct-2.jpg"
-      ]
-      // or: image: "/assets/products/powder-14ct-1.jpg"  (single image still works)
-    },
-    {
-      label: "30 ct",
-      price: 50,
-      sku: "powder-30ct",
-      images: [
-        "/assets/products/powder-product-1.jpg",
-        "/assets/products/powder-product-2.jpg",
-        "/assets/products/powder-product-3.jpg"
-      ]
-    }
-  ]
-}
+    sku: "powder",
+    slug: "powder",
+    title: "Powder",
+    price: 50,
+    description:
+      "Freeze-dried cucumber powder packed with vitamins and antioxidants. Blend it into your favorate drink or water for a daily boost of clarity and hydration.",
+    image: "/assets/products/cucumber-powder.jpg",
+    hoverImage: "/assets/products/cucumber-powder-hover.jpg",
+    benefits: ["100% Natural", "Rich in Vitamins", "Hydration Boost"],
+
+    // ✅ sizes with images
+    variants: [
+      {
+        label: "14 ct",
+        price: 27,
+        sku: "powder-14ct",
+        // you can use a single `image` OR an `images` array
+        image: "/assets/products/face-mist-2oz.jpg",
+      },
+      {
+        label: "30 ct",
+        price: 50,
+        sku: "powder-30ct",
+        images: [
+          "/assets/products/powder-product-1.jpg",
+          "/assets/products/powder-product-2.jpg",
+          "/assets/products/powder-product-3.jpg",
+        ],
+      },
+    ],
+
+    // optional product-level gallery (shown after variant media)
+    images: [
+      // add any general images you want after the variant images
+      // "/assets/products/powder-hero-1.jpg",
+      // "/assets/products/powder-hero-2.jpg",
+    ],
+
+    category: "powders",
+  }, // 👈 IMPORTANT: comma between product objects
+
   {
     sku: "soap",
     slug: "soap",
