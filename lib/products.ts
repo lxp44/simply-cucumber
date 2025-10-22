@@ -59,7 +59,9 @@ export const PRODUCTS: Product[] = [
         label: "14 ct",
         price: 27,
         sku: "powder-14ct",
-        image: "/assets/products/powder-14-ct.jpg",
+        images: [ "/assets/products/powder-14-ct.jpg",
+        "/assets/products/powder-14-ct-back.jpg",
+                 ],
       },
       {
         label: "30 ct",
@@ -68,11 +70,11 @@ export const PRODUCTS: Product[] = [
         images: [
           "/assets/products/powder-product-1.jpg",
           "/assets/products/powder-product-2.jpg",
-          "/assets/products/powder-product-3.jpg",
         ],
       },
     ],
     images: [
+      "/assets/products/powder-30-ct.jpg",
       // "/assets/products/powder-hero-1.jpg",
       // "/assets/products/powder-hero-2.jpg",
     ],
