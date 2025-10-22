@@ -249,7 +249,6 @@ export const PRODUCTS: Product[] = [
     images: [
       "/assets/products/mouth-wash-product-1.jpg",
       "/assets/products/mouth-wash-product-2.jpg",
-      "/assets/products/mouth-wash-product-3.jpg",
     ],
     hoverImage: "/assets/products/cucumber-mouth-wash-hover.jpg",
     benefits: [
