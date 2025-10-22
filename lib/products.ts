@@ -83,7 +83,6 @@ export const PRODUCTS: Product[] = [
 
     category: "powders",
   }, // 👈 IMPORTANT: comma between product objects
-
   {
     sku: "soap",
     slug: "soap",
