@@ -63,7 +63,7 @@ variants: [
       label: "30",
       price: 50,
       sku: "powder-30ct",
-      images: "/assets/products/powder-product-1.jpg",          
+      image: "/assets/products/powder-product-1.jpg",          
        "/assets/products/powder-product-2.jpg",
               "/assets/products/powder-product-3.jpg",
     },
