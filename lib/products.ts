@@ -296,7 +296,6 @@ export const PRODUCTS: Product[] = [
     images: [
       "/assets/products/body-scrub-product-1.jpg",
       "/assets/products/body-scrub-product-2.jpg",
-      "/assets/products/body-scrub-product-3.jpg",
     ],
     hoverImage: "/assets/products/cucumber-body-scrub-hover.jpg",
     benefits: [
@@ -306,6 +305,26 @@ export const PRODUCTS: Product[] = [
       "Soothes redness, bumps, and irritation",
       "Antioxidant protection from free radicals",
       "Preps skin for moisture or self-tanning",
+    ],
+    variants: [
+      {
+        label: "8 oz",
+        price: 18,
+        sku: "body-scrub-8oz",
+        image: "/assets/products/cucumber-body-scrub.jpg",
+      },
+      {
+        label: "16 oz",
+        price: 40,
+        sku: "body-scrub-16oz",
+        image: "/assets/products/body-scrub-16-oz.png",
+      },
+      {
+        label: "32 oz",
+        price: 70,
+        sku: "body-scrub-32oz",
+        image: "/assets/products/body-scrub-32-oz.PNG",
+      },
     ],
     badges: ["Vegan", "Paraben-Free", "Alcohol-Free"],
     highlights: ["Vegan", "Hydrating", "Brightening"],
@@ -324,7 +343,6 @@ export const PRODUCTS: Product[] = [
     images: [
       "/assets/products/face-scrub-product-1.jpg",
       "/assets/products/face-scrub-product-2.jpg",
-      "/assets/products/face-scrub-product-3.jpg",
     ],
     hoverImage: "/assets/products/cucumber-face-scrub-hover.jpg",
     benefits: [
@@ -334,6 +352,26 @@ export const PRODUCTS: Product[] = [
       "Soothes with aloe and cucumber extract",
       "Prepares skin for better product absorption",
       "100% natural and non-stripping formula",
+    ],
+        variants: [
+      {
+        label: "8 oz",
+        price: 18,
+        sku: "face-scrub-8oz",
+        image: "/assets/products/cucumber-face-scrub.jpg",
+      },
+      {
+        label: "16 oz",
+        price: 40,
+        sku: "face-scrub-16oz",
+        image: "/assets/products/face-scrub-16-oz.PNG",
+      },
+      {
+        label: "32 oz",
+        price: 70,
+        sku: "face-scrub-32oz",
+        image: "/assets/products/face-scrub-32-oz.PNG",
+      },
     ],
     badges: ["Vegan", "Paraben-Free", "Alcohol-Free"],
     highlights: ["Gentle", "Brightening", "Soothing"],
@@ -391,6 +429,20 @@ export const PRODUCTS: Product[] = [
       "Infused with cucumber extract, aloe, and shea butter",
       "Light, cooling scent that refreshes all day",
     ],
+     variants: [
+      {
+        label: "8 oz",
+        price: 18,
+        sku: "lotion-8oz",
+        image: "/assets/products/cucumber-lotion.jpg",
+      },
+      {
+        label: "32 oz",
+        price: 60,
+        sku: "lotion-32oz",
+        image: "/assets/products/lotion-32-oz.PNG",
+      },
+       ],
     badges: ["Vegan", "Paraben-Free", "Alcohol-Free"],
     highlights: ["Hydrating", "Soothing", "Fast-Absorbing"],
     category: "body",
