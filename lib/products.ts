@@ -431,14 +431,20 @@ export const PRODUCTS: Product[] = [
     ],
      variants: [
       {
-        label: "8 oz",
-        price: 18,
+        label: "3 oz",
+        price: 5,
+        sku: "lotion-8oz",
+        image: "/assets/products/cucumber-lotion.jpg",
+      },  
+      {
+        label: "16 oz",
+        price: 25,
         sku: "lotion-8oz",
         image: "/assets/products/cucumber-lotion.jpg",
       },
       {
         label: "32 oz",
-        price: 60,
+        price: 45,
         sku: "lotion-32oz",
         image: "/assets/products/lotion-32-oz.PNG",
       },
@@ -460,7 +466,6 @@ export const PRODUCTS: Product[] = [
     images: [
       "/assets/products/shampoo-product-1.jpg",
       "/assets/products/shampoo-product-2.jpg",
-      "/assets/products/shampoo-product-3.jpg",
     ],
     hoverImage: "/assets/products/cucumber-shampoo-hover.jpg",
     benefits: [
@@ -471,6 +476,26 @@ export const PRODUCTS: Product[] = [
       "Light, fresh cucumber scent for daily refresh",
       "Safe for color-treated and sensitive scalps",
     ],
+     variants: [
+     {
+        label: "3 oz",
+        price: 5,
+        sku: "shampoo-3oz",
+        image: "/assets/products/shampoo-3-oz.png",
+      },
+       {
+        label: "12 oz",
+        price: 12,
+        sku: "shampoo-12oz",
+        image: "/assets/products/cucumber-shampoo.jpg",
+      },
+      {
+        label: "16 oz",
+        price: 40,
+        sku: "shampoo-16oz",
+        image: "/assets/products/shampoo-16-oz.PNG",
+      },
+       ],
     badges: ["Sulfate-Free", "Paraben-Free", "Alcohol-Free"],
     highlights: ["Sulfate-Free", "Hydrating", "Balancing"],
     category: "body",
@@ -488,7 +513,6 @@ export const PRODUCTS: Product[] = [
     images: [
       "/assets/products/conditioner-product-1.jpg",
       "/assets/products/conditioner-product-2.jpg",
-      "/assets/products/conditioner-product-3.jpg",
     ],
     hoverImage: "/assets/products/cucumber-conditioner-hover.jpg",
     benefits: [
@@ -499,6 +523,26 @@ export const PRODUCTS: Product[] = [
       "Light, clean cucumber scent refreshes daily",
       "Safe for all hair types, including color-treated hair",
     ],
+     variants: [
+     {
+        label: "3 oz",
+        price: 5,
+        sku: "conditioner-3oz",
+        image: "/assets/products/conditioner-3-oz.png",
+      },
+       {
+        label: "12 oz",
+        price: 12,
+        sku: "conditioner-12oz",
+        image: "/assets/products/conditioner-12-oz.png",
+      },
+      {
+        label: "16 oz",
+        price: 40,
+        sku: "conditioner-16oz",
+        image: "/assets/products/conditioner-16-oz.PNG",
+      },
+       ],
     badges: ["Silicone-Free", "Paraben-Free", "Alcohol-Free"],
     highlights: ["Hydrating", "Detangling", "Smoothing"],
     category: "body",
@@ -597,9 +641,7 @@ export const PRODUCTS: Product[] = [
       "Reset your skin with the refreshing power of cucumber. The Simply Cucumber Face Mask delivers a surge of deep hydration, antioxidants, and Vitamin C to instantly cool, soothe, and brighten your complexion. Designed for all skin types — even sensitive — it helps reduce puffiness, tighten pores, and restore a naturally balanced glow. The gel-based formula feels icy and weightless, melting into skin to calm inflammation and boost radiance in minutes. Whether used after a long day, a flight, or a night out, this mask brings your skin back to life — refreshed, smooth, and luminous.",
     image: "/assets/products/cucumber-face-mask-single.jpg",
     images: [
-      "/assets/products/face-mask-single-product-1.jpg",
-      "/assets/products/face-mask-single-product-2.jpg",
-      "/assets/products/face-mask-single-product-3.jpg",
+      
     ],
     hoverImage: "/assets/products/face-mask-single-product-3.jpg",
     benefits: [
@@ -609,33 +651,25 @@ export const PRODUCTS: Product[] = [
       "Tightens pores and refines skin texture",
       "Brightens and softens for a healthy, natural glow",
     ],
-    badges: ["Vegan", "Paraben-Free", "Alcohol-Free"],
-    highlights: ["Hydrating", "Cooling", "Brightening"],
-    category: "face",
-  },
-
-  {
-    sku: "face-mask-16",
-    slug: "cucumber-face-mask-16",
-    title: "Simply Cucumber Face Mask (16 count)",
-    tagline: "Cool Your Skin. Revive Your Glow.",
-    price: 100,
-    description:
-      "Reset your skin with the refreshing power of cucumber. The Simply Cucumber Face Mask delivers a surge of deep hydration, antioxidants, and Vitamin C to instantly cool, soothe, and brighten your complexion. Designed for all skin types — even sensitive — it helps reduce puffiness, tighten pores, and restore a naturally balanced glow. The gel-based formula feels icy and weightless, melting into skin to calm inflammation and boost radiance in minutes. Whether used after a long day, a flight, or a night out, this mask brings your skin back to life — refreshed, smooth, and luminous.",
-    image: "/assets/products/cucumber-face-mask-pack.jpg",
-    images: [
-      "/assets/products/face-mask-pack-product-1.jpg",
-      "/assets/products/face-mask-pack-product-2.jpg",
+    variants: [
+     {
+        label: "1 ct",
+        price: 6,
+        sku: "face-mask-1-1ct",
+        images: [ "/assets/products/cucumber-face-mask-single.jpg",
+                 "/assets/products/face-mask-single-product-2.jpg",
+                 ]
+      },
+       {
+        label: "14 ct",
+        price: 80,
+        sku: "face-mask-1-14ct",
+        images: [ "/assets/products/cucumber-face-mask-pack.jpg",
+                 "/assets/products/face-mask-pack-product-2.jpg",
       "/assets/products/face-mask-pack-product-3.jpg",
-    ],
-    hoverImage: "/assets/products/face-mask-pack-product-3.jpg",
-    benefits: [
-      "Deep hydration that replenishes and locks in moisture",
-      "Reduces puffiness and dark circles for energized skin",
-      "Calms irritation with antioxidants and Vitamin C",
-      "Tightens pores and refines skin texture",
-      "Brightens and softens for a healthy, natural glow",
-    ],
+                 ]
+      },
+      ],
     badges: ["Vegan", "Paraben-Free", "Alcohol-Free"],
     highlights: ["Hydrating", "Cooling", "Brightening"],
     category: "face",
@@ -651,9 +685,7 @@ export const PRODUCTS: Product[] = [
       "Refresh tired eyes in minutes with our Simply Cucumber Eye Pads, infused with cooling cucumber extract, aloe, and vitamin-rich botanicals that bring instant relief to delicate under-eye skin. Each pad delivers a soothing, hydrating boost that reduces puffiness, brightens dark circles, and revives your natural glow—whether you’re recovering from a long night or a long day. Powered by Vitamin C, niacinamide, and green tea antioxidants, these pads fight fatigue and early signs of aging, while cucumber’s cooling touch calms and refreshes. Store them in the fridge for the ultimate spa-at-home experience.",
     image: "/assets/products/cucumber-eye-pads-single.jpg",
     images: [
-      "/assets/products/eye-pad-single-product-1.jpg",
-      "/assets/products/eye-pad-single-product-2.jpg",
-      "/assets/products/eye-pad-single-product-3.jpg",
+     
     ],
     hoverImage: "/assets/products/cucumber-eye-pads-hover.jpg",
     benefits: [
@@ -663,33 +695,25 @@ export const PRODUCTS: Product[] = [
       "Soothes sensitive, tired eyes",
       "Antioxidant protection (cucumber + green tea)",
     ],
-    badges: ["Vegan", "Paraben-Free", "Alcohol-Free"],
-    highlights: ["De-Puffing", "Brightening", "Hydrating"],
-    category: "face",
-  },
-
-  {
-    sku: "eye-pads-16",
-    slug: "cucumber-eye-pads-16",
-    title: "Simply Cucumber Eye Pads (16 count)",
-    tagline: "Wake Up Beautifully.",
-    price: 100,
-    description:
-      "Refresh tired eyes in minutes with our Simply Cucumber Eye Pads, infused with cooling cucumber extract, aloe, and vitamin-rich botanicals that bring instant relief to delicate under-eye skin. Each pad delivers a soothing, hydrating boost that reduces puffiness, brightens dark circles, and revives your natural glow—whether you’re recovering from a long night or a long day. Powered by Vitamin C, niacinamide, and green tea antioxidants, these pads fight fatigue and early signs of aging, while cucumber’s cooling touch calms and refreshes. Store them in the fridge for the ultimate spa-at-home experience.",
-    image: "/assets/products/cucumber-eye-pads-pack.jpg",
-    images: [
-      "/assets/products/eye-pads-pack-product-1.jpg",
+      variants: [
+     {
+        label: "1 ct",
+        price: 6,
+        sku: "eye-pads-1-1ct",
+        images: [ "/assets/products/cucumber-eye-pads-single.jpg",
+                 "/assets/products/eye-pad-single-product-2.jpg",
+                 ]
+      },
+       {
+        label: "14 ct",
+        price: 80,
+        sku: "eye-pads-1-14ct",
+        images: [ "/assets/products/cucumber-eye-pads-pack.jpg",
       "/assets/products/eye-pads-pack-product-2.jpg",
       "/assets/products/eye-pads-pack-product-3.jpg",
-    ],
-    hoverImage: "/assets/products/eye-pads-pack-product-3.jpg",
-    benefits: [
-      "Reduces puffiness and under-eye bags",
-      "Brightens dark circles (Vitamin C + niacinamide)",
-      "Deep hydration without irritation (aloe + glycerin)",
-      "Soothes sensitive, tired eyes",
-      "Antioxidant protection (cucumber + green tea)",
-    ],
+                 ]
+      },
+      ],
     badges: ["Vegan", "Paraben-Free", "Alcohol-Free"],
     highlights: ["De-Puffing", "Brightening", "Hydrating"],
     category: "face",
