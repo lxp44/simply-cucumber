@@ -761,21 +761,6 @@ export const PRODUCTS: Product[] = [
     highlights: ["Giftable", "Complete Set", "Spa-At-Home"],
     category: "spa-packages",
   },
-
-  {
-    sku: "lotion",
-    slug: "cucumber-body-lotion",
-    title: "Cucumber Body Lotion",
-    price: 25,
-    description:
-      "Lightweight daily hydration infused with cooling cucumber extract.",
-    image: "/assets/products/lotion.jpg",
-    hoverImage: "/assets/products/lotion-hover.jpg",
-    benefits: ["Non-Greasy", "Quick Absorb"],
-    badges: ["Vegan", "Paraben-Free", "Alcohol-Free"],
-    highlights: ["Hydrating", "Quick-Absorb", "Non-Greasy"],
-    category: "body",
-  },
 ];
 
 // Helper: always return a product with an images[] for components that expect it
