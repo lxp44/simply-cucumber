@@ -634,7 +634,7 @@ export const PRODUCTS: Product[] = [
   {
     sku: "face-mask-1",
     slug: "cucumber-face-mask",
-    title: "Simply Cucumber Face Mask (Single Use)",
+    title: "Simply Cucumber Face Mask",
     tagline: "Cool Your Skin. Revive Your Glow.",
     price: 6,
     description:
@@ -678,7 +678,7 @@ export const PRODUCTS: Product[] = [
   {
     sku: "eye-pads-1",
     slug: "cucumber-eye-pads",
-    title: "Simply Cucumber Eye Pads (Single Use)",
+    title: "Simply Cucumber Eye Pads",
     tagline: "Wake Up Beautifully.",
     price: 6,
     description:
