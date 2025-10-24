@@ -65,14 +65,14 @@ export const PRODUCTS: Product[] = [
       },
       {
         label: "30 ct",
-        price: 50,
-        sku: "powder-30ct",
-        images: [
-          "/assets/products/powder-product-1.jpg",
-          "/assets/products/powder-product-2.jpg",
-           "/assets/products/powder-30-ct-model",
-        ],
-      },
+  price: 50,
+  sku: "powder-30ct",
+  images: [
+    "/assets/products/powder-product-1.jpg",
+    "/assets/products/powder-product-2.jpg",
+    "/assets/products/powder-30-ct-model.jpg", // 👈 add .jpg (or the correct extension)
+  ],
+}
     ],
     images: [
       // "/assets/products/powder-hero-1.jpg",
@@ -632,92 +632,82 @@ export const PRODUCTS: Product[] = [
   },
 
   {
-    sku: "face-mask-1",
-    slug: "cucumber-face-mask",
-    title: "Simply Cucumber Face Mask",
-    tagline: "Cool Your Skin. Revive Your Glow.",
-    price: 6,
-    description:
-      "Reset your skin with the refreshing power of cucumber. The Simply Cucumber Face Mask delivers a surge of deep hydration, antioxidants, and Vitamin C to instantly cool, soothe, and brighten your complexion. Designed for all skin types — even sensitive — it helps reduce puffiness, tighten pores, and restore a naturally balanced glow. The gel-based formula feels icy and weightless, melting into skin to calm inflammation and boost radiance in minutes. Whether used after a long day, a flight, or a night out, this mask brings your skin back to life — refreshed, smooth, and luminous.",
-    image: "/assets/products/cucumber-face-mask-single.jpg",
-    images: [
-      
-    ],
-    hoverImage: "/assets/products/face-mask-single-product-3.jpg",
-    benefits: [
-      "Deep hydration that replenishes and locks in moisture",
-      "Reduces puffiness and dark circles for energized skin",
-      "Calms irritation with antioxidants and Vitamin C",
-      "Tightens pores and refines skin texture",
-      "Brightens and softens for a healthy, natural glow",
-    ],
-    variants: [
-     {
-        label: "1 ct",
-        price: 6,
-        sku: "face-mask-1-1ct",
-        images: [ "/assets/products/cucumber-face-mask-single.jpg",
-                 "/assets/products/face-mask-single-product-2.jpg",
-                 ]
-      },
-       {
-        label: "14 ct",
-        price: 80,
-        sku: "face-mask-1-14ct",
-        images: [ "/assets/products/cucumber-face-mask-pack.jpg",
-                 "/assets/products/face-mask-pack-product-2.jpg",
-      "/assets/products/face-mask-pack-product-3.jpg",
-                 ]
-      },
+  sku: "face-mask",
+  slug: "cucumber-face-mask",
+  title: "Simply Cucumber Face Mask",
+  tagline: "Cool Your Skin. Revive Your Glow.",
+  price: 6, // base can be the first variant's price
+  description: "...(same copy you have)...",
+  image: "/assets/products/cucumber-face-mask-single.jpg",
+  hoverImage: "/assets/products/face-mask-single-product-3.jpg",
+  benefits: [ /* ... */ ],
+  badges: ["Vegan", "Paraben-Free", "Alcohol-Free"],
+  highlights: ["Hydrating", "Cooling", "Brightening"],
+  // 👇 variants drive the size selector + image swap
+  variants: [
+    {
+      label: "Single Use",
+      price: 6,
+      sku: "face-mask-1",
+      images: [
+        "/assets/products/face-mask-single-product-1.jpg",
+        "/assets/products/face-mask-single-product-2.jpg",
+        "/assets/products/face-mask-single-product-3.jpg",
       ],
-    badges: ["Vegan", "Paraben-Free", "Alcohol-Free"],
-    highlights: ["Hydrating", "Cooling", "Brightening"],
-    category: "face",
-  },
+    },
+    {
+      label: "16 count",
+      price: 100,
+      sku: "face-mask-16",
+      images: [
+        "/assets/products/face-mask-pack-product-1.jpg",
+        "/assets/products/face-mask-pack-product-2.jpg",
+        "/assets/products/face-mask-pack-product-3.jpg",
+      ],
+    },
+  ],
+  // optional general gallery (shown after variant media)
+  images: [],
+  category: "face",
+},
 
   {
-    sku: "eye-pads-1",
-    slug: "cucumber-eye-pads",
-    title: "Simply Cucumber Eye Pads",
-    tagline: "Wake Up Beautifully.",
-    price: 6,
-    description:
-      "Refresh tired eyes in minutes with our Simply Cucumber Eye Pads, infused with cooling cucumber extract, aloe, and vitamin-rich botanicals that bring instant relief to delicate under-eye skin. Each pad delivers a soothing, hydrating boost that reduces puffiness, brightens dark circles, and revives your natural glow—whether you’re recovering from a long night or a long day. Powered by Vitamin C, niacinamide, and green tea antioxidants, these pads fight fatigue and early signs of aging, while cucumber’s cooling touch calms and refreshes. Store them in the fridge for the ultimate spa-at-home experience.",
-    image: "/assets/products/cucumber-eye-pads-single.jpg",
-    images: [
-     
-    ],
-    hoverImage: "/assets/products/cucumber-eye-pads-hover.jpg",
-    benefits: [
-      "Reduces puffiness and under-eye bags",
-      "Brightens dark circles (Vitamin C + niacinamide)",
-      "Deep hydration without irritation (aloe + glycerin)",
-      "Soothes sensitive, tired eyes",
-      "Antioxidant protection (cucumber + green tea)",
-    ],
-      variants: [
-     {
-        label: "1 ct",
-        price: 6,
-        sku: "eye-pads-1-1ct",
-        images: [ "/assets/products/cucumber-eye-pads-single.jpg",
-                 "/assets/products/eye-pad-single-product-2.jpg",
-                 ]
-      },
-       {
-        label: "14 ct",
-        price: 80,
-        sku: "eye-pads-1-14ct",
-        images: [ "/assets/products/cucumber-eye-pads-pack.jpg",
-      "/assets/products/eye-pads-pack-product-2.jpg",
-      "/assets/products/eye-pads-pack-product-3.jpg",
-                 ]
-      },
+  sku: "eye-pads",
+  slug: "cucumber-eye-pads",
+  title: "Simply Cucumber Eye Pads",
+  tagline: "Wake Up Beautifully.",
+  price: 6,
+  description: "...(same copy you have)...",
+  image: "/assets/products/cucumber-eye-pads-single.jpg",
+  hoverImage: "/assets/products/cucumber-eye-pads-hover.jpg",
+  benefits: [ /* ... */ ],
+  badges: ["Vegan", "Paraben-Free", "Alcohol-Free"],
+  highlights: ["De-Puffing", "Brightening", "Hydrating"],
+  variants: [
+    {
+      label: "Single Use",
+      price: 6,
+      sku: "eye-pads-1",
+      images: [
+        "/assets/products/eye-pad-single-product-1.jpg",
+        "/assets/products/eye-pad-single-product-2.jpg",
+        "/assets/products/eye-pad-single-product-3.jpg",
       ],
-    badges: ["Vegan", "Paraben-Free", "Alcohol-Free"],
-    highlights: ["De-Puffing", "Brightening", "Hydrating"],
-    category: "face",
-  },
+    },
+    {
+      label: "16 count",
+      price: 100,
+      sku: "eye-pads-16",
+      images: [
+        "/assets/products/eye-pads-pack-product-1.jpg",
+        "/assets/products/eye-pads-pack-product-2.jpg",
+        "/assets/products/eye-pads-pack-product-3.jpg",
+      ],
+    },
+  ],
+  images: [],
+  category: "face",
+},
 
   {
     sku: "eye-gel",
