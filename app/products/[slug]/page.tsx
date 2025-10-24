@@ -1,8 +1,8 @@
 // app/products/[slug]/page.tsx
 import { notFound } from "next/navigation";
-import { bySlug, PRODUCTS } from "@/lib/products";
-import ProductDetailMobile from "@/components/ProductDetailMobile";
-import ProductDetailDesktop from "@/components/ProductDetailDesktop";
+import { bySlug, PRODUCTS } from "../../../lib/products";
+import ProductDetailMobile from "../../../components/ProductDetailMobile";
+import ProductDetailDesktop from "../../../components/ProductDetailDesktop";
 
 type PageProps = { params: { slug: string } };
 
