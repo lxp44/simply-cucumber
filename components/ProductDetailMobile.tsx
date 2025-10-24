@@ -3,12 +3,11 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useCart } from "./CartProvider";
-import type { Product } from "../lib/products"; // ✅ single source of truth
-import { CheckCircle2 } from "lucide-react"; // add this next to your other lucide-react imports
-
+import type { Product } from "../lib/products";
 import {
+  CheckCircle2,
   Leaf,
   FlaskConical,
   Sparkles,
@@ -37,24 +36,34 @@ export default function ProductDetailMobile({
 }) {
   const cart = useCart();
 
-function Empty() {
-  return <p className="text-sm text-gray-500">Info coming soon.</p>;
-}
+  function Empty() {
+    return <p className="text-sm text-gray-500">Info coming soon.</p>;
+  }
 
   // ---- state ----
   const [active, setActive] = useState(0);
   const [qty, setQty] = useState(1);
   const [purchase, setPurchase] = useState<"onetime" | "subscribe">("onetime");
   const [vIdx, setVIdx] = useState(0);
- const imgs = useMemo(() => {
-  if (product.variants?.length && product.variants[vIdx]?.image) {
-    // put the chosen variant image first, then the rest of the gallery
-    return [product.variants[vIdx].image!, ...(product.images ?? [])];
-  }
-  return product.images?.length ? product.images : ["/placeholder.png"];
-}, [product, vIdx]);
+
+  // ✅ Build gallery: prefer variant.images[], then variant.image, then product.images, then product.image
+  const imgs = useMemo(() => {
+    const v = product.variants?.[vIdx];
+    const fromVariant =
+      (v?.images && v.images.length > 0 && v.images) ||
+      (v?.image ? [v.image] : []);
+    const base = product.images ?? (product.image ? [product.image] : []);
+    const merged = [...(fromVariant ?? []), ...(base ?? [])];
+    return merged.length > 0 ? merged : ["/placeholder.png"];
+  }, [product, vIdx]);
+
+  // ✅ when variant changes or product changes, jump to first slide
+  useEffect(() => {
+    setActive(0);
+  }, [vIdx, product.slug]);
+
   const selectedVariant = useMemo(() => {
-    if (product.variants?.length) return product.variants[vIdx];
+    if (product.variants?.length) return product.variants[vIdx]!;
     return { label: "", price: product.price, sku: product.sku };
   }, [product, vIdx]);
 
@@ -64,27 +73,13 @@ function Empty() {
   const rating = Math.max(0, Math.min(5, product.rating ?? 0));
   const reviewCount = product.reviewCount ?? 0;
 
-// ---- safe badges (falls back to highlights if badges missing) ----
-const badges = Array.isArray(product.badges) && product.badges.length
-  ? product.badges
-  : Array.isArray(product.highlights) ? product.highlights.slice(0, 3) : [];
-
-// dev sanity check (won’t ship minified builds)
-if (process.env.NODE_ENV !== "production") {
-  // eslint-disable-next-line no-console
-  console.log("[ProductDetailMobile] badges:", badges, "from product:", product.title);
-}
-if (process.env.NODE_ENV !== "production") {
-  console.log("vIdx:", vIdx, "first image:", imgs[0]);
-}
-const imgs = useMemo(() => {
-  const v = product.variants?.[vIdx];
-  const fromVariant =
-    (v?.images && v.images.length > 0 && v.images) ||
-    (v?.image ? [v.image] : []);
-  const base = product.images ?? (product.image ? [product.image] : []);
-  return [...(fromVariant ?? []), ...(base ?? [])];
-}, [product, vIdx]);
+  // ---- safe badges (falls back to highlights if badges missing) ----
+  const badges =
+    Array.isArray(product.badges) && product.badges.length
+      ? product.badges
+      : Array.isArray(product.highlights)
+      ? product.highlights.slice(0, 3)
+      : [];
 
   // ------- short blurb under badges -------
   const blurb =
@@ -106,8 +101,10 @@ const imgs = useMemo(() => {
 
   function addToCart() {
     const payload = {
-      sku: selectedVariant.sku || product.sku,
-      title: `${product.title}${selectedVariant.label ? ` — ${selectedVariant.label}` : ""}`,
+      sku: (selectedVariant as any).sku || product.sku,
+      title: `${product.title}${
+        (selectedVariant as any).label ? ` — ${(selectedVariant as any).label}` : ""
+      }`,
       price: unitPrice,
       quantity: qty,
       image: imgs[0],
@@ -152,9 +149,9 @@ const imgs = useMemo(() => {
       <div className="px-4 mt-3">
         <div className="relative w-full h-[78vw] max-h-[560px] overflow-hidden rounded-xl border bg-white">
           <Image
-            key={imgs[active]}
+            key={`${product.slug}-${vIdx}-${imgs[active]}`} // forces re-render when variant/image changes
             src={imgs[active]}
-            alt={product.title}
+            alt={`${product.title}${selectedVariant.label ? ` — ${selectedVariant.label}` : ""}`}
             fill
             priority
             sizes="100vw"
@@ -190,37 +187,37 @@ const imgs = useMemo(() => {
       </div>
 
       {/* Badges + Short blurb */}
-{(badges.length > 0 || blurb) && (
-  <div className="px-4 mt-4">
-    {badges.length > 0 && (
-      <div className="grid grid-cols-3 gap-6 text-center" data-testid="badge-row">
-        {badges.map((b) => (
-          <div key={b} className="flex flex-col items-center gap-2">
-            <span className="inline-grid place-items-center rounded-full border border-cucumber-700/30 text-cucumber-700 bg-white w-10 h-10">
-              {BADGE_ICON[b] ?? <Sparkles className="w-5 h-5" />}
-            </span>
-            <span className="text-[13px] font-medium text-cucumber-900">{b}</span>
-          </div>
-        ))}
-      </div>
-    )}
+      {(badges.length > 0 || blurb) && (
+        <div className="px-4 mt-4">
+          {badges.length > 0 && (
+            <div className="grid grid-cols-3 gap-6 text-center" data-testid="badge-row">
+              {badges.map((b) => (
+                <div key={b} className="flex flex-col items-center gap-2">
+                  <span className="inline-grid place-items-center rounded-full border border-cucumber-700/30 text-cucumber-700 bg-white w-10 h-10">
+                    {BADGE_ICON[b] ?? <Sparkles className="w-5 h-5" />}
+                  </span>
+                  <span className="text-[13px] font-medium text-cucumber-900">{b}</span>
+                </div>
+              ))}
+            </div>
+          )}
 
-    {blurb && (
-      <p className="mt-4 text-[15px] leading-6 text-gray-800">
-        {blurb}{" "}
-        {product.description && (
-          <button
-            type="button"
-            onClick={openDetails}
-            className="font-medium text-cucumber-800 underline"
-          >
-            Read more
-          </button>
-        )}
-      </p>
-    )}
-  </div>
-)}
+          {blurb && (
+            <p className="mt-4 text-[15px] leading-6 text-gray-800">
+              {blurb}{" "}
+              {product.description && (
+                <button
+                  type="button"
+                  onClick={openDetails}
+                  className="font-medium text-cucumber-800 underline"
+                >
+                  Read more
+                </button>
+              )}
+            </p>
+          )}
+        </div>
+      )}
 
       {/* Size / variants */}
       {product.variants?.length ? (
@@ -339,21 +336,21 @@ const imgs = useMemo(() => {
         </section>
       )}
 
-{/* Benefits */}
-<AccordionRow title="Benefits" openByDefault={false}>
-  {Array.isArray(product.benefits) && product.benefits.length > 0 ? (
-    <ul className="space-y-2 text-sm leading-relaxed">
-      {product.benefits.map((b, i) => (
-        <li key={i} className="flex items-start gap-2">
-          <CheckCircle2 className="mt-0.5 h-4 w-4 text-cucumber-700" />
-          <span>{b}</span>
-        </li>
-      ))}
-    </ul>
-  ) : (
-    <Empty />
-  )}
-</AccordionRow>
+      {/* Benefits */}
+      <AccordionRow title="Benefits" openByDefault={false}>
+        {Array.isArray(product.benefits) && product.benefits.length > 0 ? (
+          <ul className="space-y-2 text-sm leading-relaxed">
+            {product.benefits.map((b, i) => (
+              <li key={i} className="flex items-start gap-2">
+                <CheckCircle2 className="mt-0.5 h-4 w-4 text-cucumber-700" />
+                <span>{b}</span>
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <Empty />
+        )}
+      </AccordionRow>
 
       {/* Spacer for sticky bar */}
       <div className="h-20" />
