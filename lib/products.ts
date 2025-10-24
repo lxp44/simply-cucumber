@@ -77,7 +77,7 @@ export const PRODUCTS: Product[] = [
   ],
   images: [],
   category: "powders",
-}
+},
 
   {
     sku: "soap",
@@ -672,7 +672,7 @@ export const PRODUCTS: Product[] = [
   ],
   images: [],
   category: "face",
-}
+},
 
   {
   sku: "eye-pads",
@@ -717,7 +717,7 @@ export const PRODUCTS: Product[] = [
   ],
   images: [],
   category: "face",
-}
+},
 
   {
     sku: "eye-gel",
