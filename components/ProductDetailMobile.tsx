@@ -77,6 +77,14 @@ if (process.env.NODE_ENV !== "production") {
 if (process.env.NODE_ENV !== "production") {
   console.log("vIdx:", vIdx, "first image:", imgs[0]);
 }
+const imgs = useMemo(() => {
+  const v = product.variants?.[vIdx];
+  const fromVariant =
+    (v?.images && v.images.length > 0 && v.images) ||
+    (v?.image ? [v.image] : []);
+  const base = product.images ?? (product.image ? [product.image] : []);
+  return [...(fromVariant ?? []), ...(base ?? [])];
+}, [product, vIdx]);
 
   // ------- short blurb under badges -------
   const blurb =
