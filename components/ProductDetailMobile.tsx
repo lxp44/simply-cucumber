@@ -74,6 +74,9 @@ if (process.env.NODE_ENV !== "production") {
   // eslint-disable-next-line no-console
   console.log("[ProductDetailMobile] badges:", badges, "from product:", product.title);
 }
+if (process.env.NODE_ENV !== "production") {
+  console.log("vIdx:", vIdx, "first image:", imgs[0]);
+}
 
   // ------- short blurb under badges -------
   const blurb =
