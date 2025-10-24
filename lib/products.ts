@@ -41,45 +41,43 @@ export type Product = {
 };
 
 export const PRODUCTS: Product[] = [
-  {
-    sku: "powder",
-    slug: "powder",
-    title: "Powder",
-    price: 50,
-    description:
-      "Freeze-dried cucumber powder packed with vitamins and antioxidants. Blend it into your favorate drink or water for a daily boost of clarity and hydration.",
-    image: "/assets/products/powder-14-ct.jpg",
-    hoverImage: "/assets/products/cucumber-powder-hover.jpg",
-    benefits: ["100% Natural", "Rich in Vitamins", "Hydration Boost"],
-    badges: ["Vegan", "Paraben-Free", "Alcohol-Free"],
-    highlights: ["Vegan", "Paraben-Free", "Synthetic Fragrance-Free"],
-    bestSeller: true,
-    variants: [
-      {
-        label: "14 ct",
-        price: 27,
-        sku: "powder-14ct",
-        images: [ "/assets/products/powder-14-ct.jpg",
-        "/assets/products/powder-14-ct-back.jpg",
-                 ],
-      },
-      {
-        label: "30 ct",
+ {
+  sku: "powder",
+  slug: "powder",
+  title: "Powder",
   price: 50,
-  sku: "powder-30ct",
-  images: [
-    "/assets/products/powder-product-1.jpg",
-    "/assets/products/powder-product-2.jpg",
-    "/assets/products/powder-30-ct-model.jpg", // 👈 add .jpg (or the correct extension)
+  description:
+    "Freeze-dried cucumber powder packed with vitamins and antioxidants. Blend it into your favorate drink or water for a daily boost of clarity and hydration.",
+  image: "/assets/products/powder-14-ct.jpg",
+  hoverImage: "/assets/products/cucumber-powder-hover.jpg",
+  benefits: ["100% Natural", "Rich in Vitamins", "Hydration Boost"],
+  badges: ["Vegan", "Paraben-Free", "Alcohol-Free"],
+  highlights: ["Vegan", "Paraben-Free", "Synthetic Fragrance-Free"],
+  bestSeller: true,
+  variants: [
+    {
+      label: "14 ct",
+      price: 27,
+      sku: "powder-14ct",
+      images: [
+        "/assets/products/powder-14-ct.jpg",
+        "/assets/products/powder-14-ct-back.jpg",
+      ],
+    },
+    {
+      label: "30 ct",
+      price: 50,
+      sku: "powder-30ct",
+      images: [
+        "/assets/products/powder-product-1.jpg",
+        "/assets/products/powder-product-2.jpg",
+        "/assets/products/powder-30-ct-model.jpg", // ← add the extension
+      ],
+    },
   ],
+  images: [],
+  category: "powders",
 }
-    ],
-    images: [
-      // "/assets/products/powder-hero-1.jpg",
-      // "/assets/products/powder-hero-2.jpg",
-    ],
-    category: "powders",
-  },
 
   {
     sku: "soap",
@@ -631,19 +629,25 @@ export const PRODUCTS: Product[] = [
     category: "face",
   },
 
-  {
+ {
   sku: "face-mask",
   slug: "cucumber-face-mask",
   title: "Simply Cucumber Face Mask",
   tagline: "Cool Your Skin. Revive Your Glow.",
-  price: 6, // base can be the first variant's price
-  description: "...(same copy you have)...",
+  price: 6,
+  description:
+    "Reset your skin with the refreshing power of cucumber. The Simply Cucumber Face Mask delivers a surge of deep hydration, antioxidants, and Vitamin C to instantly cool, soothe, and brighten your complexion. Designed for all skin types — even sensitive — it helps reduce puffiness, tighten pores, and restore a naturally balanced glow. The gel-based formula feels icy and weightless, melting into skin to calm inflammation and boost radiance in minutes. Whether used after a long day, a flight, or a night out, this mask brings your skin back to life — refreshed, smooth, and luminous.",
   image: "/assets/products/cucumber-face-mask-single.jpg",
   hoverImage: "/assets/products/face-mask-single-product-3.jpg",
-  benefits: [ /* ... */ ],
+  benefits: [
+    "Deep hydration that replenishes and locks in moisture",
+    "Reduces puffiness and dark circles for energized skin",
+    "Calms irritation with antioxidants and Vitamin C",
+    "Tightens pores and refines skin texture",
+    "Brightens and softens for a healthy, natural glow",
+  ],
   badges: ["Vegan", "Paraben-Free", "Alcohol-Free"],
   highlights: ["Hydrating", "Cooling", "Brightening"],
-  // 👇 variants drive the size selector + image swap
   variants: [
     {
       label: "Single Use",
@@ -666,10 +670,9 @@ export const PRODUCTS: Product[] = [
       ],
     },
   ],
-  // optional general gallery (shown after variant media)
   images: [],
   category: "face",
-},
+}
 
   {
   sku: "eye-pads",
@@ -677,10 +680,17 @@ export const PRODUCTS: Product[] = [
   title: "Simply Cucumber Eye Pads",
   tagline: "Wake Up Beautifully.",
   price: 6,
-  description: "...(same copy you have)...",
+  description:
+    "Refresh tired eyes in minutes with our Simply Cucumber Eye Pads, infused with cooling cucumber extract, aloe, and vitamin-rich botanicals that bring instant relief to delicate under-eye skin. Each pad delivers a soothing, hydrating boost that reduces puffiness, brightens dark circles, and revives your natural glow—whether you’re recovering from a long night or a long day. Powered by Vitamin C, niacinamide, and green tea antioxidants, these pads fight fatigue and early signs of aging, while cucumber’s cooling touch calms and refreshes. Store them in the fridge for the ultimate spa-at-home experience.",
   image: "/assets/products/cucumber-eye-pads-single.jpg",
   hoverImage: "/assets/products/cucumber-eye-pads-hover.jpg",
-  benefits: [ /* ... */ ],
+  benefits: [
+    "Reduces puffiness and under-eye bags",
+    "Brightens dark circles (Vitamin C + niacinamide)",
+    "Deep hydration without irritation (aloe + glycerin)",
+    "Soothes sensitive, tired eyes",
+    "Antioxidant protection (cucumber + green tea)",
+  ],
   badges: ["Vegan", "Paraben-Free", "Alcohol-Free"],
   highlights: ["De-Puffing", "Brightening", "Hydrating"],
   variants: [
@@ -707,7 +717,7 @@ export const PRODUCTS: Product[] = [
   ],
   images: [],
   category: "face",
-},
+}
 
   {
     sku: "eye-gel",
