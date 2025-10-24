@@ -71,7 +71,7 @@ export const PRODUCTS: Product[] = [
       images: [
         "/assets/products/powder-product-1.jpg",
         "/assets/products/powder-product-2.jpg",
-        "/assets/products/powder-30-ct-model.jpg", // ← add the extension
+        "/assets/products/powder-30-ct-model.jpg", // ← make sure this file exists and has .jpg
       ],
     },
   ],
@@ -629,7 +629,7 @@ export const PRODUCTS: Product[] = [
     category: "face",
   },
 
- {
+{
   sku: "face-mask",
   slug: "cucumber-face-mask",
   title: "Simply Cucumber Face Mask",
