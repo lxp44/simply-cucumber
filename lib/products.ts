@@ -464,7 +464,7 @@ export const PRODUCTS: Product[] = [
         sku: "lotion-8oz",
          images: [
            "/assets/products/cucumber-lotion.jpg",
-           "/assets/products/ cucumber-lotion-back.png",
+           "/assets/products/cucumber-lotion-back.png",
            ],
       },  
       {
@@ -473,7 +473,7 @@ export const PRODUCTS: Product[] = [
         sku: "lotion-8oz",
          images: [
            "/assets/products/cucumber-lotion.jpg",
-          "/assets/products/ cucumber-lotion-back.png",
+          "/assets/products/cucumber-lotion-back.png",
            ],
       },
       {
