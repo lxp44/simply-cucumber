@@ -114,7 +114,6 @@ export const PRODUCTS: Product[] = [
       "Hydration. Balance. Glow — Anywhere, Anytime. Give your skin a refreshing reset with our Simply Cucumber Face Mist, your instant dose of hydration and calm. Infused with cucumber extract, aloe, and natural antioxidants, this fine mist delivers cooling relief, deep moisture, and a healthy, dewy glow—whether you’re fresh out of the gym, setting your makeup, or winding down after a long day. Each spray feels like a cool breeze in a bottle, instantly soothing redness, reviving dull skin, and rebalancing oil without disrupting your routine. It’s skincare that travels with you—light, pure, and powerful.",
     image: "/assets/products/cucumber-face-mist.jpg",
     images: [
-      
     ],
     hoverImage: "/assets/products/cucumber-face-mist-hover.jpg",
     benefits: [
@@ -139,7 +138,7 @@ export const PRODUCTS: Product[] = [
          images: [ 
            "/assets/products/cucumber-face-mist-3.png",
            "/assets/products/cucumber-face-mist-back.png",
-        ]          
+        ],          
       },
       {
         label: "8 oz",
@@ -163,6 +162,7 @@ export const PRODUCTS: Product[] = [
       "Experience the refreshingly pure clean your mouth deserves. Our Simply Cucumber Toothpaste combines cool mint and crisp cucumber for a soothing yet powerful oral care ritual. Formulated with natural minerals like silica and potassium, it helps support strong enamel and healthy gums while staying gentle on sensitive teeth. Every brush delivers a burst of freshness that lasts — fighting inflammation, balancing oral pH, and nourishing with Vitamin C and Zinc for immunity and repair. Fluoride-free and clean by design, it’s perfect for those who crave nature’s touch in their daily routine. Available in travel-size tubes or eco-friendly glass jars, the Simply Cucumber Toothpaste is your soothing care for sensitive gums — refreshing, natural, and undeniably clean.",
     image: "/assets/products/cucumber-toothpaste.jpg",
     images: [
+      "/assets/products/cucumber-toothpaste-back.png",
     ],
     hoverImage: "/assets/products/cucumber-toothpaste-hover.jpg",
     benefits: [
@@ -186,7 +186,6 @@ export const PRODUCTS: Product[] = [
         sku: "toothpaste-4oz",
          images: [ 
            "/assets/products/cucumber-toothpaste.png",
-           "/assets/products/cucumber-toothpaste-back.png",
         ],          
       },
        ],
@@ -205,7 +204,7 @@ export const PRODUCTS: Product[] = [
       "Deep-clean your smile with Simply Cucumber Charcoal Toothpaste — a natural detoxifying formula powered by activated charcoal, mint, and cucumber extract. Designed to lift surface stains, balance oral pH, and freshen breath, this fluoride-free blend delivers a cool, clean polish that leaves your mouth feeling refreshed and renewed. The smooth black paste foams gently without grit, while cucumber and coconut oil hydrate and soothe sensitive gums. Safe for daily use and ideal for anyone seeking a bright, naturally balanced smile.",
     image: "/assets/products/cucumber-charcoal-toothpaste.jpg",
     images: [
-  
+  "/assets/products/cucumber-charcoal-toothpaste-back.png"
     ],
     hoverImage: "/assets/products/cucumber-charcoal-toothpaste-hover.png",
     benefits: [
@@ -228,8 +227,7 @@ export const PRODUCTS: Product[] = [
         price: 18,
         sku: "charcoal-toothpaste-4oz",
          images: [ 
-           "/assets/products/cucumber-charcoal-toothpaste-1 copy.png",
-           "/assets/products/cucumber-charcoal-toothpaste-back.png",
+           "/assets/products/cucumber-charcoal-toothpaste.jpg",
         ],          
       },
        ],
@@ -320,8 +318,6 @@ export const PRODUCTS: Product[] = [
       "Reveal your skin’s natural radiance with our Simply Cucumber Body Scrub, a refreshing blend of cucumber extract, fine sugar crystals, and nourishing plant oils. Designed to exfoliate gently yet effectively, this scrub buffs away dull, dry skin while replenishing essential moisture — leaving you silky-smooth, hydrated, and glowing. The cooling power of cucumber calms inflammation, while natural antioxidants help detoxify and brighten the skin. Each use feels like a spa treatment — fresh, clean, and crisp, with a scent that relaxes your senses and revives your energy. Perfect for daily or weekly use on body, hands, or feet.",
     image: "/assets/products/cucumber-body-scrub.jpg",
     images: [
-      "/assets/products/body-scrub-product-1.jpg",
-      "/assets/products/body-scrub-product-2.jpg",
     ],
     hoverImage: "/assets/products/cucumber-body-scrub-hover.jpg",
     benefits: [
@@ -337,13 +333,19 @@ export const PRODUCTS: Product[] = [
         label: "8 oz",
         price: 18,
         sku: "body-scrub-8oz",
-        image: "/assets/products/cucumber-body-scrub.jpg",
+        images: [
+          "/assets/products/cucumber-body-scrub.jpg",
+          "/assets/products/cucumber-body-scrub-back.png",
+                ],
       },
       {
         label: "16 oz",
         price: 40,
         sku: "body-scrub-16oz",
-        image: "/assets/products/body-scrub-16-oz.png",
+        images: [
+          "/assets/products/body-scrub-16-oz.png",
+        "/assets/products/cucumber-body-scrub-back.png",
+                ],
       },
       {
         label: "32 oz",
@@ -367,8 +369,6 @@ export const PRODUCTS: Product[] = [
       "Give your skin a fresh start every day with our Simply Cucumber Face Scrub. This gentle, yet powerful exfoliator blends cucumber extract, fine rice powder, and natural fruit enzymes to smooth away dead skin cells and impurities without irritation. Enriched with aloe and green tea, it calms redness while promoting an even, radiant complexion. Designed for all skin types, this refreshing scrub refines texture, unclogs pores, and enhances the absorption of serums and moisturizers. The result — clean, balanced, and glowing skin that feels as soft as it looks.",
     image: "/assets/products/cucumber-face-scrub.jpg",
     images: [
-      "/assets/products/face-scrub-product-1.jpg",
-      "/assets/products/face-scrub-product-2.jpg",
     ],
     hoverImage: "/assets/products/cucumber-face-scrub-hover.jpg",
     benefits: [
@@ -384,13 +384,19 @@ export const PRODUCTS: Product[] = [
         label: "8 oz",
         price: 18,
         sku: "face-scrub-8oz",
-        image: "/assets/products/cucumber-face-scrub.jpg",
+        images: [
+      "/assets/products/cucumber-face-scrub.jpg",
+      "/assets/products/cucumber-face-scrub-back.png",
+        ],
       },
       {
         label: "16 oz",
         price: 40,
         sku: "face-scrub-16oz",
-        image: "/assets/products/face-scrub-16-oz.PNG",
+        images: [
+          "/assets/products/face-scrub-16-oz.PNG",
+         "/assets/products/cucumber-face-scrub-back.png",
+          ],
       },
       {
         label: "32 oz",
@@ -415,8 +421,7 @@ export const PRODUCTS: Product[] = [
     image: "/assets/products/cucumber-deodorant-2.jpg",
     images: [
       "/assets/products/cucumber-deodorant-2.png",
-      "/assets/products/deodorant-product-2.jpg",
-      "/assets/products/deodorant-product-3.jpg",
+      "/assets/products/cucumber-deordorant-back.jpg",
     ],
     hoverImage: "/assets/products/cucumber-deordorant-hover.jpg",
     benefits: [
@@ -442,9 +447,6 @@ export const PRODUCTS: Product[] = [
       "Lightweight, fast-absorbing hydration for silky, balanced skin. Simply Cucumber Lotion is crafted with cucumber extract, aloe, and shea butter to deliver long-lasting moisture that feels breathable, never greasy. This refreshing formula absorbs instantly, soothing dryness and restoring elasticity while leaving a cool, clean scent that refreshes the senses. Perfect for daily use on both face and body, it’s your go-to lotion for smooth, nourished skin — simple, pure, and naturally effective.",
     image: "/assets/products/cucumber-lotion.jpg",
     images: [
-      "/assets/products/lotion-products-1.jpg",
-      "/assets/products/lotion-products-2.jpg",
-      "/assets/products/lotion-products-3.jpg",
     ],
     hoverImage: "/assets/products/cucumber-lotion-hover.jpg",
     benefits: [
@@ -460,13 +462,19 @@ export const PRODUCTS: Product[] = [
         label: "3 oz",
         price: 5,
         sku: "lotion-8oz",
-        image: "/assets/products/cucumber-lotion.jpg",
+         images: [
+           "/assets/products/cucumber-lotion.jpg",
+           "/assets/products/ cucumber-lotion-back.png",
+           ],
       },  
       {
         label: "16 oz",
         price: 25,
         sku: "lotion-8oz",
-        image: "/assets/products/cucumber-lotion.jpg",
+         images: [
+           "/assets/products/cucumber-lotion.jpg",
+          "/assets/products/ cucumber-lotion-back.png",
+           ],
       },
       {
         label: "32 oz",
@@ -490,7 +498,6 @@ export const PRODUCTS: Product[] = [
       "Bring your hair back to life with Simply Cucumber Shampoo — a refreshing, sulfate-free cleanser designed to purify the scalp while restoring natural shine and softness. Infused with cucumber extract, aloe, and vitamin B5, this gentle formula removes buildup, balances oil, and delivers lightweight hydration from root to tip. Each wash leaves your hair feeling fresh, smooth, and naturally vibrant with a subtle, clean cucumber scent that lingers just long enough to refresh your senses.",
     image: "/assets/products/cucumber-shampoo.jpg",
     images: [
-      
     ],
     hoverImage: "/assets/products/cucumber-shampoo-hover.jpg",
     benefits: [
@@ -542,7 +549,6 @@ export const PRODUCTS: Product[] = [
       "Complete your clean hair ritual with Simply Cucumber Conditioner — a lightweight, hydrating blend that restores softness and shine without weighing your hair down. Infused with cucumber extract, aloe, and coconut oil, it smooths frizz, strengthens strands, and seals in moisture for a silky, healthy finish. Designed for all skin types, it leaves your scalp refreshed and your hair beautifully balanced with a subtle, clean cucumber scent. Use daily after shampooing for naturally radiant hair that feels fresh, soft, and renewed.",
     image: "/assets/products/cucumber-conditioner.jpg",
     images: [
-    
     ],
     hoverImage: "/assets/products/cucumber-conditioner-hover.jpg",
     benefits: [
